@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
@@ -10,7 +11,9 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject optionMenu;
 
     public Button closeButton;
+    public Button closeOption;
     public Button cancelButton;
+    public Button optionButton;
 
     private bool DoNotCall;
     void Start()
@@ -58,6 +61,7 @@ public class PauseMenu : MonoBehaviour
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0;
+            optionButton.Select();
         }
     }
 
@@ -66,5 +70,15 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         optionMenu.SetActive(true);
         DoNotCall = true;
+        closeOption.Select();
+
+    }
+
+    public void CloseOptionsPanel()
+    {
+        pauseMenu.SetActive(true);
+        optionMenu.SetActive(false);
+        DoNotCall = false;
+        optionButton.Select();
     }
 }
