@@ -7,14 +7,16 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject optionMenu;
 
     public Button closeButton;
     public Button cancelButton;
 
-
+    private bool DoNotCall;
     void Start()
     {
         pauseMenu.SetActive(false);
+        optionMenu.SetActive(false);
     }
 
     void Update()
@@ -52,10 +54,17 @@ public class PauseMenu : MonoBehaviour
 
     void GetPauseMenu()
     {
-        if (pauseMenu != null)
+        if (pauseMenu != null  && !DoNotCall)
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0;
         }
+    }
+
+    public void CallOptionsPanel()
+    {
+        pauseMenu.SetActive(false);
+        optionMenu.SetActive(true);
+        DoNotCall = true;
     }
 }
