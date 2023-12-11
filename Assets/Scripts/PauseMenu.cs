@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public Button closeButton;
     public Button cancelButton;
 
+
     void Start()
     {
         pauseMenu.SetActive(false);
