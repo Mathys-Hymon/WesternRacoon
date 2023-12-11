@@ -7,10 +7,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 15f;
     [SerializeField] private ParticleSystem walkParticle;
     [SerializeField] float jumpForce = 6;
+    [SerializeField] float coyoteTime = 0.1f;
     private float horizontalMovement;
     private float lastTimeGrounded;
     private float lastTimeJumpPressed;
-    private int grounded = 0;
+    private bool grounded;
+    private int jumpNumber;
 
     private Rigidbody2D rb;
 
@@ -23,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        if(grounded == 0)
+        if(grounded == true)
         {
             lastTimeGrounded = Time.time;
         }
@@ -55,9 +57,9 @@ public class PlayerMovement : MonoBehaviour
             }
        
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && (lastTimeJumpPressed - lastTimeGrounded < 0.05f || grounded == 1))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && (lastTimeJumpPressed - lastTimeGrounded < coyoteTime || jumpNumber < 2))
         {
-                grounded += 1;
+            jumpNumber += 1;
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 walkParticle.Play();
         }
@@ -67,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
-        if (rb.velocity.y < 0.2f && grounded > 0)
+        if (rb.velocity.y < 0.2f && grounded == true)
         {
             if(rb.gravityScale <= 6f)
             {
@@ -86,7 +88,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == 3)
         {
-            grounded = 0;
+            grounded = true;
+            jumpNumber = 0;
         }
     }
 
@@ -94,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == 3)
         {
-            grounded = 1;
+            grounded = false;
         }
     }
 }

@@ -11,11 +11,12 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private GameObject target;
     private float x, y, z;
     [SerializeField] private float yOffset ;
+    [SerializeField] private float xOffset ;
 
 
     void Start()
     {
-        x = transform.position.x;
+        x = transform.position.x + xOffset;
         y = transform.position.y + yOffset;
         z = transform.position.z;
     }
