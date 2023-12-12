@@ -160,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(horizontalMovement*_speed, rb.velocity.y, 0);
         }
 
-        if(horizontalMovement > 0 || horizontalMovement < 0)
+        if(horizontalMovement < 0 || horizontalMovement > 0)
         {
             TurnCheck();
         }
@@ -197,6 +197,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Turn()
     {
+        Debug.Log(horizontalMovement);
         if (isFacingRight)
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
