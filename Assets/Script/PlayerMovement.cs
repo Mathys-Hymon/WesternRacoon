@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,11 +21,34 @@ public class PlayerMovement : MonoBehaviour
     private bool grounded;
     private bool invincibilityFrame;
     private bool roll;
+    private bool isGamepad;
 
     private int jumpNumber;
 
     private Rigidbody2D rb;
+    private Controles controlesScript;
+    private PlayerInput playerinput;
 
+    private void Awake()
+    {
+        controlesScript = new Controles();
+        playerinput = GetComponent<PlayerInput>();
+    }
+
+    private void OnEnable()
+    {
+        controlesScript.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controlesScript.Disable();
+    }
+
+    public void OnDeviceChange(PlayerInput pi)
+    {
+        isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
+    }
     private void Start()
     {
         Instance = this;
@@ -65,19 +90,21 @@ public class PlayerMovement : MonoBehaviour
             walkParticle.Play();
         }
 
-        if (horizontalMovement <= _speed && horizontalMovement >= -_speed && Input.GetAxis("Horizontal") != 0)
-        {
-             horizontalMovement += Input.GetAxis("Horizontal") / 5;         //Change to input action
-        }
-        else if (Input.GetAxis("Horizontal") == 0)
-        {
-            horizontalMovement = 0;
-        }
-        else if (horizontalMovement < -_speed)
-        {
-            horizontalMovement = -_speed;
-        }
-        else { horizontalMovement = _speed; }
+        horizontalMovement = controlesScript.player.move.ReadValue<float>();
+
+        //if (horizontalMovement <= _speed && horizontalMovement >= -_speed && Input.GetAxis("Horizontal") != 0)
+        //{
+        //     horizontalMovement += Input.GetAxis("Horizontal") / 5;         //Change to input action
+        //}
+        //else if (Input.GetAxis("Horizontal") == 0)
+        //{
+        //    horizontalMovement = 0;
+        //}
+        //else if (horizontalMovement < -_speed)
+        //{
+        //    horizontalMovement = -_speed;
+        //}
+        //else { horizontalMovement = _speed; }
 
         if(lastTimeJumpPressed - lastTimeGrounded > coyoteTime && jumpNumber == 0)
         {
@@ -110,11 +137,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if(roll)
         {
-            rb.velocity = new Vector3(horizontalMovement*2, rb.velocity.y, 0);
+            rb.velocity = new Vector3(horizontalMovement*_speed*2, rb.velocity.y, 0);
         }
         else
         {
-            rb.velocity = new Vector3(horizontalMovement, rb.velocity.y, 0);
+            rb.velocity = new Vector3(horizontalMovement*_speed, rb.velocity.y, 0);
         }
     }
 
