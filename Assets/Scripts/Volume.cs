@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -10,17 +9,13 @@ public class Volume : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     void Start()
     {
-        if (PlayerPrefs.HasKey("Volume"))
-        {
-            volume = PlayerPrefs.GetFloat("Volume");
-        }
         volumeSlider.value = volume;
         OnVolumeSlide();
     }
+
     public void OnVolumeSlide()
     {
-        volume = volumeSlider.value;
+        volume = volumeSlider.value / 100;
         audioSource.volume = volume;
-        PlayerPrefs.SetFloat("Volume", volume);
     }
 }
