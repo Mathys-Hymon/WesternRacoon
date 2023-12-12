@@ -10,10 +10,15 @@ public class CameraFollowPlayer : MonoBehaviour
     [Header("Flip Rotation Stats")]
     [SerializeField] private float _flipYRotationTime = 0.5f;
 
+    [Header("Offset")]
+    [SerializeField] private float yOffset;
+    [SerializeField] private float xOffset;
+
     private Coroutine _turnCoroutine;
     private PlayerMovement _player;
 
     private bool _isFacingRight;
+    private float x, y, z;
 
     private void Awake()
     {
@@ -22,9 +27,19 @@ public class CameraFollowPlayer : MonoBehaviour
         _isFacingRight = _player.isFacingRight;
     }
 
+    private void Start()
+    {
+        x = transform.position.x + xOffset;
+        y = transform.position.y + yOffset;
+        z = transform.position.z;
+    }
+
     private void Update()
     {
-        transform.position = _player.transform.position;
+        y = _player.transform.position.y + yOffset;
+        x = _player.transform.position.x + xOffset;
+
+        transform.position = new Vector3(x, y, z);
     }
 
     public void CallTurn()
