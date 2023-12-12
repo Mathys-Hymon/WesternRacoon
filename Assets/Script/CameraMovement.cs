@@ -21,16 +21,22 @@ public class CameraMovement : MonoBehaviour
         z = transform.position.z;
     }
 
+    public void SetSmoothSpeed(float speed)
+    {
+        smoothingSpeed = speed;
+    }
 
     void Update()
     {
+        xOffset = (target.GetComponent<Rigidbody2D>().velocity.x / 2);
+
         if (target.transform.position.x < minPosition.x || target.transform.position.x > maxPosition.x)
         {
             x = Mathf.Clamp(target.transform.position.x, minPosition.x, maxPosition.x);
         }
         else if (Mathf.Abs(transform.position.x - target.transform.position.x) > 0.1f)
         {
-            x = target.transform.position.x;
+            x = target.transform.position.x + xOffset;
         }
         if (target.transform.position.y < minPosition.y || target.transform.position.y > maxPosition.y)
         {
@@ -43,7 +49,8 @@ public class CameraMovement : MonoBehaviour
         Vector3 targetPosition = Vector3.Lerp(transform.position, new Vector3(x, y, z), smoothingSpeed * Time.deltaTime);
         transform.position = new Vector3(targetPosition.x, targetPosition.y, z);
 
-      
+        
+
     }
 
 }

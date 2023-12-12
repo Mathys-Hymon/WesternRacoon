@@ -514,6 +514,8 @@ MonoBehaviour:
   _speed: 10
   walkParticle: {fileID: 1332056973}
   jumpForce: 12
+  coyoteTime: 0.1
+  CameraRef: {fileID: 519420033}
 --- !u!61 &347671914
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -975,7 +977,8 @@ MonoBehaviour:
   smoothingSpeed: 3
   cam: {fileID: 519420031}
   target: {fileID: 347671907}
-  yOffset: 3
+  yOffset: 2
+  xOffset: 3
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
