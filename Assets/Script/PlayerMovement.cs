@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMovement;
     private float lastTimeGrounded;
     private float lastTimeJumpPressed;
+    private float _fallSpeedYThresholdChange;
 
     private bool grounded;
     private bool invincibilityFrame;
@@ -40,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     private Controles controlesScript;
     private PlayerInput playerinput;
     private CameraFollowPlayer _cameraFollowObject;
+
 
     private void Awake()
     {
@@ -68,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowPlayer>();
+        _fallSpeedYThresholdChange = CameraManager.instance._fallspeedYThresholdChange;
     }
 
     void Update()
@@ -123,6 +126,20 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         else rb.gravityScale = 3f;
+
+        //if we are falling past a certain speed threshold
+        if(rb.velocity.y < _fallSpeedYThresholdChange && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
+        {
+            CameraManager.instance.LerpYDamping(true);
+        }
+
+        //if we are standing still or moving up
+        if(rb.velocity.y >= 0f && !CameraManager.instance.isLerpingYDamping && CameraManager.instance.LerpedFromPlayerFalling)
+        {
+            //reset so it can be called again
+            CameraManager.instance.LerpedFromPlayerFalling = false;
+            CameraManager.instance.LerpYDamping(false);
+        }
 
 
     }
