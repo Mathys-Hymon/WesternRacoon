@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private bool invincibilityFrame;
     private bool roll;
     private bool isGamepad;
+    private bool isFacingRight;
 
     private int jumpNumber;
 
@@ -128,6 +129,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector3(horizontalMovement*_speed, rb.velocity.y, 0);
         }
+
+        if(horizontalMovement > 0 || horizontalMovement < 0)
+        {
+            TurnCheck();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -147,8 +153,38 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void TurnCheck()
+    {
+        if(horizontalMovement > 0 && !isFacingRight)
+        {
+            Turn();
+        }
+        else if(horizontalMovement < 0 && isFacingRight)
+        {
+            Turn();
+        }
+    }
+
+    private void Turn()
+    {
+        if (isFacingRight)
+        {
+            Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
+            isFacingRight = !isFacingRight;
+        }
+        else
+        {
+            Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
+            isFacingRight = !isFacingRight;
+        }
+    }
+
     public void Die()
     {
         
     }
+
+
 }
