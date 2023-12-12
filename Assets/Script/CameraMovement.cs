@@ -26,9 +26,21 @@ public class CameraMovement : MonoBehaviour
         smoothingSpeed = speed;
     }
 
+    public void SetTarget(GameObject newtarget)
+    {
+        if(target == null)
+        {
+            target = PlayerMovement.Instance.gameObject;
+        }
+        target = newtarget;
+    }
+
     void Update()
     {
-        xOffset = (target.GetComponent<Rigidbody2D>().velocity.x / 2);
+        if(target = PlayerMovement.Instance.gameObject)
+        {
+            xOffset = (target.GetComponent<Rigidbody2D>().velocity.x / 2);
+        }
 
         if (target.transform.position.x < minPosition.x || target.transform.position.x > maxPosition.x)
         {

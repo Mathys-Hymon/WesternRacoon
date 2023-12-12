@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance;
     [SerializeField] private float _speed = 15f;
     [SerializeField] private ParticleSystem walkParticle;
     [SerializeField] private float jumpForce = 6;
@@ -19,13 +20,13 @@ public class PlayerMovement : MonoBehaviour
     private bool invincibilityFrame;
     private bool roll;
 
-
     private int jumpNumber;
 
     private Rigidbody2D rb;
 
     private void Start()
     {
+        Instance = this;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -45,14 +46,32 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-
         if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Space))
         {
             lastTimeJumpPressed = Time.time;
         }
-        if(horizontalMovement <= _speed && horizontalMovement >= -_speed) 
+        if ((Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Space)) && (lastTimeJumpPressed - lastTimeGrounded < coyoteTime || jumpNumber < 2))
+        {
+            jumpNumber += 1;
+            if (roll)
+            {
+                rb.velocity = new Vector2(rb.velocity.x * 2f, jumpForce * 1.1f);
+            }
+            else
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
+
+            walkParticle.Play();
+        }
+
+        if (horizontalMovement <= _speed && horizontalMovement >= -_speed && Input.GetAxis("Horizontal") != 0)
         {
              horizontalMovement += Input.GetAxis("Horizontal") / 5;         //Change to input action
+        }
+        else if (Input.GetAxis("Horizontal") == 0)
+        {
+            horizontalMovement = 0;
         }
         else if (horizontalMovement < -_speed)
         {
@@ -60,42 +79,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else { horizontalMovement = _speed; }
 
-        
-            if(horizontalMovement != 0)
-            {
-                if (Mathf.Abs(horizontalMovement) <= 0.05)
-                {
-                    horizontalMovement = 0;
-                }
-
-                if (horizontalMovement < 0 && Input.GetAxis("Horizontal") == 0)
-                {
-                    horizontalMovement += 50 * Time.deltaTime;
-                }
-                else if(horizontalMovement > 0 && Input.GetAxis("Horizontal") == 0)
-                {
-                    horizontalMovement -= 50 * Time.deltaTime;
-                }
-            }
-       
         if(lastTimeJumpPressed - lastTimeGrounded > coyoteTime && jumpNumber == 0)
         {
             jumpNumber = 2;
-        }
-
-        if ((Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Space)) && (lastTimeJumpPressed - lastTimeGrounded < coyoteTime || jumpNumber < 2))
-        {
-            jumpNumber += 1;
-               if (roll)
-            {
-                rb.velocity = new Vector2(rb.velocity.x*2f, jumpForce*1.1f);
-            }
-               else
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            }
-      
-                walkParticle.Play();
         }
 
         if ((Input.GetKeyUp(KeyCode.Joystick1Button0) || Input.GetKeyUp(KeyCode.Space)) && rb.velocity.y > 0f)
