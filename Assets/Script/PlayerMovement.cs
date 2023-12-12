@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject lastCheckpoint;
 
     private float horizontalMovement;
-    private float inputmovement;
     private float lastTimeGrounded;
     private float lastTimeJumpPressed;
 
@@ -78,6 +77,10 @@ public class PlayerMovement : MonoBehaviour
         }
         if ((Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Space)) && (lastTimeJumpPressed - lastTimeGrounded < coyoteTime || jumpNumber < 2))
         {
+            if(lastTimeJumpPressed - lastTimeGrounded > coyoteTime)
+            {
+                jumpNumber = 1;
+            }
             jumpNumber += 1;
             if (roll)
             {
@@ -92,22 +95,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         horizontalMovement = controlesScript.player.move.ReadValue<float>();
-
-        //if(horizontalMovement != inputmovement)
-        //{
-
-        //}
-        
-        //else if (horizontalMovement != 0f)
-        //{
-        //    horizontalMovement = horizontalMovement / 2;
-        //}
-
-
-        if (lastTimeJumpPressed - lastTimeGrounded > coyoteTime && jumpNumber == 0)
-        {
-            jumpNumber = 2;
-        }
 
         if ((Input.GetKeyUp(KeyCode.Joystick1Button0) || Input.GetKeyUp(KeyCode.Space)) && rb.velocity.y > 0f)
         {
