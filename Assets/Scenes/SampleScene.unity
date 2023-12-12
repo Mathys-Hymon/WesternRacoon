@@ -515,7 +515,8 @@ MonoBehaviour:
   walkParticle: {fileID: 1332056973}
   jumpForce: 12
   coyoteTime: 0.1
-  CameraRef: {fileID: 519420033}
+  cameraRef: {fileID: 519420033}
+  lastCheckpoint: {fileID: 0}
 --- !u!61 &347671914
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1361,13 +1362,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293056195}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.23856837, w: -0.9711257}
-  m_LocalPosition: {x: -11.326, y: -3.8438, z: 0}
-  m_LocalScale: {x: 4.880198, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.17455478, w: -0.9846475}
+  m_LocalPosition: {x: -11.0128, y: -3.8561, z: 0}
+  m_LocalScale: {x: 6.589731, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -27.604}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -20.105}
 --- !u!61 &1293056198
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6580,8 +6581,8 @@ Transform:
   m_GameObject: {fileID: 1903563522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.18, y: -2.77, z: 0}
-  m_LocalScale: {x: 25.84695, y: 1, z: 1}
+  m_LocalPosition: {x: -26.5101, y: -2.77, z: 0}
+  m_LocalScale: {x: 25.187853, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -6642,7 +6643,7 @@ GameObject:
   - component: {fileID: 2002396881}
   - component: {fileID: 2002396880}
   - component: {fileID: 2002396882}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Floor (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

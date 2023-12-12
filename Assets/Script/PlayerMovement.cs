@@ -6,9 +6,10 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 15f;
     [SerializeField] private ParticleSystem walkParticle;
-    [SerializeField] float jumpForce = 6;
-    [SerializeField] float coyoteTime = 0.1f;
-    [SerializeField] CameraMovement CameraRef;
+    [SerializeField] private float jumpForce = 6;
+    [SerializeField] private float coyoteTime = 0.1f;
+    [SerializeField] private CameraMovement cameraRef;
+    [SerializeField] private GameObject lastCheckpoint;
 
     private float horizontalMovement;
     private float lastTimeGrounded;
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.Joystick1Button1) && roll == false)
             {
                 roll = true;
-                CameraRef.SetSmoothSpeed(1);
+                cameraRef.SetSmoothSpeed(1);
                 Invoke("StopRoll", 0.2f);
             }
 
@@ -116,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
     private void StopRoll()
     {
         roll = false;
-        CameraRef.SetSmoothSpeed(3);
+        cameraRef.SetSmoothSpeed(3);
     }
 
     private void FixedUpdate()
@@ -146,5 +147,10 @@ public class PlayerMovement : MonoBehaviour
         {
             grounded = false;
         }
+    }
+
+    public void Die()
+    {
+        
     }
 }
