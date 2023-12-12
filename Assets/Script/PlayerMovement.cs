@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject lastCheckpoint;
 
     private float horizontalMovement;
+    private float inputmovement;
     private float lastTimeGrounded;
     private float lastTimeJumpPressed;
 
@@ -92,21 +93,18 @@ public class PlayerMovement : MonoBehaviour
 
         horizontalMovement = controlesScript.player.move.ReadValue<float>();
 
-        //if (horizontalMovement <= _speed && horizontalMovement >= -_speed && Input.GetAxis("Horizontal") != 0)
+        //if(horizontalMovement != inputmovement)
         //{
-        //     horizontalMovement += Input.GetAxis("Horizontal") / 5;         //Change to input action
-        //}
-        //else if (Input.GetAxis("Horizontal") == 0)
-        //{
-        //    horizontalMovement = 0;
-        //}
-        //else if (horizontalMovement < -_speed)
-        //{
-        //    horizontalMovement = -_speed;
-        //}
-        //else { horizontalMovement = _speed; }
 
-        if(lastTimeJumpPressed - lastTimeGrounded > coyoteTime && jumpNumber == 0)
+        //}
+        
+        //else if (horizontalMovement != 0f)
+        //{
+        //    horizontalMovement = horizontalMovement / 2;
+        //}
+
+
+        if (lastTimeJumpPressed - lastTimeGrounded > coyoteTime && jumpNumber == 0)
         {
             jumpNumber = 2;
         }

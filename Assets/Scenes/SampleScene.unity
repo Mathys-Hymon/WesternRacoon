@@ -651,6 +651,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 2a15b3a0-f151-4dcf-a12b-4a61d422f878
     m_ActionName: player/aim[/XInputControllerWindows/rightStick,/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ca851d8a-0a45-42b5-9466-65be7fb3cd9e
+    m_ActionName: player/move[/XInputControllerWindows/leftStick/x,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: player
@@ -1036,11 +1040,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minPosition: {x: -100, y: -100}
   maxPosition: {x: 100, y: 100}
-  smoothingSpeed: 1
+  smoothingSpeedx: 2.5
+  smoothingSpeedy: 5
   cam: {fileID: 519420031}
   target: {fileID: 347671907}
-  yOffset: 2
-  xOffset: 3
+  yOffset: 1.5
+  xOffset: 10
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0

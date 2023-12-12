@@ -6,7 +6,8 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private Vector2 minPosition;
     [SerializeField] private Vector2 maxPosition;
-    [SerializeField] private float smoothingSpeed;
+    [SerializeField] private float smoothingSpeedx;
+    [SerializeField] private float smoothingSpeedy;
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject target;
     private float x, y, z;
@@ -23,7 +24,7 @@ public class CameraMovement : MonoBehaviour
 
     public void SetSmoothSpeed(float speed)
     {
-        smoothingSpeed = speed;
+       
     }
 
     public void SetTarget(GameObject newtarget)
@@ -58,8 +59,9 @@ public class CameraMovement : MonoBehaviour
         {
             y = target.transform.position.y + yOffset;
         }
-        Vector3 targetPosition = Vector3.Lerp(transform.position, new Vector3(x, y, z), smoothingSpeed * Time.deltaTime);
-        transform.position = new Vector3(targetPosition.x, targetPosition.y, z);
+        float targetPositionX = Mathf.Lerp(transform.position.x, x, smoothingSpeedx * Time.deltaTime);
+        float targetPositionY = Mathf.Lerp(transform.position.y, y, smoothingSpeedy * Time.deltaTime);
+        transform.position = new Vector3(targetPositionX, targetPositionY, z);
 
         
 
