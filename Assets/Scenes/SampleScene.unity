@@ -663,6 +663,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6ef56374-461d-4bfa-8bb6-2de7b63aad53
     m_ActionName: player/roll[/XInputControllerWindows/buttonEast,/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68d934d7-3159-4be8-b47c-81e8c22269df
+    m_ActionName: player/shoot[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: player
@@ -681,9 +685,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crosshairRef: {fileID: 2075818697}
-  ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  bulletRef: {fileID: 0}
+  cartridgeRef: {fileID: 9119777075786067958, guid: 9623fcadcd27c5f4bba1daa8f662cc78, type: 3}
 --- !u!1 &371515140
 GameObject:
   m_ObjectHideFlags: 0
@@ -7264,7 +7267,7 @@ Transform:
   m_GameObject: {fileID: 2075818697}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.75, y: -3.92, z: 0.1496501}
+  m_LocalPosition: {x: 3.36, y: -3.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

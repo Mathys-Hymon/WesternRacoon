@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         {
             lastTimeGrounded = Time.time;
 
-            if(Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.Joystick1Button1) && roll == false)
+            if(controlesScript.player.roll.triggered && roll == false)
             {
                 roll = true;
                 cameraRef.SetSmoothSpeed(1);
@@ -71,11 +71,11 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Space))
+        if (controlesScript.player.jump.triggered)
         {
             lastTimeJumpPressed = Time.time;
         }
-        if ((Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Space)) && (lastTimeJumpPressed - lastTimeGrounded < coyoteTime || jumpNumber < 2))
+        if (controlesScript.player.jump.triggered && (lastTimeJumpPressed - lastTimeGrounded < coyoteTime || jumpNumber < 2))
         {
             if(lastTimeJumpPressed - lastTimeGrounded > coyoteTime)
             {
