@@ -50,16 +50,20 @@ public class TextWriter : MonoBehaviour
             this.uiTMP = uiTMP;
             this.textToWrite = textToWrite;
             this.timePerCharacter = timePerCharacter;
-            characterIndex = 0;
+            this.characterIndex = 0;
         }
         public bool Update()
         {
-                timer -= Time.deltaTime;
+            if (uiTMP == null || string.IsNullOrEmpty(textToWrite))
+            {
+                return true;
+            }
+            timer -= Time.deltaTime;
                 while (timer <= 0f)
                 {
                     timer += timePerCharacter;
                     characterIndex++;
-                    uiTMP.text = textToWrite.Substring(0, characterIndex);
+                    uiTMP.text = textToWrite.Substring(0, Mathf.Min(characterIndex, textToWrite.Length));
 
 
                     if (characterIndex >= textToWrite.Length)

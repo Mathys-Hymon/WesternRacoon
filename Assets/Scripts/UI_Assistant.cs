@@ -9,24 +9,46 @@ using CodeMonkey.Utils;
 public class UI_Assistant : MonoBehaviour
 {
     private TextMeshProUGUI messageTMP;
-    private void Awake()
-    {
-        messageTMP = transform.Find("message").Find("messageTMP").GetComponent<TextMeshProUGUI>();
 
-        transform.Find("message").GetComponent<Button_UI>().ClickFunc = () => 
-        { 
-            string[] messageArray = new string[] 
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.Joystick1Button2))
             {
-                "HI",
-                "YO",
-                "HEHEHEHEHE",
-                "MUAHAHAHAHA",
-                "HEY",
-            }; 
-            string message = messageArray[Random.Range(0, messageArray.Length)];
-            TextWriter.AddWriter_Static(messageTMP, message, 0.05f);
-        };
+                HandleButtonPress();
+            }
     }
+
+    private void HandleButtonPress()
+    {
+        string[] messageArray = new string[]
+        {
+        "HI",
+        "YO",
+        "HEHEHEHEHE",
+        "MUAHAHAHAHA",
+        "HEY",
+        };
+        string message = messageArray[Random.Range(0, messageArray.Length)];
+        TextWriter.AddWriter_Static(messageTMP, message, 0.05f);
+    }
+    //private void Awake()
+    //{
+    //    messageTMP = transform.Find("message").Find("messageTMP").GetComponent<TextMeshProUGUI>();
+
+    //    transform.Find("message")Input.GetKey(KeyCode.Joystick1Button6) = () => 
+    //    { 
+    //        string[] messageArray = new string[] 
+    //        {
+    //            "HI",
+    //            "YO",
+    //            "HEHEHEHEHE",
+    //            "MUAHAHAHAHA",
+    //            "HEY",
+    //        }; 
+    //        string message = messageArray[Random.Range(0, messageArray.Length)];
+    //        TextWriter.AddWriter_Static(messageTMP, message, 0.05f);
+    //    };
+    //}
 
     private void Start()
     {
