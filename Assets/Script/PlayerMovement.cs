@@ -7,11 +7,22 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance;
+    public bool isFacingRight;
+
+    [Header("Movement")]
     [SerializeField] private float _speed = 15f;
     [SerializeField] private ParticleSystem walkParticle;
+
+    [Header("Jump")]
     [SerializeField] private float jumpForce = 6;
     [SerializeField] private float coyoteTime = 0.1f;
+
+    [Header("Camera Stuff")]
     [SerializeField] private CameraMovement cameraRef;
+    [SerializeField] private GameObject _cameraFollow;
+    
+
+    [Header("CheckPoint")]
     [SerializeField] private GameObject lastCheckpoint;
 
     private float horizontalMovement;
@@ -22,13 +33,13 @@ public class PlayerMovement : MonoBehaviour
     private bool invincibilityFrame;
     private bool roll;
     private bool isGamepad;
-    private bool isFacingRight;
 
     private int jumpNumber;
 
     private Rigidbody2D rb;
     private Controles controlesScript;
     private PlayerInput playerinput;
+    private CameraFollowPlayer _cameraFollowObject;
 
     private void Awake()
     {
@@ -55,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
         Instance = this;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
+
+        _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowPlayer>();
     }
 
     void Update()
@@ -172,12 +185,16 @@ public class PlayerMovement : MonoBehaviour
             Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = !isFacingRight;
+
+            _cameraFollowObject.CallTurn();
         }
         else
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = !isFacingRight;
+
+            _cameraFollowObject.CallTurn();
         }
     }
 
