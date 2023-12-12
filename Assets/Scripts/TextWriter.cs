@@ -23,7 +23,7 @@ public class TextWriter : MonoBehaviour
         if (uiTMP != null)
         {
             timer -= Time.deltaTime;
-            if(timer <= 0f)
+            while(timer <= 0f)
             {
                 timer += timePerCharacter;
                 characterIndex++;
