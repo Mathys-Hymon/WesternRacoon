@@ -17,6 +17,10 @@ public class SimpleMove : MonoBehaviour
         {
             transform.position = transform.position + new Vector3(speed * Time.deltaTime, 0, 0);
         }
+        else if (Input.GetKey(KeyCode.Joystick1Button4))
+        {
+            transform.position = transform.position - new Vector3(speed * Time.deltaTime, 0, 0);
+        }
 
     }
 }
