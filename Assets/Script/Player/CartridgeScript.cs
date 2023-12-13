@@ -6,7 +6,7 @@ public class CartridgeScript : MonoBehaviour
 {
     private void Start()
     {
-        Invoke("Destroy", 4f);
+        Invoke("Destroy", 3f);
     }
 
     private void Destroy()

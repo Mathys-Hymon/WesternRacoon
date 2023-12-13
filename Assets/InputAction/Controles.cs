@@ -219,6 +219,17 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""24837853-fb82-444a-8f6c-54c54fb93005"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""01b2028b-b24d-4404-965f-6c2667ee81c9"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
