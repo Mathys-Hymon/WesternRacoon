@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 6;
+    [SerializeField] private float airControl = 0.8f;
     [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private LayerMask floorLayer;
 
@@ -165,7 +166,14 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector3(horizontalMovement*_speed, rb.velocity.y, 0);
+            if(grounded)
+            {
+                rb.velocity = new Vector3(horizontalMovement * _speed, rb.velocity.y, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector3(horizontalMovement * _speed * airControl, rb.velocity.y, 0);
+            }
         }
 
         //PAS TOUCHE
