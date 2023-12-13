@@ -16,9 +16,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump")]
     [SerializeField] private float jumpForce = 6;
     [SerializeField] private float coyoteTime = 0.1f;
+    [SerializeField] private LayerMask floorLayer;
 
     [Header("Camera Stuff")]
-    [SerializeField] private CameraMovement cameraRef;
     [SerializeField] private GameObject _cameraFollow;
     [SerializeField] private float deadZoneXOffset;
     [SerializeField] private float deadZoneMinusXOffset;
@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     private int jumpNumber;
 
     private Rigidbody2D rb;
+    private BoxCollider2D bc2d;
     private Controles controlesScript;
     private PlayerInput playerinput;
     private CameraFollowPlayer _cameraFollowObject;
@@ -71,13 +72,14 @@ public class PlayerMovement : MonoBehaviour
         Instance = this;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
-
+        bc2d = GetComponent<BoxCollider2D>();
         _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowPlayer>();
         _fallSpeedYThresholdChange = CameraManager.instance._fallspeedYThresholdChange;
     }
 
     void Update()
     {
+        IsGrounded();
         if(grounded == true)
         {
             lastTimeGrounded = Time.time;
@@ -87,7 +89,14 @@ public class PlayerMovement : MonoBehaviour
                 roll = true;
                 Invoke("StopRoll", 0.2f);
             }
-
+            else if(roll && Mathf.Abs(rb.velocity.x) > 0.1f)
+            {
+                bc2d.size = new Vector2(1, Mathf.Lerp(0.5f, 1f, 1f * Time.deltaTime));
+            }
+            else if(!roll && bc2d.size.y <= 1f)
+            {
+                bc2d.size = new Vector2(1, Mathf.Lerp(1f, 0.5f, 1f * Time.deltaTime));
+            }
         }
         if (controlesScript.player.jump.triggered)
         {
@@ -167,22 +176,21 @@ public class PlayerMovement : MonoBehaviour
         //C'EST BON
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void IsGrounded()
     {
-        if (collision.gameObject.layer == 3)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, floorLayer);
+        if (hit.collider != null)
         {
-            grounded = true;
             jumpNumber = 0;
+            grounded = true;
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 3)
+        else
         {
             grounded = false;
         }
     }
+
+  
 
     //PAS TOUCHE
     private void TurnCheck()
@@ -199,7 +207,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Turn()
     {
-        Debug.Log(horizontalMovement);
         if (isFacingRight)
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
