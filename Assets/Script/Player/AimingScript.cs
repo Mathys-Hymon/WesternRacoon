@@ -49,15 +49,14 @@ public class AimingScript : MonoBehaviour
                 crosshairRef.GetComponent<SpriteRenderer>().enabled = true;
                 crosshairRef.transform.position = new Vector3(transform.position.x + 4 * mouseMultiplyer.x, transform.position.y + 4 * mouseMultiplyer.y, 0);
             }
-
             if (controlesScript.player.shoot.triggered)
             {
                 Vector2 DirectiontoTarget = crosshairRef.transform.position - transform.position;
                 float angle = -90+Mathf.Atan2(DirectiontoTarget.y, DirectiontoTarget.x) * Mathf.Rad2Deg;
                 Instantiate(bulletRef, transform.position, Quaternion.Euler(0,0,angle));
 
-                GameObject emptyMun = Instantiate(cartridgeRef, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 350)));
-                emptyMun.GetComponent<Rigidbody2D>().velocity = new Vector3(-3 * mouseMultiplyer.x, 4, 0);
+                //GameObject emptyMun = Instantiate(cartridgeRef, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 350)));
+                //emptyMun.GetComponent<Rigidbody2D>().velocity = new Vector3(-3 * mouseMultiplyer.x, 4, 0);
             }
         }
         else
@@ -74,9 +73,9 @@ public class AimingScript : MonoBehaviour
                 float angle = -90 + Mathf.Atan2(DirectiontoTarget.y, DirectiontoTarget.x) * Mathf.Rad2Deg;
                 Instantiate(bulletRef, transform.position, Quaternion.Euler(0, 0, angle));
 
-                GameObject emptyMun = Instantiate(cartridgeRef, transform.position, Quaternion.identity);
-                emptyMun.GetComponent<Rigidbody2D>().velocity = new Vector3(3 * Mathf.Clamp(transform.position.x - Camera.main.ScreenToWorldPoint(controlesScript.player.aim.ReadValue<Vector2>()).x, -1, 1), 4, 0);
-                emptyMun.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 350));
+                //GameObject emptyMun = Instantiate(cartridgeRef, transform.position, Quaternion.identity);
+                //emptyMun.GetComponent<Rigidbody2D>().velocity = new Vector3(3 * Mathf.Clamp(transform.position.x - Camera.main.ScreenToWorldPoint(controlesScript.player.aim.ReadValue<Vector2>()).x, -1, 1), 4, 0);
+                //emptyMun.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 350));
             }
         }
     }
