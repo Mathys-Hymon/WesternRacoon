@@ -93,9 +93,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 bc2d.size = new Vector2(1, Mathf.Lerp(0.5f, 1f, 1f * Time.deltaTime));
             }
-            else if(!roll && bc2d.size.y <= 1f)
+            else if(!roll && bc2d.size.y < 2.4f)
             {
-                bc2d.size = new Vector2(1, Mathf.Lerp(1f, 0.5f, 1f * Time.deltaTime));
+                bc2d.size = new Vector2(1, Mathf.Lerp(2.4f, 0.5f, 1f * Time.deltaTime));
             }
         }
         if (controlesScript.player.jump.triggered)
