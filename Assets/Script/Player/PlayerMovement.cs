@@ -212,13 +212,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = false;
-
-            // if(transform.position.x > transform.position.x + deadZoneXOffset)
-            // {
-                
-            // }
             _cameraFollowObject.CallTurn();
-            
         }
         else
         {
