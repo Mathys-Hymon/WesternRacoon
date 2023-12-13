@@ -12,14 +12,15 @@ public class UI_Assistant : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Joystick1Button2))
-            {
-                HandleButtonPress();
-            }
+        if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+        {
+            HandleButtonPress();
+        }
     }
 
     private void HandleButtonPress()
     {
+        messageTMP = transform.Find("message").Find("messageTMP").GetComponent<TextMeshProUGUI>();
         string[] messageArray = new string[]
         {
         "HI",
