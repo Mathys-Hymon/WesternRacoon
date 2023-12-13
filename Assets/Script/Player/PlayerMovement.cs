@@ -7,16 +7,30 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance;
+    public bool isFacingRight;
+
+    [Header("Movement")]
     [SerializeField] private float _speed = 15f;
     [SerializeField] private ParticleSystem walkParticle;
+
+    [Header("Jump")]
     [SerializeField] private float jumpForce = 6;
     [SerializeField] private float coyoteTime = 0.1f;
+
+    [Header("Camera Stuff")]
     [SerializeField] private CameraMovement cameraRef;
+    [SerializeField] private GameObject _cameraFollow;
+    [SerializeField] private float deadZoneXOffset;
+    [SerializeField] private float deadZoneMinusXOffset;
+    
+
+    [Header("CheckPoint")]
     [SerializeField] private GameObject lastCheckpoint;
 
     private float horizontalMovement;
     private float lastTimeGrounded;
     private float lastTimeJumpPressed;
+    private float _fallSpeedYThresholdChange;
 
     private bool grounded;
     private bool invincibilityFrame;
@@ -28,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Controles controlesScript;
     private PlayerInput playerinput;
+    private CameraFollowPlayer _cameraFollowObject;
+
 
     private void Awake()
     {
@@ -49,16 +65,19 @@ public class PlayerMovement : MonoBehaviour
     {
         isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
     }
+
     private void Start()
     {
         Instance = this;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
+
+        _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowPlayer>();
+        _fallSpeedYThresholdChange = CameraManager.instance._fallspeedYThresholdChange;
     }
 
     void Update()
     {
-
         if(grounded == true)
         {
             lastTimeGrounded = Time.time;
@@ -66,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
             if(controlesScript.player.roll.triggered && roll == false)
             {
                 roll = true;
-                cameraRef.SetSmoothSpeed(1);
                 Invoke("StopRoll", 0.2f);
             }
 
@@ -110,12 +128,24 @@ public class PlayerMovement : MonoBehaviour
         }
         else rb.gravityScale = 3f;
 
+        //if we are falling past a certain speed threshold
+        if(rb.velocity.y < _fallSpeedYThresholdChange && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
+        {
+            CameraManager.instance.LerpYDamping(true);
+        }
+
+        //if we are standing still or moving up
+        if(rb.velocity.y >= 0f && !CameraManager.instance.isLerpingYDamping && CameraManager.instance.LerpedFromPlayerFalling)
+        {
+            //reset so it can be called again
+            CameraManager.instance.LerpedFromPlayerFalling = false;
+            CameraManager.instance.LerpYDamping(false);
+        }
 
     }
     private void StopRoll()
     {
         roll = false;
-        cameraRef.SetSmoothSpeed(3);
     }
 
     private void FixedUpdate()
@@ -128,6 +158,13 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector3(horizontalMovement*_speed, rb.velocity.y, 0);
         }
+
+        //PAS TOUCHE
+        if(horizontalMovement < 0 || horizontalMovement > 0)
+        {
+            TurnCheck();
+        }
+        //C'EST BON
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -147,8 +184,50 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //PAS TOUCHE
+    private void TurnCheck()
+    {
+        if(horizontalMovement > 0 && !isFacingRight)
+        {
+            Turn();
+        }
+        else if(horizontalMovement < 0 && isFacingRight)
+        {
+            Turn();
+        }
+    }
+
+    private void Turn()
+    {
+        Debug.Log(horizontalMovement);
+        if (isFacingRight)
+        {
+            Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
+            isFacingRight = false;
+
+            // if(transform.position.x > transform.position.x + deadZoneXOffset)
+            // {
+                
+            // }
+            _cameraFollowObject.CallTurn();
+            
+        }
+        else
+        {
+            Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
+            isFacingRight = true;
+
+            _cameraFollowObject.CallTurn();
+        }
+    }
+    //C'EST BON
+
     public void Die()
     {
         
     }
+
+
 }
