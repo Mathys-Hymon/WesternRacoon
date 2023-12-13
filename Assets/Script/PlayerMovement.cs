@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Camera Stuff")]
     [SerializeField] private CameraMovement cameraRef;
     [SerializeField] private GameObject _cameraFollow;
+    [SerializeField] private float deadZoneXOffset;
+    [SerializeField] private float deadZoneMinusXOffset;
     
 
     [Header("CheckPoint")]
@@ -76,8 +78,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Gamepad.current?.IsActuated(5));
-
         if(grounded == true)
         {
             lastTimeGrounded = Time.time;
@@ -85,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.Joystick1Button1) && roll == false)
             {
                 roll = true;
-                cameraRef.SetSmoothSpeed(1);
                 Invoke("StopRoll", 0.2f);
             }
 
@@ -143,12 +142,10 @@ public class PlayerMovement : MonoBehaviour
             CameraManager.instance.LerpYDamping(false);
         }
 
-
     }
     private void StopRoll()
     {
         roll = false;
-        cameraRef.SetSmoothSpeed(3);
     }
 
     private void FixedUpdate()
@@ -162,10 +159,12 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(horizontalMovement*_speed, rb.velocity.y, 0);
         }
 
+        //PAS TOUCHE
         if(horizontalMovement < 0 || horizontalMovement > 0)
         {
             TurnCheck();
         }
+        //C'EST BON
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -185,6 +184,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //PAS TOUCHE
     private void TurnCheck()
     {
         if(horizontalMovement > 0 && !isFacingRight)
@@ -206,7 +206,12 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = false;
 
+            // if(transform.position.x > transform.position.x + deadZoneXOffset)
+            // {
+                
+            // }
             _cameraFollowObject.CallTurn();
+            
         }
         else
         {
@@ -217,6 +222,7 @@ public class PlayerMovement : MonoBehaviour
             _cameraFollowObject.CallTurn();
         }
     }
+    //C'EST BON
 
     public void Die()
     {
