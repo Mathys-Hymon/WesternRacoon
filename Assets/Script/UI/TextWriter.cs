@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,17 +16,17 @@ public class TextWriter : MonoBehaviour
         textWriterSingleList = new List<TextWriterSingle>();
     }
 
-    public static TextWriterSingle AddWriter_Static(TextMeshProUGUI uiTMP, string textToWrite, float timePerCharacter, bool removeWriterBeforeAdd)
+    public static TextWriterSingle AddWriter_Static(TextMeshProUGUI uiTMP, string textToWrite, float timePerCharacter, bool removeWriterBeforeAdd, Action onComplete)
     {
         if(removeWriterBeforeAdd)
         {
             instance.RemoveWriter(uiTMP);
         }
-        return instance.AddWriter(uiTMP, textToWrite, timePerCharacter);
+        return instance.AddWriter(uiTMP, textToWrite, timePerCharacter, onComplete);
     }
-    private TextWriterSingle AddWriter(TextMeshProUGUI uiTMP, string textToWrite, float timePerCharacter)
+    private TextWriterSingle AddWriter(TextMeshProUGUI uiTMP, string textToWrite, float timePerCharacter, Action onComplete)
     {
-        TextWriterSingle textWriterSingle = new TextWriterSingle(uiTMP, textToWrite, timePerCharacter);
+        TextWriterSingle textWriterSingle = new TextWriterSingle(uiTMP, textToWrite, timePerCharacter, onComplete);
         textWriterSingleList.Add(textWriterSingle);
         return textWriterSingle;
     }
@@ -67,11 +68,13 @@ public class TextWriter : MonoBehaviour
         private int characterIndex;
         private float timePerCharacter;
         private float timer;
-        public TextWriterSingle(TextMeshProUGUI uiTMP, string textToWrite, float timePerCharacter)
+        private Action onComplete;
+        public TextWriterSingle(TextMeshProUGUI uiTMP, string textToWrite, float timePerCharacter, Action onComplete)
         {
             this.uiTMP = uiTMP;
             this.textToWrite = textToWrite;
             this.timePerCharacter = timePerCharacter;
+            this.onComplete = onComplete;
             this.characterIndex = 0;
         }
         public bool Update()
@@ -90,7 +93,7 @@ public class TextWriter : MonoBehaviour
 
                     if (characterIndex >= textToWrite.Length)
                     {
-                        uiTMP = null;
+                        if (onComplete != null) onComplete();
                         return true;
                     }
                 }
@@ -110,6 +113,7 @@ public class TextWriter : MonoBehaviour
         {
             uiTMP.text = textToWrite;
             characterIndex = textToWrite.Length;
+            if (onComplete != null) onComplete();
             TextWriter.RemoveWriter_Static(uiTMP);
         }
     }

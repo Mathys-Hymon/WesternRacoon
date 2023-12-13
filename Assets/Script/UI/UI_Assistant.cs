@@ -35,8 +35,8 @@ public class UI_Assistant : MonoBehaviour
             if(messageArray.Length !=0)
             {
                 string message = messageArray[Random.Range(0, messageArray.Length)];
-                talkingAudioSource.Play();
-                textWriterSingle = TextWriter.AddWriter_Static(messageTMP, message, 0.05f, true);
+                StartTalkingSound();
+                textWriterSingle = TextWriter.AddWriter_Static(messageTMP, message, 0.05f, true, StopTalkingSound);
             }
             //string[] messageArray = new string[]
             //{
@@ -50,6 +50,14 @@ public class UI_Assistant : MonoBehaviour
             //textWriterSingle = TextWriter.AddWriter_Static(messageTMP, message, 0.05f, true);
 
         }
+    }
+    private void StartTalkingSound()
+    {
+        talkingAudioSource.Play();
+    }
+    private void StopTalkingSound()
+    {
+        talkingAudioSource.Stop();
     }
     //private void Awake()
     //{

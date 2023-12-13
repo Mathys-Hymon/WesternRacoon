@@ -24,7 +24,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Joystick1Button6))
+        if (Input.GetKey(KeyCode.Joystick1Button7))
         {
             GetPauseMenu();
             Debug.Log("Opens");
