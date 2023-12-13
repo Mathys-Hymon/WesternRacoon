@@ -303,7 +303,7 @@ MonoBehaviour:
   - {fileID: 1751802652}
   _fallPanAmount: 0.2
   _fallYPanTime: 0.35
-  _fallspeedYThresholdChange: -15
+  _fallspeedYThresholdChange: -7.8
 --- !u!1 &61252520
 GameObject:
   m_ObjectHideFlags: 0
@@ -7146,7 +7146,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 27.851381, y: 12.194211}
+  m_Offset: {x: 28.619946, y: 12.194211}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -7157,7 +7157,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 24.848469, y: 28.841337}
+  m_Size: {x: 23.31134, y: 28.841337}
   m_EdgeRadius: 0
 --- !u!61 &1693659725
 BoxCollider2D:
@@ -7191,7 +7191,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: -3.8155594, y: 9.051423}
+  m_Offset: {x: -3.137416, y: 9.051423}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -7202,7 +7202,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 36.00988, y: 27.845316}
+  m_Size: {x: 37.366165, y: 27.845316}
   m_EdgeRadius: 0
 --- !u!66 &1693659726
 CompositeCollider2D:
@@ -7245,9 +7245,9 @@ CompositeCollider2D:
     m_ColliderPaths:
     - - X: 402756160
         Y: 266148800
-      - X: 154271472
+      - X: 169642752
         Y: 266148800
-      - X: 154271472
+      - X: 169642752
         Y: -22264576
       - X: 402756160
         Y: -22264576
@@ -7263,22 +7263,22 @@ CompositeCollider2D:
         Y: -30479640
   - m_Collider: {fileID: 1693659725}
     m_ColliderPaths:
-    - - X: 141893808
+    - - X: 155456672
         Y: 229740816
       - X: -218204992
         Y: 229740816
       - X: -218204992
         Y: -48712348
-      - X: 141893808
+      - X: 155456672
         Y: -48712348
   m_CompositePaths:
     m_Paths:
     - - {x: 40.27559, y: -2.2264576}
       - {x: 40.27559, y: 26.61488}
-      - {x: 15.427147, y: 26.614851}
-      - {x: 15.427176, y: -2.2264576}
-    - - {x: 14.189352, y: -4.871235}
-      - {x: 14.189352, y: 22.974081}
+      - {x: 16.964275, y: 26.614851}
+      - {x: 16.964304, y: -2.2264576}
+    - - {x: 15.545639, y: -4.871235}
+      - {x: 15.545639, y: 22.974081}
       - {x: -10.853725, y: 22.974112}
       - {x: -10.853755, y: 26.404314}
       - {x: -37.020462, y: 26.404285}
@@ -7420,7 +7420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BoundingShape2D: {fileID: 1693659726}
-  m_Damping: 0.5
+  m_Damping: 2
   m_MaxWindowSize: -1
 --- !u!1001 &1758626948
 PrefabInstance:
@@ -8099,7 +8099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 347671911}
   _flipYRotationTime: 0.7
-  yOffset: 3
+  yOffset: 4
   xOffset: 0
 --- !u!4 &2143001821
 Transform:

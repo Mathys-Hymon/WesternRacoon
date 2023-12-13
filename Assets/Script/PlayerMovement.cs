@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
     }
+
     private void Start()
     {
         Instance = this;
@@ -75,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(Gamepad.current?.IsActuated(5));
 
         if(grounded == true)
         {
@@ -202,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
-            isFacingRight = !isFacingRight;
+            isFacingRight = false;
 
             _cameraFollowObject.CallTurn();
         }
@@ -210,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
-            isFacingRight = !isFacingRight;
+            isFacingRight = true;
 
             _cameraFollowObject.CallTurn();
         }
