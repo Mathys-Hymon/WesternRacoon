@@ -62,6 +62,15 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""68d934d7-3159-4be8-b47c-81e8c22269df"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -210,6 +219,17 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""24837853-fb82-444a-8f6c-54c54fb93005"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""01b2028b-b24d-4404-965f-6c2667ee81c9"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
@@ -222,11 +242,33 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2da52e03-1703-4879-b42a-00136d68cf66"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
                     ""action"": ""roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24152512-fcfe-4891-b3ec-682a60fe49af"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ae478b0-665e-4fe9-81e5-2cee3a1b7702"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -269,6 +311,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         m_player_move = m_player.FindAction("move", throwIfNotFound: true);
         m_player_jump = m_player.FindAction("jump", throwIfNotFound: true);
         m_player_roll = m_player.FindAction("roll", throwIfNotFound: true);
+        m_player_shoot = m_player.FindAction("shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -334,6 +377,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
     private readonly InputAction m_player_move;
     private readonly InputAction m_player_jump;
     private readonly InputAction m_player_roll;
+    private readonly InputAction m_player_shoot;
     public struct PlayerActions
     {
         private @Controles m_Wrapper;
@@ -342,6 +386,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         public InputAction @move => m_Wrapper.m_player_move;
         public InputAction @jump => m_Wrapper.m_player_jump;
         public InputAction @roll => m_Wrapper.m_player_roll;
+        public InputAction @shoot => m_Wrapper.m_player_shoot;
         public InputActionMap Get() { return m_Wrapper.m_player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -363,6 +408,9 @@ public partial class @Controles: IInputActionCollection2, IDisposable
             @roll.started += instance.OnRoll;
             @roll.performed += instance.OnRoll;
             @roll.canceled += instance.OnRoll;
+            @shoot.started += instance.OnShoot;
+            @shoot.performed += instance.OnShoot;
+            @shoot.canceled += instance.OnShoot;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -379,6 +427,9 @@ public partial class @Controles: IInputActionCollection2, IDisposable
             @roll.started -= instance.OnRoll;
             @roll.performed -= instance.OnRoll;
             @roll.canceled -= instance.OnRoll;
+            @shoot.started -= instance.OnShoot;
+            @shoot.performed -= instance.OnShoot;
+            @shoot.canceled -= instance.OnShoot;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -420,5 +471,6 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }
