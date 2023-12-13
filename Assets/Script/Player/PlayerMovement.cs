@@ -212,14 +212,8 @@ public class PlayerMovement : MonoBehaviour
             Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = false;
-<<<<<<< HEAD:Assets/Script/PlayerMovement.cs
 
             _cameraFollowObject.CallTurn();
-            
-            
-=======
-            _cameraFollowObject.CallTurn();
->>>>>>> mathys-branch:Assets/Script/Player/PlayerMovement.cs
         }
         else
         {
