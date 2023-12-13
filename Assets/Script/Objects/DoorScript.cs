@@ -3,40 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorScript : MonoBehaviour
+public class DoorScript : FreezeMasterScript
 {
 
     [SerializeField] private ButtonScript[] Buttons;
-    private int IsValidInput;
     [SerializeField] private bool CloseBehind = false;
-    [SerializeField] private bool CameraFocus = false;
+    private int IsValidInput;
     private float  y;
-    private float x;
-    private CameraMovement CameraRef;
-    private PlayerMovement PlayerRef;
     private int DoorOpen = 0;
-    private float delay = 4f;
 
 
 
     private void Start()
     {
-        CameraRef = FindObjectOfType<CameraMovement>();
         y = transform.position.y;
-        x = transform.position.x;
-        PlayerRef = FindObjectOfType<PlayerMovement>();
     }
 
     void Update()
     {
 
-      
-        if (delay <= 4f)
-        {
-            delay += Time.deltaTime;
-        }
-
-
+      if(!freezed) {
         if(Buttons.Length > 0)       
         {
             IsValidInput = 0;
@@ -54,17 +40,7 @@ public class DoorScript : MonoBehaviour
         if (IsValidInput == Buttons.Length && DoorOpen == 0)
         {
             DoorOpen = 1;
-                if (CameraFocus && delay >=4f)
-                {
-                    PlayerRef.enabled = false;
-                    Invoke("OpenDoorDelay", 1f);
-                    CameraRef.SetTarget(gameObject);
-                    Invoke("AnimationFinished", 2f);    
-                }
-                else
-                {
-                        y = y + 2;
-                }
+            y = y + 2;
         }
           else if (IsValidInput < Buttons.Length && DoorOpen == 1)
           {
@@ -74,19 +50,6 @@ public class DoorScript : MonoBehaviour
                 Vector3 targetPosition = Vector3.Lerp(transform.position, new Vector3(transform.position.x, y, transform.position.z), 3 * Time.deltaTime);
                 transform.position = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
         }
-    }
-    private void OpenDoorDelay()
-    {
-            y += 2;
-    }
-
-    private void AnimationFinished()
-    {
-        if (CameraFocus)
-        {
-            CameraRef.SetTarget(null);
-            PlayerRef.enabled = true;
-            delay = 0f;
         }
     }
 
