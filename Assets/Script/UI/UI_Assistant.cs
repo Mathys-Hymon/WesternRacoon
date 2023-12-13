@@ -8,11 +8,20 @@ using CodeMonkey.Utils;
 
 public class UI_Assistant : MonoBehaviour
 {
+    public static UI_Assistant Instance;
+
     private TextMeshProUGUI messageTMP;
     private TextWriter.TextWriterSingle textWriterSingle;
     private AudioSource talkingAudioSource;
+    public int countMessage = 0;
 
     [SerializeField] string[] messageArray;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Joystick1Button2))
@@ -21,7 +30,7 @@ public class UI_Assistant : MonoBehaviour
         }
     }
 
-    private void HandleButtonPress()
+    public void HandleButtonPress()
     {
         messageTMP = transform.Find("message").Find("messageTMP").GetComponent<TextMeshProUGUI>();
         talkingAudioSource = transform.Find("Speech").GetComponent<AudioSource>();
@@ -35,6 +44,7 @@ public class UI_Assistant : MonoBehaviour
             if(messageArray.Length !=0)
             {
                 string message = messageArray[Random.Range(0, messageArray.Length)];
+                countMessage = countMessage + 1;
                 StartTalkingSound();
                 textWriterSingle = TextWriter.AddWriter_Static(messageTMP, message, 0.05f, true, StopTalkingSound);
             }

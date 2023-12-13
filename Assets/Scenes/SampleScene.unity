@@ -727,8 +727,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fe17f231bd04f428f7b43236ca55a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageArray: []
   canvasRef: {fileID: 780495987}
+  textWriter: {fileID: 1001366586}
+  ui_Assistant: {fileID: 0}
 --- !u!1 &258314817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1816,6 +1817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8310eaf8d80e4498d3faed9f34980c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countMessage: 0
   messageArray:
   - Heloooooooo
   - KKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
