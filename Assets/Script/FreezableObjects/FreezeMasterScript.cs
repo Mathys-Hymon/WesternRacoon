@@ -6,8 +6,6 @@ public class FreezeMasterScript : MonoBehaviour
 {
     protected bool freezed;
     protected float freezeTime = 3f;
-
-    private float timer;
     public void FreezeObject()
     {
         freezed = true;
@@ -18,5 +16,10 @@ public class FreezeMasterScript : MonoBehaviour
     private void ResetTimer()
     {
         freezed = false;
+    }
+
+    public bool isFreezed()
+    {
+        return freezed;
     }
 }
