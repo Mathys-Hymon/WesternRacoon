@@ -10,7 +10,9 @@ public class UI_Assistant : MonoBehaviour
 {
     private TextMeshProUGUI messageTMP;
     private TextWriter.TextWriterSingle textWriterSingle;
+    private AudioSource talkingAudioSource;
 
+    [SerializeField] string[] messageArray;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Joystick1Button2))
@@ -22,23 +24,30 @@ public class UI_Assistant : MonoBehaviour
     private void HandleButtonPress()
     {
         messageTMP = transform.Find("message").Find("messageTMP").GetComponent<TextMeshProUGUI>();
-        if(textWriterSingle != null && textWriterSingle.IsActive())
+        talkingAudioSource = transform.Find("Speech").GetComponent<AudioSource>();
+        if (textWriterSingle != null && textWriterSingle.IsActive())
         {
             // Currently active TextWriter
             textWriterSingle.WriteAllAndDestroy();
         }
         else
         {
-        string[] messageArray = new string[]
-        {
-        "HI",
-        "YO",
-        "HEHEHEHEHE",
-        "MUAHAHAHAHA",
-        "HEY",
-        };
-        string message = messageArray[Random.Range(0, messageArray.Length)];
-        textWriterSingle = TextWriter.AddWriter_Static(messageTMP, message, 0.05f, true);
+            if(messageArray.Length !=0)
+            {
+                string message = messageArray[Random.Range(0, messageArray.Length)];
+                talkingAudioSource.Play();
+                textWriterSingle = TextWriter.AddWriter_Static(messageTMP, message, 0.05f, true);
+            }
+            //string[] messageArray = new string[]
+            //{
+            //"HI THERE",
+            //"YO",
+            //"HEHEHEHEHEHEHEHEHEHEHE",
+            //"MUAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA",
+            //"HEY! HOW ARE YOU?",
+            //};
+            //string message = messageArray[Random.Range(0, messageArray.Length)];
+            //textWriterSingle = TextWriter.AddWriter_Static(messageTMP, message, 0.05f, true);
 
         }
     }
