@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CameraMovement cameraRef;
     [SerializeField] private GameObject _cameraFollow;
     [SerializeField] private float deadZoneXOffset;
-    [SerializeField] private float deadZoneMinusXOffset;
     
 
     [Header("CheckPoint")]
@@ -31,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private float lastTimeGrounded;
     private float lastTimeJumpPressed;
     private float _fallSpeedYThresholdChange;
+    private float oldPosition;
 
     private bool grounded;
     private bool invincibilityFrame;
@@ -141,8 +141,8 @@ public class PlayerMovement : MonoBehaviour
             CameraManager.instance.LerpedFromPlayerFalling = false;
             CameraManager.instance.LerpYDamping(false);
         }
-
     }
+
     private void StopRoll()
     {
         roll = false;
@@ -199,18 +199,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Turn()
     {
-        Debug.Log(horizontalMovement);
         if (isFacingRight)
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = false;
 
-            // if(transform.position.x > transform.position.x + deadZoneXOffset)
-            // {
-                
-            // }
             _cameraFollowObject.CallTurn();
+            
             
         }
         else
@@ -220,6 +216,7 @@ public class PlayerMovement : MonoBehaviour
             isFacingRight = true;
 
             _cameraFollowObject.CallTurn();
+            
         }
     }
     //C'EST BON
