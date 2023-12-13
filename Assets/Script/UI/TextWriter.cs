@@ -15,13 +15,35 @@ public class TextWriter : MonoBehaviour
         textWriterSingleList = new List<TextWriterSingle>();
     }
 
-    public static void AddWriter_Static(TextMeshProUGUI uiTMP, string textToWrite, float timePerCharacter)
+    public static TextWriterSingle AddWriter_Static(TextMeshProUGUI uiTMP, string textToWrite, float timePerCharacter, bool removeWriterBeforeAdd)
     {
-        instance.AddWriter(uiTMP, textToWrite, timePerCharacter);
+        if(removeWriterBeforeAdd)
+        {
+            instance.RemoveWriter(uiTMP);
+        }
+        return instance.AddWriter(uiTMP, textToWrite, timePerCharacter);
     }
-    private void AddWriter(TextMeshProUGUI uiTMP, string textToWrite, float timePerCharacter)
+    private TextWriterSingle AddWriter(TextMeshProUGUI uiTMP, string textToWrite, float timePerCharacter)
     {
-        textWriterSingleList.Add(new TextWriterSingle(uiTMP, textToWrite, timePerCharacter));
+        TextWriterSingle textWriterSingle = new TextWriterSingle(uiTMP, textToWrite, timePerCharacter);
+        textWriterSingleList.Add(textWriterSingle);
+        return textWriterSingle;
+    }
+
+    public static void RemoveWriter_Static(TextMeshProUGUI uiTMP)
+    {
+        instance.RemoveWriter(uiTMP);
+    }
+    private void RemoveWriter(TextMeshProUGUI uiTMP)
+    {
+        for (int i = 0; i < textWriterSingleList.Count; ++i)
+        {
+            if (textWriterSingleList[i].GetUIText() == uiTMP)
+            {
+                textWriterSingleList.RemoveAt(i);
+                i--;
+            }
+        }
     }
 
     private void Update()
@@ -73,6 +95,22 @@ public class TextWriter : MonoBehaviour
                     }
                 }
                 return false;
+        }
+        public TextMeshProUGUI GetUIText()
+        {
+            return uiTMP;
+        }
+
+        public bool IsActive()
+        {
+            return characterIndex < textToWrite.Length;
+        }
+
+        public void WriteAllAndDestroy()
+        {
+            uiTMP.text = textToWrite;
+            characterIndex = textToWrite.Length;
+            TextWriter.RemoveWriter_Static(uiTMP);
         }
     }
 }

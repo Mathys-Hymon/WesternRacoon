@@ -9,6 +9,7 @@ using CodeMonkey.Utils;
 public class UI_Assistant : MonoBehaviour
 {
     private TextMeshProUGUI messageTMP;
+    private TextWriter.TextWriterSingle textWriterSingle;
 
     private void Update()
     {
@@ -21,6 +22,13 @@ public class UI_Assistant : MonoBehaviour
     private void HandleButtonPress()
     {
         messageTMP = transform.Find("message").Find("messageTMP").GetComponent<TextMeshProUGUI>();
+        if(textWriterSingle != null && textWriterSingle.IsActive())
+        {
+            // Currently active TextWriter
+            textWriterSingle.WriteAllAndDestroy();
+        }
+        else
+        {
         string[] messageArray = new string[]
         {
         "HI",
@@ -30,7 +38,9 @@ public class UI_Assistant : MonoBehaviour
         "HEY",
         };
         string message = messageArray[Random.Range(0, messageArray.Length)];
-        TextWriter.AddWriter_Static(messageTMP, message, 0.05f);
+        textWriterSingle = TextWriter.AddWriter_Static(messageTMP, message, 0.05f, true);
+
+        }
     }
     //private void Awake()
     //{
