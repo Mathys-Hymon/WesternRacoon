@@ -250,7 +250,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        
+        Debug.Log("Player is DEAD");
     }
 
 
