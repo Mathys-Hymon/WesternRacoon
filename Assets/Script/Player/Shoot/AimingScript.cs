@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class AimingScript : MonoBehaviour
 {
+    [Header("REFERENCES")]
     [SerializeField] private GameObject bulletRef;
     [SerializeField] private GameObject cartridgeRef;
     private bool isGamepad;

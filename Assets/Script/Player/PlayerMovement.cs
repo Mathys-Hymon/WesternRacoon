@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
@@ -43,13 +44,33 @@ public class PlayerMovement : MonoBehaviour
     private int jumpNumber;
 
     private Rigidbody2D rb;
-    private BoxCollider2D bc2d;
+    private CapsuleCollider2D cc2d;
     private Controles controlesScript;
     private GameObject _cameraFollow;
     private PlayerInput playerinput;
     private CameraFollowPlayer _cameraFollowObject;
+    private List<GameObject> freezedObject = new List<GameObject>();
 
-
+    public void SetFreezedObject(GameObject newObject)
+    {
+        if(freezedObject.Count <3)
+        {
+            freezedObject.Add(newObject);
+        }
+        else
+        {
+            freezedObject.Remove(freezedObject[0]);
+            freezedObject.Add(newObject);
+        }
+    }
+    public List<GameObject> GetFreezedObject()
+    {
+        return freezedObject;
+    }
+    public void DestroyFreezedObject(GameObject oldGameobject)
+    {
+        freezedObject.Remove(oldGameobject);
+    }
     private void Awake()
     {
         controlesScript = new Controles();
@@ -77,13 +98,14 @@ public class PlayerMovement : MonoBehaviour
         Instance = this;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
-        bc2d = GetComponent<BoxCollider2D>();
+        cc2d = GetComponent<CapsuleCollider2D>();
         _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowPlayer>();
         _fallSpeedYThresholdChange = CameraManager.instance._fallspeedYThresholdChange;
     }
 
     void Update()
     {
+        //print(freezedObject.Length);
         IsGrounded();
         if(grounded == true)
         {
@@ -96,11 +118,11 @@ public class PlayerMovement : MonoBehaviour
             }
             else if(roll && Mathf.Abs(rb.velocity.x) > 0.1f)
             {
-                bc2d.size = new Vector2(1, Mathf.Lerp(0.5f, 1f, 1f * Time.deltaTime));
+                cc2d.size = new Vector2(1, Mathf.Lerp(0.5f, 1f, 1f * Time.deltaTime));
             }
-            else if(!roll && bc2d.size.y < 2.4f)
+            else if(!roll && cc2d.size.y < 2.4f)
             {
-                bc2d.size = new Vector2(1, Mathf.Lerp(2.4f, 0.5f, 1f * Time.deltaTime));
+                cc2d.size = new Vector2(1, Mathf.Lerp(2.4f, 0.5f, 1f * Time.deltaTime));
             }
         }
         if (controlesScript.player.jump.triggered)
