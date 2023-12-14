@@ -9,6 +9,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] private float shootFrequency = 0;
     [SerializeField] public GameObject bulletPrefab;
     [SerializeField] private float MaxPos = 0;
+    [SerializeField] private float bulletFlyDirection;
 
     void Start()
     {
@@ -39,8 +40,8 @@ public class Cannon : MonoBehaviour
     {
         bulletPrefab = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Rigidbody2D bulletRb = bulletPrefab.GetComponent<Rigidbody2D>();
-        bulletRb.velocity = transform.right * shootSpeed;
-    }
 
-    
+        Vector2 bulletDirection = new Vector2(Mathf.Cos(bulletFlyDirection * Mathf.Deg2Rad), Mathf.Sin(bulletFlyDirection * Mathf.Deg2Rad));
+        bulletRb.velocity = bulletDirection * shootSpeed;
+    }
 }
