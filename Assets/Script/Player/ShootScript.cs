@@ -10,8 +10,6 @@ public class ShootScript : MonoBehaviour
     {
         transform.position += transform.up * speed * Time.deltaTime;
     }
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision != null)
