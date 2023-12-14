@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Piston_Fast : FreezeMasterScript
 {
@@ -15,11 +16,12 @@ public class Piston_Fast : FreezeMasterScript
 
     void Start()
     {
-        transform.position = new Vector3(transform.position.x, MaxY);
+        transform.position = new Vector3(transform.position.x, MinY);
     }
 
     void Update()
     {
+
         if (!freezed)
         {
             // Move up to MaxY
@@ -27,15 +29,19 @@ public class Piston_Fast : FreezeMasterScript
             {
                 transform.position += Vector3.up * speed * Time.deltaTime;
 
+                if(transform.position.y >= MaxY)
+                {
+                    StartCoroutine(WaitForSecondsCoroutine(waitTime));
+                }
             }
             else if(!moveUp && transform.position.y > MinY)
             {
                 transform.position += Vector3.down * speed * Time.deltaTime;
-            }
-            else
-            {
-                moveUp = !moveUp;
-                StartCoroutine(WaitForSecondsCoroutine(waitTime));
+
+                if (transform.position.y <= MinY)
+                {
+                    StartCoroutine(WaitForSecondsCoroutine(waitTime));
+                }
             }
         }
     }
@@ -43,6 +49,15 @@ public class Piston_Fast : FreezeMasterScript
     IEnumerator WaitForSecondsCoroutine(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+        if(transform.position.y >= MaxY)
+        {
+            moveUp = false;
+        }
+        else if(transform.position.y <= MinY)
+        {
+            moveUp = true;
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
