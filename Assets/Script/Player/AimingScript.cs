@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class AimingScript : MonoBehaviour
 {
     [SerializeField] private GameObject crosshairRef;
+    [SerializeField] private GameObject ArmTarget;
     [SerializeField] private GameObject bulletRef;
     [SerializeField] private GameObject cartridgeRef;
     private bool isGamepad;
@@ -48,6 +49,7 @@ public class AimingScript : MonoBehaviour
             {
                 crosshairRef.GetComponent<SpriteRenderer>().enabled = true;
                 crosshairRef.transform.position = new Vector3(transform.position.x + 4 * mouseMultiplyer.x, transform.position.y + 4 * mouseMultiplyer.y, 0);
+                ArmTarget.transform.position = new Vector3(transform.position.x+mouseMultiplyer.x, transform.position.y + mouseMultiplyer.y, 0);
             }
             if (controlesScript.player.shoot.triggered)
             {
