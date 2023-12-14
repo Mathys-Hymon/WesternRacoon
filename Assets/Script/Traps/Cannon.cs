@@ -9,7 +9,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] private float shootFrequency = 0;
     [SerializeField] public GameObject bulletPrefab;
     [SerializeField] private float MaxPos = 0;
-    [SerializeField] private float bulletFlyDirection;
+    [SerializeField] private Vector2 bulletFlyDirection = Vector2.right;
 
     void Start()
     {
@@ -19,17 +19,17 @@ public class Cannon : MonoBehaviour
     
     void Update()
     {
-        if (bulletInstance != null && bulletInstance.transform.position.x >= MaxPos)
-        {
-            Destroy(bulletInstance);
-        }
+        //if (bulletInstance != null && bulletInstance.transform.position.x >= MaxPos)
+        //{
+        //    Destroy(bulletInstance);
+        //}
     }
 
     private IEnumerator ShootRoutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f / shootFrequency);
+            yield return new WaitForSeconds(10f / shootFrequency);
 
             PrepareBullet();
         }
@@ -38,10 +38,10 @@ public class Cannon : MonoBehaviour
 
     private void PrepareBullet()
     {
-        bulletPrefab = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        bulletInstance = Instantiate(bulletPrefab, transform.position + transform.up, transform.rotation);
         Rigidbody2D bulletRb = bulletPrefab.GetComponent<Rigidbody2D>();
 
-        Vector2 bulletDirection = new Vector2(Mathf.Cos(bulletFlyDirection * Mathf.Deg2Rad), Mathf.Sin(bulletFlyDirection * Mathf.Deg2Rad));
-        bulletRb.velocity = bulletDirection * shootSpeed;
+        //Vector2 bulletDirection = bulletFlyDirection.normalized;
+        //bulletRb.velocity = bulletDirection * shootSpeed;
     }
 }

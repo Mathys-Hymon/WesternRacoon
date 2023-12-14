@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7796134639919396086}
   - component: {fileID: 7771064576351904705}
   - component: {fileID: 7684165897437453020}
+  - component: {fileID: 2904126256369869319}
   m_Layer: 3
   m_Name: Cannon
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6221858562757663522}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -22.64655, y: 1.7080488, z: 0}
   m_LocalScale: {x: 2.399416, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -130,3 +131,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2904126256369869319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6221858562757663522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aece345775b58849a267757a66fc578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootSpeed: 5
+  shootFrequency: 1
+  bulletPrefab: {fileID: 3315467442001867978, guid: 96c7f070302235a418b823e6f1793d33, type: 3}
+  MaxPos: -5
+  bulletFlyDirection: 0
