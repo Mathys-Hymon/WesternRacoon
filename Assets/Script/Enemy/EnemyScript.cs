@@ -26,10 +26,24 @@ public class EnemyScript : FreezeMasterScript
 
             if (touchPlayer.collider == null && canShoot)
             {
+                if (transform.position.x - PlayerMovement.Instance.transform.position.x < 0)
+                {
+                    Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+                    transform.rotation = Quaternion.Euler(rotator);
+                }
+                else
+                {
+                    Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+                    transform.rotation = Quaternion.Euler(rotator);
+                }
+                
                 canShoot = false;
                 Shoot();
             }
+
+           
         }
+        
        
     }
 
