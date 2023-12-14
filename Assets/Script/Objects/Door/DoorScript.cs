@@ -29,7 +29,7 @@ public class DoorScript : FreezeMasterScript
     void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
-        Gizmos.DrawCube(new Vector3(transform.position.x-0.20f,transform.position.y + 0.5f + openingSize, 0 ), new Vector3(transform.GetComponent<BoxCollider2D>().size.y, transform.GetComponent<BoxCollider2D>().size.x, 0));
+        Gizmos.DrawCube(transform.position+ transform.right*openingSize, new Vector3(1,1, 0));
     }
 
     void Update()
