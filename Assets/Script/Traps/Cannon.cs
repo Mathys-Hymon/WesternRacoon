@@ -6,10 +6,11 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     [SerializeField] private float shootSpeed = 0;
+    //[SerializeField] private float directionX = 0;
+    //[SerializeField] private float directionY = 0;
     [SerializeField] private float shootFrequency = 0;
     [SerializeField] public GameObject bulletPrefab;
-    [SerializeField] private float MaxPos = 0;
-    [SerializeField] private Vector2 bulletFlyDirection = Vector2.right;
+
 
     void Start()
     {
@@ -34,11 +35,11 @@ public class Cannon : MonoBehaviour
             PrepareBullet();
         }
     }
-    private GameObject bulletInstance;
+
 
     private void PrepareBullet()
     {
-        bulletInstance = Instantiate(bulletPrefab, transform.position + transform.up, transform.rotation);
+        Instantiate(bulletPrefab, transform.position + (transform.right*2), transform.rotation);
         Rigidbody2D bulletRb = bulletPrefab.GetComponent<Rigidbody2D>();
 
         //Vector2 bulletDirection = bulletFlyDirection.normalized;
