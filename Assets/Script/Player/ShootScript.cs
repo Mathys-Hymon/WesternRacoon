@@ -15,7 +15,7 @@ public class ShootScript : MonoBehaviour
     {
         if (collision != null)
         {
-            if (collision.gameObject.layer == 7)
+            if (collision.gameObject.tag == "Freezeable")
             {
                 collision.gameObject.GetComponent<FreezeMasterScript>().FreezeObject();
             }
