@@ -189,13 +189,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector3(horizontalVelocity * _speed * airControl, rb.velocity.y, 0);
             }
         }
-
-        //PAS TOUCHE
-        if(horizontalMovement < 0 || horizontalMovement > 0)
-        {
             TurnCheck();
-        }
-        //C'EST BON
     }
 
     private void IsGrounded()
@@ -217,13 +211,27 @@ public class PlayerMovement : MonoBehaviour
     //PAS TOUCHE
     private void TurnCheck()
     {
-        if (horizontalMovement > 0 && !isFacingRight)
+        if (isGamepad)
         {
-            Turn();
+            if (controlesScript.player.aim.ReadValue<Vector2>().x > 0 && !isFacingRight)
+            {
+                Turn();
+            }
+            else if (controlesScript.player.aim.ReadValue<Vector2>().x < 0 && isFacingRight)
+            {
+                Turn();
+            }
         }
-        else if (horizontalMovement < 0 && isFacingRight)
+        else
         {
-            Turn();
+            if(transform.position.x - Camera.main.ScreenToWorldPoint(controlesScript.player.aim.ReadValue<Vector2>()).x < 0 && !isFacingRight)
+            {
+                Turn();
+            }
+            else if(transform.position.x - Camera.main.ScreenToWorldPoint(controlesScript.player.aim.ReadValue<Vector2>()).x > 0 && isFacingRight)
+            {
+                Turn();
+            }
         }
     }
 
