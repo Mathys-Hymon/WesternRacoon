@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootScript : MonoBehaviour
+public class BulletEnemyScript : MonoBehaviour
 {
     [SerializeField] float speed;
-    [SerializeField] float freezeDuration;
     void Update()
     {
         transform.position += transform.up * speed * Time.deltaTime;
@@ -16,11 +15,11 @@ public class ShootScript : MonoBehaviour
     {
         if (collision != null)
         {
-            if (collision.gameObject.tag == "Freezeable")
+            if (collision.gameObject.layer == 6)
             {
-                collision.gameObject.GetComponent<FreezeMasterScript>().FreezeObject(freezeDuration);
+                PlayerMovement.Instance.Die();
             }
-            if (collision.gameObject.layer != 6)
+            if (collision.gameObject.layer != 9)
             {
                 Destroy(gameObject);
             }
