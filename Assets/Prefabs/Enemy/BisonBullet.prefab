@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2919065235038284765}
   - component: {fileID: 3835545317394867355}
-  - component: {fileID: 6502401919131616882}
   - component: {fileID: 5529313681481201891}
   - component: {fileID: -409813682255516072}
+  - component: {fileID: 4199185489989514334}
   m_Layer: 0
-  m_Name: TimeCapsule
+  m_Name: BisonBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,20 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6502401919131616882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8736122095815300506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1109f280c4084d40840372c9026311c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
-  freezeDuration: 3
 --- !u!61 &5529313681481201891
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -116,7 +102,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 68
+    m_Bits: 516
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -173,3 +159,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &4199185489989514334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8736122095815300506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16cc8fac23ca7b4a839f61c0f9b702a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
