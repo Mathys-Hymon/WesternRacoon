@@ -25,13 +25,17 @@ public class BigBullet : FreezeMasterScript
             {
                 collision.gameObject.GetComponent<PlayerMovement>().Die();
             }
+
+            if (collision.gameObject.GetComponent<ShootScript>() == null)
+            {
                 Destroy(gameObject);
+            }
         }
         else
         {
             if (freezed)
             {
-                if (collision.gameObject.CompareTag("Bullet"))
+                if (collision.gameObject.GetComponent<BigBullet>() != null)
                 {
                     Destroy(collision.gameObject);
                     Destroy(gameObject);
