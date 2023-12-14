@@ -277,6 +277,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
+
         print("Player DEAD");
     }
 
