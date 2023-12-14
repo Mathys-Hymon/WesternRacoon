@@ -19,7 +19,8 @@ public class ShootScript : MonoBehaviour
         {
             if (collision.gameObject.tag == "Freezeable")
             {
-                GameObject timerRef = Instantiate(timer, collision.gameObject.transform);
+                GameObject timerRef = Instantiate(timer);
+                timerRef.transform.position = collision.gameObject.transform.position;
                 timerRef.GetComponent<CircleTimeFreezeScript>().SetTimer(freezeDuration);
                 
                 collision.gameObject.GetComponent<FreezeMasterScript>().FreezeObject(freezeDuration);

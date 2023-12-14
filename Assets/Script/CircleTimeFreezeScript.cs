@@ -6,24 +6,33 @@ using UnityEngine.UI;
 
 public class CircleTimeFreezeScript : MonoBehaviour
 {
-    [SerializeField] private Image[] circleImage;
-    private Image image;
+    [SerializeField] private Sprite[] circleImage;
+    //private Image image;
+    private SpriteRenderer sr;
+    private Sprite image;
     private float time;
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        image = GetComponent<Image>();
-    }
+    private int nextImage;
 
     private void ChangeClock()
     {
         
+        if (nextImage < circleImage.Length)
+        {
+            sr.sprite = circleImage[nextImage];
+            nextImage++;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
+        Invoke("ChangeClock",time/circleImage.Length);
     }
 
     public void SetTimer(float newTime)
     {
+        sr = GetComponent<SpriteRenderer>();
         time = newTime;
+        ChangeClock();
     }
 }
