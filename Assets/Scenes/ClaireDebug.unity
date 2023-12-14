@@ -1014,6 +1014,7 @@ GameObject:
   - component: {fileID: 480197140}
   - component: {fileID: 480197138}
   - component: {fileID: 480197142}
+  - component: {fileID: 480197143}
   m_Layer: 9
   m_Name: BigAssRacoon
   m_TagString: Untagged
@@ -1146,7 +1147,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletRef: {fileID: 8736122095815300506, guid: b15caf6efb97bb544bc42a3d20efbc91, type: 3}
+  obstacle:
+    serializedVersion: 2
+    m_Bits: 8
   delay: 0.5
+--- !u!58 &480197143
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480197137}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 703
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 8
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
