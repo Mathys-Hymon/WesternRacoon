@@ -42,7 +42,11 @@ public class AimingScript : MonoBehaviour
             {
                 crosshairRef.GetComponent<SpriteRenderer>().enabled = false;
             }
+            else
+            {
                 crosshairRef.GetComponent<SpriteRenderer>().enabled = true;
+            }
+                
                 crosshairRef.transform.position = new Vector3(transform.position.x + (4 * mouseMultiplyer.x), transform.position.y + (4 * mouseMultiplyer.y), 0);
                 ArmTarget.transform.position = new Vector3(transform.position.x+mouseMultiplyer.x, transform.position.y + mouseMultiplyer.y, 0);
             if (controlesScript.player.shoot.triggered)
