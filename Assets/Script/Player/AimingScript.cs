@@ -3,18 +3,20 @@ using UnityEngine.InputSystem;
 
 public class AimingScript : MonoBehaviour
 {
-    [SerializeField] private GameObject crosshairRef;
-    [SerializeField] private GameObject ArmTarget;
     [SerializeField] private GameObject bulletRef;
     [SerializeField] private GameObject cartridgeRef;
     private bool isGamepad;
     private Controles controlesScript;
     private PlayerInput playerinput;
+    private GameObject crosshairRef;
+    private GameObject ArmTarget;
 
     private void Awake()
     {
         controlesScript = new Controles();
         playerinput = GetComponent<PlayerInput>();
+        ArmTarget = GameObject.Find("ArmTargetPosition");
+        crosshairRef = GameObject.Find("Crosshair");
     }
 
     private void Start()

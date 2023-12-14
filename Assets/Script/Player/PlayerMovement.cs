@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask floorLayer;
 
     [Header("Camera Stuff")]
-    [SerializeField] private GameObject _cameraFollow;
     [SerializeField] private float deadZoneXOffset;
     [SerializeField] private float deadZoneMinusXOffset;
     
@@ -46,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D bc2d;
     private Controles controlesScript;
+    private GameObject _cameraFollow;
     private PlayerInput playerinput;
     private CameraFollowPlayer _cameraFollowObject;
 
@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         controlesScript = new Controles();
+        _cameraFollow = GameObject.Find("CameraFollowPlayer");
         playerinput = GetComponent<PlayerInput>();
     }
 
@@ -220,6 +221,17 @@ public class PlayerMovement : MonoBehaviour
             else if (controlesScript.player.aim.ReadValue<Vector2>().x < 0 && isFacingRight)
             {
                 Turn();
+            }
+            else if(controlesScript.player.aim.ReadValue<Vector2>().x == 0)
+            {
+                if(horizontalMovement > 0 && !isFacingRight)
+                {
+                    Turn();
+                }
+                else if (horizontalMovement < 0 && !isFacingRight)
+                {
+                    Turn();
+                }
             }
         }
         else
