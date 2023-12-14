@@ -248,9 +248,17 @@ public class PlayerMovement : MonoBehaviour
     }
     //C'EST BON
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 8)
+        {
+            Die();
+        }
+    }
+
     public void Die()
     {
-        
+        print("Player DEAD");
     }
 
 
