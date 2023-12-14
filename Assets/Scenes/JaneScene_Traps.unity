@@ -420,6 +420,14 @@ PrefabInstance:
       propertyPath: MinY
       value: -1.8
       objectReference: {fileID: 0}
+    - target: {fileID: 8109844435921705800, guid: e6b9c1637ddc15a4bbb33b65616e9132, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109844435921705800, guid: e6b9c1637ddc15a4bbb33b65616e9132, type: 3}
+      propertyPath: waitTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8452686521504821741, guid: e6b9c1637ddc15a4bbb33b65616e9132, type: 3}
       propertyPath: m_Name
       value: Piston_Fast (2)
@@ -1607,8 +1615,12 @@ PrefabInstance:
       value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 8109844435921705800, guid: e6b9c1637ddc15a4bbb33b65616e9132, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109844435921705800, guid: e6b9c1637ddc15a4bbb33b65616e9132, type: 3}
       propertyPath: waitTime
-      value: 100
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8452686521504821741, guid: e6b9c1637ddc15a4bbb33b65616e9132, type: 3}
       propertyPath: m_Name
