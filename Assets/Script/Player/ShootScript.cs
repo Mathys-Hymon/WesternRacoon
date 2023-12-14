@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShootScript : MonoBehaviour
 {
     [SerializeField] float speed;
+    [SerializeField] float freezeDuration;
     void Update()
     {
         transform.position += transform.up * speed * Time.deltaTime;
@@ -17,7 +18,7 @@ public class ShootScript : MonoBehaviour
         {
             if (collision.gameObject.tag == "Freezeable")
             {
-                collision.gameObject.GetComponent<FreezeMasterScript>().FreezeObject();
+                collision.gameObject.GetComponent<FreezeMasterScript>().FreezeObject(freezeDuration);
             }
             if (collision.gameObject.layer != 6)
             {
