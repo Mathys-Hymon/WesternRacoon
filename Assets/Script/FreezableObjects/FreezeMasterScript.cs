@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class FreezeMasterScript : MonoBehaviour
 {
-    [SerializeField] protected bool freezed;
-    [SerializeField] protected float freezeTime;
-
-    private float timer;
+    protected bool freezed;
+    protected float freezeTime = 3f;
     public void FreezeObject()
     {
         freezed = true;
+        Invoke("ResetTimer", freezeTime);
     }
-    private void Update()
+    
+
+    private void ResetTimer()
     {
-        if (freezed && timer <= freezeTime) 
-        {
-            timer += Time.deltaTime;
-        }
-        else if (freezed && timer >= freezeTime)
-        {
-            freezed = false;
-            timer = 0;
-        }
+        freezed = false;
+    }
+
+    public bool isFreezed()
+    {
+        return freezed;
     }
 }

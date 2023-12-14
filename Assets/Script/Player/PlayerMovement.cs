@@ -7,11 +7,13 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance;
-    public bool isFacingRight;
+    public bool isFacingRight = true;
 
     [Header("Movement")]
     [SerializeField] private float _speed = 15f;
     [SerializeField] private ParticleSystem walkParticle;
+    [SerializeField] private float groundFriction;
+    [SerializeField] private float airFriction;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 6;
@@ -32,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private float lastTimeGrounded;
     private float lastTimeJumpPressed;
     private float _fallSpeedYThresholdChange;
+    private float horizontalVelocity;
 
     private bool grounded;
     private bool invincibilityFrame;
@@ -124,6 +127,18 @@ public class PlayerMovement : MonoBehaviour
 
         horizontalMovement = controlesScript.player.move.ReadValue<float>();
 
+        if (horizontalMovement != 0)
+        {
+            horizontalVelocity = horizontalMovement;
+        }
+        else if (grounded)
+        {
+            horizontalVelocity -= (groundFriction / 10f) * horizontalVelocity;
+        }
+        else
+        {
+            horizontalVelocity -= (airFriction / 10f) * horizontalVelocity;
+        }
         if ((Input.GetKeyUp(KeyCode.Joystick1Button0) || Input.GetKeyUp(KeyCode.Space)) && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
@@ -162,17 +177,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if(roll)
         {
-            rb.velocity = new Vector3(horizontalMovement*_speed*2, rb.velocity.y, 0);
+            rb.velocity = new Vector3(horizontalVelocity * _speed*2, rb.velocity.y, 0);
         }
         else
         {
             if(grounded)
             {
-                rb.velocity = new Vector3(horizontalMovement * _speed, rb.velocity.y, 0);
+                rb.velocity = new Vector3(horizontalVelocity * _speed, rb.velocity.y, 0);
             }
             else
             {
-                rb.velocity = new Vector3(horizontalMovement * _speed * airControl, rb.velocity.y, 0);
+                rb.velocity = new Vector3(horizontalVelocity * _speed * airControl, rb.velocity.y, 0);
             }
         }
 
@@ -198,16 +213,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-  
+
 
     //PAS TOUCHE
     private void TurnCheck()
     {
-        if(horizontalMovement > 0 && !isFacingRight)
+        if (horizontalMovement > 0 && !isFacingRight)
         {
             Turn();
         }
-        else if(horizontalMovement < 0 && isFacingRight)
+        else if (horizontalMovement < 0 && isFacingRight)
         {
             Turn();
         }
