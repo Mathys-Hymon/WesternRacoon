@@ -34,35 +34,55 @@ public class DoorScript : FreezeMasterScript
 
     void Update()
     {
-      if (!freezed && !cogRef.isFreezed()) {
-        if(buttons.Length > 0)       
+      if(cogRef != null)
+        {
+            if(!freezed && !cogRef.isFreezed()) 
+            {
+                UpdateDoor();
+            }
+        }
+      else
+        {
+            if(!freezed)
+            {
+                UpdateDoor();
+            }
+        }
+    }
+
+
+    private void UpdateDoor()
+    {
+        if (buttons.Length > 0)
         {
             IsValidInput = 0;
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            if (buttons[i].IsActivated()) 
+            for (int i = 0; i < buttons.Length; i++)
             {
-                IsValidInput++;
+                if (buttons[i].IsActivated())
+                {
+                    IsValidInput++;
+                }
+                else
+                {
+                    break;
+                }
             }
-            else
+            if (IsValidInput == buttons.Length && doorOpen == 0)
             {
-                break;
+                doorOpen = 1;
+                y = initialPosition + openingSize;
             }
-        }
-        if (IsValidInput == buttons.Length && doorOpen == 0)
-        {
-            doorOpen = 1;
-            y = initialPosition + openingSize;
-        }
-          else if (IsValidInput < buttons.Length && doorOpen == 1)
-          {
-            doorOpen = 0;
-                    y = initialPosition;
-          }
-                Vector3 targetPosition = Vector3.Lerp(transform.position, new Vector3(transform.position.x, y, transform.position.z), openingTime * Time.deltaTime);
-                transform.position = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
-                cogRef.transform.rotation = Quaternion.Euler(0,0,targetPosition.y*80);
-        }
+            else if (IsValidInput < buttons.Length && doorOpen == 1)
+            {
+                doorOpen = 0;
+                y = initialPosition;
+            }
+            Vector3 targetPosition = Vector3.Lerp(transform.position, new Vector3(transform.position.x, y, transform.position.z), openingTime * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
+            if(cogRef != null)
+            {
+                cogRef.transform.rotation = Quaternion.Euler(0, 0, targetPosition.y * 80);
+            }
         }
     }
 
