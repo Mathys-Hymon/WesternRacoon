@@ -51,8 +51,4 @@ public class ResolutionManager : MonoBehaviour
         Resolution resolution = filteredResolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, true);
     }
-    void Update()
-    {
-        
-    }
 }
