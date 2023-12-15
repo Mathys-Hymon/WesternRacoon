@@ -17,7 +17,7 @@ public class ActionTextCall : MonoBehaviour
 
     void Update()
     {
-        newMessage = UI_Assistant.Instance.countMessage;
+        //newMessage = UI_Assistant.Instance.countMessage;
 
         if (newMessage >= 3)
         {
