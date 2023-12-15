@@ -3,18 +3,21 @@ using UnityEngine.InputSystem;
 
 public class AimingScript : MonoBehaviour
 {
-    [SerializeField] private GameObject crosshairRef;
-    [SerializeField] private GameObject ArmTarget;
+    [Header("REFERENCES")]
     [SerializeField] private GameObject bulletRef;
     [SerializeField] private GameObject cartridgeRef;
     private bool isGamepad;
     private Controles controlesScript;
     private PlayerInput playerinput;
+    private GameObject crosshairRef;
+    private GameObject ArmTarget;
 
     private void Awake()
     {
         controlesScript = new Controles();
         playerinput = GetComponent<PlayerInput>();
+        ArmTarget = GameObject.Find("ArmTargetPosition");
+        crosshairRef = GameObject.Find("Crosshair");
     }
 
     private void Start()
@@ -29,28 +32,26 @@ public class AimingScript : MonoBehaviour
     {
         controlesScript.Disable();
     }
-
     public void OnDeviceChange(PlayerInput pi)
     {
         isGamepad = pi.currentControlScheme.Equals("Gamepad")? true : false;
     }
-
     private void Update()
     {
         if(isGamepad)
         {
             Vector2 mouseMultiplyer = controlesScript.player.aim.ReadValue<Vector2>();
-
-            if(Mathf.Abs(mouseMultiplyer.x) + Mathf.Abs(mouseMultiplyer.y) <= 0.2f)
+            if (Mathf.Abs(mouseMultiplyer.x) + Mathf.Abs(mouseMultiplyer.y) <= 0.2f)
             {
                 crosshairRef.GetComponent<SpriteRenderer>().enabled = false;
             }
             else
             {
                 crosshairRef.GetComponent<SpriteRenderer>().enabled = true;
-                crosshairRef.transform.position = new Vector3(transform.position.x + 4 * mouseMultiplyer.x, transform.position.y + 4 * mouseMultiplyer.y, 0);
-                ArmTarget.transform.position = new Vector3(transform.position.x+mouseMultiplyer.x, transform.position.y + mouseMultiplyer.y, 0);
             }
+
+                crosshairRef.transform.position = new Vector3(transform.position.x + (4 * mouseMultiplyer.x), transform.position.y + (4 * mouseMultiplyer.y), 0);
+                ArmTarget.transform.position = new Vector3(transform.position.x+mouseMultiplyer.x, transform.position.y + mouseMultiplyer.y, 0);
             if (controlesScript.player.shoot.triggered)
             {
                 Vector2 DirectiontoTarget = crosshairRef.transform.position - transform.position;
@@ -68,8 +69,7 @@ public class AimingScript : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(controlesScript.player.aim.ReadValue<Vector2>());
             mousePos.z = 0;
             crosshairRef.transform.position = mousePos;
-            ArmTarget.transform.position = new Vector3(transform.position.x + mousePos.x, transform.position.y + mousePos.y, 0);
-
+            ArmTarget.transform.position = mousePos;
             if (controlesScript.player.shoot.triggered)
             {
                 Vector2 DirectiontoTarget = crosshairRef.transform.position - transform.position;

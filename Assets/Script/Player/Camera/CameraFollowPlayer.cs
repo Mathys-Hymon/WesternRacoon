@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CameraFollowPlayer : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private Transform _playerTransform;
-
     [Header("Flip Rotation Stats")]
     [SerializeField] private float _flipYRotationTime = 0.5f;
 
@@ -20,15 +17,10 @@ public class CameraFollowPlayer : MonoBehaviour
     private bool _isFacingRight;
     private float x, y, z;
 
-    private void Awake()
-    {
-        _player = _playerTransform.gameObject.GetComponent<PlayerMovement>();
-
-        _isFacingRight = _player.isFacingRight;
-    }
-
     private void Start()
     {
+        _player = PlayerMovement.Instance;
+        _isFacingRight = _player.isFacingRight;
         x = transform.position.x + xOffset;
         y = transform.position.y + yOffset;
         z = transform.position.z;

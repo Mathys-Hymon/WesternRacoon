@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6502401919131616882}
   - component: {fileID: 5529313681481201891}
   - component: {fileID: -409813682255516072}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TimeCapsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1109f280c4084d40840372c9026311c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 6271782246426197651, guid: cd6572873592fa3478ef084f7bcbfe15, type: 3}
   speed: 20
   freezeDuration: 3
 --- !u!61 &5529313681481201891
@@ -116,7 +117,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 68
+    m_Bits: 1092
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

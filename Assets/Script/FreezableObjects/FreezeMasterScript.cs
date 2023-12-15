@@ -8,6 +8,7 @@ public class FreezeMasterScript : MonoBehaviour
     protected float freezeTime = 3f;
     public void FreezeObject(float freezetime)
     {
+        CancelInvoke("ResetTimer");
         freezeTime = freezetime;
         freezed = true;
         Invoke("ResetTimer", freezeTime);
