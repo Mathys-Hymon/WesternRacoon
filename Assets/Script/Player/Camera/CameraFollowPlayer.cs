@@ -10,16 +10,15 @@ public class CameraFollowPlayer : MonoBehaviour
     [Header("Offset")]
     [SerializeField] private float yOffset;
     [SerializeField] private float xOffset;
+    [SerializeField] PlayerMovement _player;
 
     private Coroutine _turnCoroutine;
-    private PlayerMovement _player;
 
     private bool _isFacingRight;
     private float x, y, z;
 
     private void Start()
     {
-        _player = PlayerMovement.Instance;
         _isFacingRight = _player.isFacingRight;
         x = transform.position.x + xOffset;
         y = transform.position.y + yOffset;
