@@ -250,10 +250,6 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
         }
     }
-
-
-
-    //PAS TOUCHE
     private void TurnCheck()
     {
         if (isGamepad)
@@ -272,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     Turn();
                 }
-                else if (horizontalMovement < 0 && !isFacingRight)
+                else if (horizontalMovement < 0 && isFacingRight)
                 {
                     Turn();
                 }
