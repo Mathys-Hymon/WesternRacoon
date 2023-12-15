@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInput playerinput;
     private CameraFollowPlayer _cameraFollowObject;
     private List<GameObject> freezedObject = new List<GameObject>();
+    private Animator animator;
 
     public void SetFreezedObject(GameObject newObject)
     {
@@ -76,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         controlesScript = new Controles();
         _cameraFollow = GameObject.Find("CameraFollowPlayer");
         playerinput = GetComponent<PlayerInput>();
+        animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -118,11 +120,11 @@ public class PlayerMovement : MonoBehaviour
             }
             else if(roll && Mathf.Abs(rb.velocity.x) > 0.1f)
             {
-                cc2d.size = new Vector2(1, Mathf.Lerp(0.5f, 1f, 1f * Time.deltaTime));
+                cc2d.size = new Vector2(1, Mathf.Lerp(0.6f, 1.2f, 1f * Time.deltaTime));
             }
             else if(!roll && cc2d.size.y < 2.4f)
             {
-                cc2d.size = new Vector2(1, Mathf.Lerp(2.4f, 0.5f, 1f * Time.deltaTime));
+                cc2d.size = new Vector2(1, Mathf.Lerp(1.2f, 0.6f, 1f * Time.deltaTime));
             }
         }
         if (controlesScript.player.jump.triggered)
@@ -152,14 +154,34 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalMovement != 0)
         {
             horizontalVelocity = horizontalMovement;
+            
+            if (horizontalMovement > 0 && isFacingRight)
+            {
+                animator.SetBool("RunForward", true);
+                animator.SetBool("RunBackward", false);
+            }
+            else if (horizontalMovement < 0 && !isFacingRight)
+            {
+                animator.SetBool("RunForward", true);
+                animator.SetBool("RunBackward", false);
+            }
+            else
+            {
+                animator.SetBool("RunForward", false);
+                animator.SetBool("RunBackward", true);
+            }
         }
         else if (grounded)
         {
             horizontalVelocity -= (groundFriction / 10f) * horizontalVelocity;
+            animator.SetBool("RunForward", false);
+            animator.SetBool("RunBackward", false);
         }
         else
         {
             horizontalVelocity -= (airFriction / 10f) * horizontalVelocity;
+            animator.SetBool("RunForward", false);
+            animator.SetBool("RunBackward", false);
         }
         if ((Input.GetKeyUp(KeyCode.Joystick1Button0) || Input.GetKeyUp(KeyCode.Space)) && rb.velocity.y > 0f)
         {
