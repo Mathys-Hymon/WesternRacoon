@@ -79,7 +79,24 @@ public class EnemyScript : FreezeMasterScript
                             }
                         }
                     }
-                    rushPlayer = canReach;
+                    if(canReach)
+                    {
+                    float distance = Vector3.Distance(transform.position, PlayerMovement.Instance.transform.position);
+                    RaycastHit2D WallDetection = Physics2D.Raycast(transform.position, (transform.position - PlayerMovement.Instance.transform.position) * (-1), distance, obstacle);
+                    Debug.DrawRay(transform.position, (transform.position - PlayerMovement.Instance.transform.position) * (-1));
+                        if(WallDetection.collider == null)
+                        {
+                            rushPlayer = canReach;
+                        }
+                        else
+                        {
+                            rushPlayer = false;
+                        }
+                    }
+                    else
+                    {
+                        rushPlayer = false;
+                    }
                 }
 
                 if (!rushPlayer)
