@@ -250,6 +250,19 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
         }
     }
+
+    public float GetFloorY()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, floorLayer);
+        if (hit.collider != null)
+        {
+            return hit.collider.transform.position.y;
+        }
+        else
+        {
+            return 1000000f;
+        }
+    }
     private void TurnCheck()
     {
         if (isGamepad)

@@ -28,7 +28,7 @@ public class SteamMachineScript : MonoBehaviour
                 }
             }
 
-            if (IsValidInput == buttons.Length && collision.gameObject.tag == "Freezeable" && collision.gameObject.GetComponent<Rigidbody2D>() != null)
+            if (IsValidInput == buttons.Length && collision.gameObject.GetComponent<BoxScript>() != null && collision.gameObject.GetComponent<Rigidbody2D>() != null)
             {
                 steamParticle.Play();
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity = (transform.up * 10) / Vector3.Distance(transform.position, collision.transform.position);
