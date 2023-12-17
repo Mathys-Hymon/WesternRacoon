@@ -120,11 +120,11 @@ public class PlayerMovement : MonoBehaviour
             }
             else if(roll && Mathf.Abs(rb.velocity.x) > 0.1f)
             {
-                cc2d.size = new Vector2(1, Mathf.Lerp(0.6f, 1.2f, 1f * Time.deltaTime));
+                cc2d.size = new Vector2(1, Mathf.Lerp(0.5f, 1.2f, 1f * Time.deltaTime));
             }
             else if(!roll && cc2d.size.y < 2.4f)
             {
-                cc2d.size = new Vector2(1, Mathf.Lerp(1.2f, 0.6f, 1f * Time.deltaTime));
+                cc2d.size = new Vector2(1, Mathf.Lerp(1.2f, 0.5f, 1f * Time.deltaTime));
             }
         }
         if (controlesScript.player.jump.triggered)
