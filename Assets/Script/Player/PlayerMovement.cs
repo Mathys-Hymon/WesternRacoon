@@ -10,24 +10,24 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement Instance;
     public bool isFacingRight = true;
 
-    [Header("Movement")]
+    [Header("Movement\n")]
     [SerializeField] private float _speed = 15f;
     [SerializeField] private ParticleSystem walkParticle;
     [SerializeField] private float groundFriction;
     [SerializeField] private float airFriction;
 
-    [Header("Jump")]
+    [Header("Jump\n")]
     [SerializeField] private float jumpForce = 6;
     [SerializeField] private float airControl = 0.8f;
     [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private LayerMask floorLayer;
 
-    [Header("Camera Stuff")]
+    [Header("Camera Stuff\n")]
     [SerializeField] private float deadZoneXOffset;
     [SerializeField] private float deadZoneMinusXOffset;
     
 
-    [Header("CheckPoint")]
+    [Header("CheckPoint\n")]
     [SerializeField] private GameObject lastCheckpoint;
 
     private float horizontalMovement;
@@ -120,11 +120,11 @@ public class PlayerMovement : MonoBehaviour
             }
             else if(roll && Mathf.Abs(rb.velocity.x) > 0.1f)
             {
-                cc2d.size = new Vector2(1, Mathf.Lerp(0.6f, 1.2f, 1f * Time.deltaTime));
+                cc2d.size = new Vector2(1, Mathf.Lerp(0.5f, 1.2f, 1f * Time.deltaTime));
             }
             else if(!roll && cc2d.size.y < 2.4f)
             {
-                cc2d.size = new Vector2(1, Mathf.Lerp(1.2f, 0.6f, 1f * Time.deltaTime));
+                cc2d.size = new Vector2(1, Mathf.Lerp(1.2f, 0.5f, 1f * Time.deltaTime));
             }
         }
         if (controlesScript.player.jump.triggered)
