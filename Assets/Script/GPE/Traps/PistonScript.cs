@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PistonScript : FreezeMasterScript
 {
-    [Header("MOVEMENT INFOS")]
+    [Header("MOVEMENT INFOS\n")]
     [SerializeField] private float speed;
     [SerializeField] private float waitTime;
     [SerializeField] private bool startFirst;
-    [Header("WORLD TARGET POSITION")]
-    [SerializeField] private float targetY_Position;
+    [Header("\n\nWORLD DIRECTION AND POSITION")]
+    [Header("put the X value if you check isHorizontal, else put the Y value\n")]
+    [SerializeField] private bool isHorizontal;
+    [SerializeField] private float targetDownPosition;
+
 
     private float initialPositionY;
     private float y;
@@ -19,8 +23,16 @@ public class PistonScript : FreezeMasterScript
 
     void Start()
     {
-        initialPositionY = transform.position.y;
-        y = initialPositionY;
+        if(!isHorizontal)
+        {
+            y = transform.position.y;
+        }
+        else
+        {
+            y = transform.position.x;
+        }
+
+        initialPositionY = y;
         if(startFirst)
         {
             FlipFlopPosition();
@@ -35,8 +47,16 @@ public class PistonScript : FreezeMasterScript
     {
         if (!freezed)
         {
-            Vector3 targetPosition = Vector3.Lerp(transform.position, new Vector3(transform.position.x, y, transform.position.z), speed * Time.deltaTime);
-            transform.position = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
+            if(!isHorizontal)
+            {
+                Vector3 targetPosition = Vector3.Lerp(transform.position, new Vector3(transform.position.x, y, transform.position.z), speed * Time.deltaTime);
+                transform.position = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
+            }
+            else
+            {
+                Vector3 targetPosition = Vector3.Lerp(transform.position, new Vector3(y, transform.position.y, transform.position.z), speed * Time.deltaTime);
+                transform.position = new Vector3(targetPosition.x, transform.position.y, transform.position.z);
+            }
         }
             
     }
@@ -46,7 +66,7 @@ public class PistonScript : FreezeMasterScript
         if (!moveUp)
         {
             moveUp = true;
-            y = targetY_Position;
+            y = targetDownPosition;
         }
         else
         {

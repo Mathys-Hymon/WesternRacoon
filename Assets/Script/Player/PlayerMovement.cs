@@ -10,24 +10,24 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement Instance;
     public bool isFacingRight = true;
 
-    [Header("Movement")]
+    [Header("Movement\n")]
     [SerializeField] private float _speed = 15f;
     [SerializeField] private ParticleSystem walkParticle;
     [SerializeField] private float groundFriction;
     [SerializeField] private float airFriction;
 
-    [Header("Jump")]
+    [Header("Jump\n")]
     [SerializeField] private float jumpForce = 6;
     [SerializeField] private float airControl = 0.8f;
     [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private LayerMask floorLayer;
 
-    [Header("Camera Stuff")]
+    [Header("Camera Stuff\n")]
     [SerializeField] private float deadZoneXOffset;
     [SerializeField] private float deadZoneMinusXOffset;
     
 
-    [Header("CheckPoint")]
+    [Header("CheckPoint\n")]
     [SerializeField] private GameObject lastCheckpoint;
 
     private float horizontalMovement;
