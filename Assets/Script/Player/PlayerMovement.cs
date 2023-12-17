@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInput playerinput;
     private CameraFollowPlayer _cameraFollowObject;
     private List<GameObject> freezedObject = new List<GameObject>();
+    private Animator animator;
 
     public void SetFreezedObject(GameObject newObject)
     {
@@ -76,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         controlesScript = new Controles();
         _cameraFollow = GameObject.Find("CameraFollowPlayer");
         playerinput = GetComponent<PlayerInput>();
+        animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -152,14 +154,34 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalMovement != 0)
         {
             horizontalVelocity = horizontalMovement;
+            
+            if (horizontalMovement > 0 && isFacingRight)
+            {
+                animator.SetBool("RunForward", true);
+                animator.SetBool("RunBackward", false);
+            }
+            else if (horizontalMovement < 0 && !isFacingRight)
+            {
+                animator.SetBool("RunForward", true);
+                animator.SetBool("RunBackward", false);
+            }
+            else
+            {
+                animator.SetBool("RunForward", false);
+                animator.SetBool("RunBackward", true);
+            }
         }
         else if (grounded)
         {
             horizontalVelocity -= (groundFriction / 10f) * horizontalVelocity;
+            animator.SetBool("RunForward", false);
+            animator.SetBool("RunBackward", false);
         }
         else
         {
             horizontalVelocity -= (airFriction / 10f) * horizontalVelocity;
+            animator.SetBool("RunForward", false);
+            animator.SetBool("RunBackward", false);
         }
         if ((Input.GetKeyUp(KeyCode.Joystick1Button0) || Input.GetKeyUp(KeyCode.Space)) && rb.velocity.y > 0f)
         {
@@ -229,9 +251,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-
-    //PAS TOUCHE
+    public float GetFloorY()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, floorLayer);
+        if (hit.collider != null)
+        {
+            return hit.collider.transform.position.y;
+        }
+        else
+        {
+            return 1000000f;
+        }
+    }
     private void TurnCheck()
     {
         if (isGamepad)
@@ -250,7 +281,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     Turn();
                 }
-                else if (horizontalMovement < 0 && !isFacingRight)
+                else if (horizontalMovement < 0 && isFacingRight)
                 {
                     Turn();
                 }
