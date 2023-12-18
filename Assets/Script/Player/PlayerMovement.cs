@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -340,14 +337,14 @@ public class PlayerMovement : MonoBehaviour
     private void Animation()
     {
         //Jumping animations
+        
         if (controlesScript.player.jump.triggered)
         {
             animator.SetBool("isJumping", true);
-
         }
-        if (controlesScript.player.jump.triggered && jumpNumber < 2)
+        if (controlesScript.player.jump.triggered && !grounded)
         {
-
+            animator.SetBool("isJumping", false);
             animator.SetTrigger("DoubleJumping");
         }
 
