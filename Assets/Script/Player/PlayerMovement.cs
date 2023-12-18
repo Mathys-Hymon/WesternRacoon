@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     private int jumpNumber;
 
     private Rigidbody2D rb;
-    private CapsuleCollider2D cc2d;
+    private CircleCollider2D cc2d;
     private Controles controlesScript;
     private GameObject _cameraFollow;
     private PlayerInput playerinput;
@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         Instance = this;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
-        cc2d = GetComponent<CapsuleCollider2D>();
+        cc2d = GetComponent<CircleCollider2D>();
         _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowPlayer>();
         _fallSpeedYThresholdChange = CameraManager.instance._fallspeedYThresholdChange;
     }
@@ -119,11 +119,13 @@ public class PlayerMovement : MonoBehaviour
             }
             else if(roll)
             {
-                cc2d.size = new Vector2(1, Mathf.Lerp(0.5f, 1.2f, 1f * Time.deltaTime));
+                cc2d.radius = Mathf.Lerp(0.25f, 0.55f, 1f * Time.deltaTime);
+                cc2d.offset = new Vector2(0,Mathf.Lerp(-0.37f, -0.1f, 1f * Time.deltaTime));
             }
-            else if(!roll && cc2d.size.y < 1.2f)
+            else if(!roll && cc2d.radius < 0.5f)
             {
-                cc2d.size = new Vector2(1, Mathf.Lerp(1.2f, 0.5f, 1f * Time.deltaTime));
+                cc2d.radius = Mathf.Lerp(0.55f, 0.25f, 1f * Time.deltaTime);
+                cc2d.offset = new Vector2(0,Mathf.Lerp(-0.1f, -0.37f, 1f * Time.deltaTime));
             }
         }
         if (controlesScript.player.jump.triggered)

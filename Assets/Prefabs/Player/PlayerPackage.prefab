@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101350825586712620}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.19578758, w: 0.9806464}
+  m_LocalRotation: {x: -0, y: -0, z: -0.19578692, w: 0.9806465}
   m_LocalPosition: {x: 0.299, y: -0.004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -237,9 +237,9 @@ GameObject:
   - component: {fileID: 4086801281320223400}
   - component: {fileID: 2519812724163830939}
   - component: {fileID: 4482500349316631337}
+  - component: {fileID: 429186947198187112}
   - component: {fileID: 1614156765902360851}
   - component: {fileID: 371311576083862503}
-  - component: {fileID: 2586936998432772632}
   - component: {fileID: 2083458069802310440}
   - component: {fileID: 8211064800730227996}
   m_Layer: 6
@@ -345,49 +345,8 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1614156765902360851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3305133647993923695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b4b9bc3a0734974b8c54581f4b57cec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isFacingRight: 0
-  _speed: 10
-  walkParticle: {fileID: 7115240822108328029}
-  groundFriction: 1
-  airFriction: 0.5
-  dashForce: 3
-  jumpForce: 12.1
-  airControl: 0.6
-  coyoteTime: 0.1
-  floorLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  deadZoneXOffset: 0.1
-  deadZoneMinusXOffset: 0.1
-  lastCheckpoint: {fileID: 0}
---- !u!114 &371311576083862503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3305133647993923695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dc156cbc99eea743b9d85782a6f6cc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletRef: {fileID: 8736122095815300506, guid: 059fb016940bac641b7ef4cd97831c6b, type: 3}
-  cartridgeRef: {fileID: 9119777075786067958, guid: 9623fcadcd27c5f4bba1daa8f662cc78, type: 3}
---- !u!70 &2586936998432772632
-CapsuleCollider2D:
+--- !u!58 &429186947198187112
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -418,9 +377,50 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.08, y: 0}
-  m_Size: {x: 0.6, y: 1.2}
-  m_Direction: 0
+  m_Offset: {x: 0, y: -0.1}
+  serializedVersion: 2
+  m_Radius: 0.55
+--- !u!114 &1614156765902360851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305133647993923695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4b9bc3a0734974b8c54581f4b57cec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFacingRight: 0
+  _speed: 10
+  walkParticle: {fileID: 7115240822108328029}
+  groundFriction: 1
+  airFriction: 0.5
+  dashForce: 2
+  jumpForce: 12.5
+  airControl: 0.8
+  coyoteTime: 0.1
+  floorLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  deadZoneXOffset: 0.1
+  deadZoneMinusXOffset: 0.1
+  lastCheckpoint: {fileID: 0}
+--- !u!114 &371311576083862503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305133647993923695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc156cbc99eea743b9d85782a6f6cc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletRef: {fileID: 8736122095815300506, guid: 059fb016940bac641b7ef4cd97831c6b, type: 3}
+  cartridgeRef: {fileID: 9119777075786067958, guid: 9623fcadcd27c5f4bba1daa8f662cc78, type: 3}
 --- !u!114 &2083458069802310440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -862,7 +862,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4999154077748941920}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.49286777, w: 0.87010425}
+  m_LocalRotation: {x: 0, y: 0, z: -0.49286795, w: 0.8701042}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1029,7 +1029,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7496322697331448584}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.65368456, w: 0.7567671}
+  m_LocalRotation: {x: 0, y: 0, z: 0.65368414, w: 0.75676745}
   m_LocalPosition: {x: 0.47000116, y: 0.0017320663, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
