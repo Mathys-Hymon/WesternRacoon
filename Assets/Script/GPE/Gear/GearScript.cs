@@ -1,37 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class GearScript : MonoBehaviour
+public class GearScript : FreezeMasterScript
 {
     [SerializeField] private float rotationSpeed;
     [SerializeField] private bool rotateRight;
 
     private void Update()
     {
-        if(rotateRight)
+        if (!freezed)
         {
-            transform.rotation = Quaternion.Euler(0, 0, -rotationSpeed * Time.timeSinceLevelLoad);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 0, rotationSpeed * Time.timeSinceLevelLoad);
+            if (rotateRight)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, -rotationSpeed * Time.timeSinceLevelLoad);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, rotationSpeed * Time.timeSinceLevelLoad);
+            }
         }
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject == PlayerMovement.Instance.gameObject)
+        if (!freezed)
         {
-            if(rotateRight)
+            if (collision.gameObject == PlayerMovement.Instance.gameObject)
             {
-                collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x + (rotationSpeed/6f)*Time.deltaTime, collision.gameObject.transform.position.y, collision.gameObject.transform.position.z);
-            }
-            
-            else
-            {
-                Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-                rb.velocity = new Vector3(rb.velocity.x - rotationSpeed*10, rb.velocity.y, 0);
+                if (rotateRight)
+                {
+                    collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x + (rotationSpeed / 6f) * Time.deltaTime, collision.gameObject.transform.position.y, collision.gameObject.transform.position.z);
+                }
+                else
+                {
+                    collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x - (rotationSpeed / 6f) * Time.deltaTime, collision.gameObject.transform.position.y, collision.gameObject.transform.position.z);
+                }
             }
         }
     }
