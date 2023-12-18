@@ -211,6 +211,7 @@ public class PlayerMovement : MonoBehaviour
             if(rb.gravityScale <= 6f)
             {
                 animator.SetBool("Falling", true);
+                animator.SetBool("isJumping", false);
                 animator.ResetTrigger("DoubleJumping");
                 rb.gravityScale += 20 * Time.deltaTime;
             }
