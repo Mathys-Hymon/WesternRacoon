@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressurePlateformScript : MonoBehaviour
+public class PressurePlateformScript : FreezeMasterScript
 {
     [Header("Other plateform Ref\n")]
     [SerializeField] private PressurePlateformScript otherPlateformRef;
     [SerializeField] private bool goBackInPlace;
     [SerializeField] private float maxHeight;
+    [SerializeField] private float startPositionInPercent;
     [SerializeField] private float fallSpeed;
     [SerializeField] private bool startDown;
 
@@ -35,9 +36,13 @@ public class PressurePlateformScript : MonoBehaviour
 
     private void Start()
     {
-        if(!startDown)
+        if(!startDown && startPositionInPercent == 0)
         {
             transform.position = new Vector3(transform.position.x, initialPosition + maxHeight, transform.position.z);
+        }
+        else
+        {
+            transform.position = new Vector3(transform.position.x, initialPosition + (maxHeight*(startPositionInPercent/100)), transform.position.z);
         }
 
         if(otherPlateformRef != null && startDown == otherPlateformRef.GetStartDown()) 
@@ -56,49 +61,52 @@ public class PressurePlateformScript : MonoBehaviour
 
     private void Update()
     {
-        if(otherPlateformRef == null)
+        if (!freezed)
         {
-            if (weightOnPlateform > 0 && transform.position.y >= initialPosition)
+            if (otherPlateformRef == null)
             {
-                transform.position += new Vector3(0, -fallSpeed * Time.deltaTime, 0);
-            }
-            else if (weightOnPlateform == 0 && transform.position.y <= initialPosition+maxHeight)
-            {
-                transform.position += new Vector3(0, fallSpeed * Time.deltaTime, 0);
-            }
-        }
-        else
-        {
-            if(otherPlateformRef.GetWeightOnIt() < weightOnPlateform)
-            {
-                if (transform.position.y >= initialPosition)
+                if (weightOnPlateform > 0 && transform.position.y >= initialPosition)
                 {
                     transform.position += new Vector3(0, -fallSpeed * Time.deltaTime, 0);
                 }
-            }
-            else if(otherPlateformRef.GetWeightOnIt() > weightOnPlateform)
-            {
-                if (transform.position.y <= initialPosition + maxHeight)
+                else if (weightOnPlateform == 0 && transform.position.y <= initialPosition + maxHeight)
                 {
                     transform.position += new Vector3(0, fallSpeed * Time.deltaTime, 0);
                 }
             }
-            else
+            else if(!otherPlateformRef.freezed)
             {
-                if(goBackInPlace)
+                if (otherPlateformRef.GetWeightOnIt() < weightOnPlateform)
                 {
-                    if (startDown)
+                    if (transform.position.y >= initialPosition)
                     {
-                        if (transform.position.y >= initialPosition)
-                        {
-                            transform.position += new Vector3(0, -fallSpeed * Time.deltaTime, 0);
-                        }
+                        transform.position += new Vector3(0, -fallSpeed * Time.deltaTime, 0);
                     }
-                    else
+                }
+                else if (otherPlateformRef.GetWeightOnIt() > weightOnPlateform)
+                {
+                    if (transform.position.y <= initialPosition + maxHeight)
                     {
-                        if (transform.position.y <= initialPosition + maxHeight)
+                        transform.position += new Vector3(0, fallSpeed * Time.deltaTime, 0);
+                    }
+                }
+                else
+                {
+                    if (goBackInPlace)
+                    {
+                        if (startDown)
                         {
-                            transform.position += new Vector3(0, fallSpeed * Time.deltaTime, 0);
+                            if (transform.position.y >= initialPosition)
+                            {
+                                transform.position += new Vector3(0, -fallSpeed * Time.deltaTime, 0);
+                            }
+                        }
+                        else
+                        {
+                            if (transform.position.y <= initialPosition + maxHeight)
+                            {
+                                transform.position += new Vector3(0, fallSpeed * Time.deltaTime, 0);
+                            }
                         }
                     }
                 }
