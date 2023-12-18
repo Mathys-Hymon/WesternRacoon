@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3976928883465829426}
   - component: {fileID: 251645708321652996}
   - component: {fileID: 2264657543238237520}
+  - component: {fileID: 6491629507319767855}
   m_Layer: 9
   m_Name: BisonPrefab
   m_TagString: Freezeable
@@ -105,6 +106,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   delay: 1
+  speed: 10
 --- !u!58 &3976928883465829426
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -202,3 +204,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
+--- !u!95 &6491629507319767855
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3644148261644043159}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e3ab1838b82761b4e8dde66249b68b7e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

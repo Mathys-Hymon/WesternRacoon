@@ -9,8 +9,10 @@ public class EnemyScript : FreezeMasterScript
     [SerializeField] private GameObject bulletRef;
     [SerializeField] private LayerMask obstacle;
     [SerializeField] private float delay;
+    [SerializeField] private float speed;
 
     private Vector2 directiontoTarget;
+    private Animator anim;
 
     private bool canShoot = true;
     private bool isInRange;
@@ -23,21 +25,23 @@ public class EnemyScript : FreezeMasterScript
     private void Start()
     {
         IsGrounded(0);
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
         if (!freezed)
         {
+            anim.speed = 1f;
             if (rushPlayer)
             {
                 if (!lookRight && IsGrounded(0.5f) && CheckWall())
                 {
-                    transform.position += transform.right * Time.deltaTime * 5;
+                    transform.position += transform.right * Time.deltaTime * speed;
                 }
                 else if (lookRight && IsGrounded(-0.5f) && CheckWall())
                 {
-                    transform.position += transform.right * Time.deltaTime * 5;
+                    transform.position += transform.right * Time.deltaTime * speed;
                 }
                 else
                 {
@@ -125,6 +129,10 @@ public class EnemyScript : FreezeMasterScript
                     }
                 }
             }
+        }
+        else if (freezed)
+        {
+            anim.speed = 0f;
         }
     }
 
