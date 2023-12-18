@@ -6,7 +6,6 @@ public class PistonDetectionScript : MonoBehaviour
 {
     [SerializeField] PistonScript scriptRef;
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject == PlayerMovement.Instance.gameObject)
