@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ParticleSystem walkParticle;
     [SerializeField] private float groundFriction;
     [SerializeField] private float airFriction;
+    [SerializeField] private float dashForce = 3;
 
     [Header("Jump\n")]
     [SerializeField] private float jumpForce = 6;
@@ -113,16 +114,16 @@ public class PlayerMovement : MonoBehaviour
         {
             lastTimeGrounded = Time.time;
 
-            if(controlesScript.player.roll.triggered && roll == false)
+            if(controlesScript.player.roll.triggered && !roll)
             {
                 roll = true;
                 Invoke("StopRoll", 0.2f);
             }
-            else if(roll && Mathf.Abs(rb.velocity.x) > 0.1f)
+            else if(roll)
             {
                 cc2d.size = new Vector2(1, Mathf.Lerp(0.5f, 1.2f, 1f * Time.deltaTime));
             }
-            else if(!roll && cc2d.size.y < 2.4f)
+            else if(!roll && cc2d.size.y < 1.2f)
             {
                 cc2d.size = new Vector2(1, Mathf.Lerp(1.2f, 0.5f, 1f * Time.deltaTime));
             }
@@ -138,6 +139,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpNumber = 1;
             }
             jumpNumber += 1;
+
             if (roll)
             {
                 rb.velocity = new Vector2(rb.velocity.x * 2f, jumpForce * 1.1f);
@@ -221,7 +223,21 @@ public class PlayerMovement : MonoBehaviour
     {
         if(roll)
         {
-            rb.velocity = new Vector3(horizontalVelocity * _speed*2, rb.velocity.y, 0);
+            if(Mathf.Abs(horizontalVelocity) >= 0.1f)
+            {
+                rb.velocity = new Vector3(Mathf.Clamp(horizontalVelocity * _speed * dashForce, -30, 30), rb.velocity.y, 0);
+            }
+            else
+            {
+                if (isFacingRight)
+                {
+                    rb.velocity = new Vector2(10 * dashForce, rb.velocity.y);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(-10 * dashForce, rb.velocity.y);
+                }
+            }
         }
         else
         {

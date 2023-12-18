@@ -186,7 +186,7 @@ public class EnemyScript : FreezeMasterScript
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject == PlayerMovement.Instance.gameObject)
+        if (PlayerMovement.Instance.gameObject != null && other.gameObject == PlayerMovement.Instance.gameObject)
         {
             isInRange = false;
         }

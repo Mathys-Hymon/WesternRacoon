@@ -11,7 +11,7 @@ public class DoorScript : FreezeMasterScript
     [SerializeField] private CogScript cogRef;
 
     [Header("openingInfos\n")]
-    [SerializeField] private bool isHorizontal;
+    [SerializeField] private bool isVertical;
     [SerializeField] private float openingSize;
     [SerializeField] private float openingTime;
     [SerializeField] private bool closeBehind = false;
@@ -24,7 +24,7 @@ public class DoorScript : FreezeMasterScript
 
     private void Start()
     {
-        if(isHorizontal)
+        if(isVertical)
         {
             y = transform.position.y;
         }
@@ -86,7 +86,7 @@ public class DoorScript : FreezeMasterScript
                 y = initialPosition;
             }
 
-            if(isHorizontal)
+            if(isVertical)
             {
                 Vector3 targetPosition = Vector3.Lerp(transform.position, new Vector3(transform.position.x, y, transform.position.z), openingTime * Time.deltaTime);
                 transform.position = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
@@ -109,7 +109,7 @@ public class DoorScript : FreezeMasterScript
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" && closeBehind && doorOpen < 2 && !isHorizontal)
+        if (collision.gameObject.tag == "Player" && closeBehind && doorOpen < 2 && !isVertical)
         {
             doorOpen = 2;
             y = initialPosition; 

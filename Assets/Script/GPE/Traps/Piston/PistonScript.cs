@@ -17,6 +17,7 @@ public class PistonScript : FreezeMasterScript
 
     private float initialPositionY;
     private float y;
+    private float oldY;
 
     private bool moveUp;
 
@@ -27,10 +28,12 @@ public class PistonScript : FreezeMasterScript
         if (!isHorizontal)
         {
             y = transform.localPosition.y;
+            oldY = transform.localPosition.y;
         }
         else
         {
             y = transform.localPosition.x;
+            oldY = transform.localPosition.x;
         }
 
         initialPositionY = y;
@@ -50,19 +53,20 @@ public class PistonScript : FreezeMasterScript
         {
             if(!isHorizontal)
             {
-                Vector3 targetPosition = Vector3.Lerp(transform.localPosition, new Vector3(transform.position.x, y, transform.position.z), speed * Time.deltaTime);
-                transform.localPosition = new Vector3(0, targetPosition.y, 0);
+                float targetPosition = Mathf.Lerp(transform.localPosition.y, y, speed * Time.deltaTime);
+                transform.localPosition = new Vector3(0, targetPosition, 0);
             }
             else
             {
-                Vector3 targetPosition = Vector3.Lerp(transform.localPosition, new Vector3(y, transform.position.y, transform.position.z), speed * Time.deltaTime);
-                transform.localPosition = new Vector3(targetPosition.x, transform.position.y, transform.position.z);
+                float targetPosition = Mathf.Lerp(transform.localPosition.x, y, speed * Time.deltaTime);
+                transform.localPosition = new Vector3(targetPosition,0, 0);
             }
         }
     }
 
     private void FlipFlopPosition()
     {
+        oldY = y;
         if (!moveUp)
         {
             moveUp = true;
@@ -73,7 +77,6 @@ public class PistonScript : FreezeMasterScript
             moveUp = false;
             y = initialPositionY;
         }
-
         Invoke("FlipFlopPosition", waitTime);
     }
 
