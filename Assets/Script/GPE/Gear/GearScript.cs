@@ -10,6 +10,14 @@ public class GearScript : MonoBehaviour
 
     private void Update()
     {
-        transform.rotation = Quaternion.Euler(0, 0,rotationSpeed*Time.timeSinceLevelLoad);
+        if(rotateRight)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, -rotationSpeed * Time.timeSinceLevelLoad);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, rotationSpeed * Time.timeSinceLevelLoad);
+        }
+        
     }
 }
