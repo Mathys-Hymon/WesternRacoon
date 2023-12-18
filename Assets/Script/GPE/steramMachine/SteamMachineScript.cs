@@ -17,7 +17,7 @@ public class SteamMachineScript : MonoBehaviour
 
     private void Start()
     {
-        if(IsValidInput == 0)
+        if(buttons.Length == 0)
         {
             pushCreate = true;
             Invoke("AutomaticSteam", steamTime);
@@ -37,6 +37,19 @@ public class SteamMachineScript : MonoBehaviour
             Invoke("AutomaticSteam", steamTime);
         }
     }
+
+    private void Update()
+    {
+        if (pushCreate)
+        {
+            steamParticle.Play();
+        }
+        else if (!pushCreate)
+        {
+            steamParticle.Stop();
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (buttons.Length > 0)
@@ -56,25 +69,16 @@ public class SteamMachineScript : MonoBehaviour
 
             if (IsValidInput == buttons.Length && collision.gameObject.GetComponent<BoxScript>() != null && collision.gameObject.GetComponent<Rigidbody2D>() != null)
             {
-                steamParticle.Play();
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity = (transform.up * 10) / Vector3.Distance(transform.position, collision.transform.position);
-            }
-            else if(IsValidInput != buttons.Length)
-            {
-                steamParticle.Stop();
             }
         }
         else
         {
             if (pushCreate && collision.gameObject.GetComponent<BoxScript>() != null && collision.gameObject.GetComponent<Rigidbody2D>() != null)
             {
-                steamParticle.Play();
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity = (transform.up * 10) / Vector3.Distance(transform.position, collision.transform.position);
             }
-            else if (!pushCreate)
-            {
-                steamParticle.Stop();
-            }
         }
+
     }
 }

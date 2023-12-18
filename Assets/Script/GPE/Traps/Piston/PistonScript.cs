@@ -17,23 +17,21 @@ public class PistonScript : FreezeMasterScript
 
     private float initialPositionY;
     private float y;
-    private float oldY;
 
     private bool moveUp;
+    private BoxCollider2D bc;
 
 
     void Start()
-    {
-
+    { 
+        bc = GetComponent<BoxCollider2D>();
         if (!isHorizontal)
         {
             y = transform.localPosition.y;
-            oldY = transform.localPosition.y;
         }
         else
         {
             y = transform.localPosition.x;
-            oldY = transform.localPosition.x;
         }
 
         initialPositionY = y;
@@ -66,7 +64,6 @@ public class PistonScript : FreezeMasterScript
 
     private void FlipFlopPosition()
     {
-        oldY = y;
         if (!moveUp)
         {
             moveUp = true;
@@ -80,7 +77,10 @@ public class PistonScript : FreezeMasterScript
         Invoke("FlipFlopPosition", waitTime);
     }
 
-
+    public void PlayerIsHere(bool playerHere)
+    {
+        bc.enabled = playerHere;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

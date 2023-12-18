@@ -13,7 +13,7 @@ public class PressurePlateformScript : FreezeMasterScript
     [SerializeField] private bool startDown;
 
     private float initialPosition;
-    private int weightOnPlateform;
+    private bool playerIsOn;
 
     void OnDrawGizmosSelected()
     {
@@ -50,13 +50,13 @@ public class PressurePlateformScript : FreezeMasterScript
             print("Oops, it seems that there is an error, two pressure plateform are linked and in the same state that cant be acceptable, please modify it");
         }
     }
-    public void SetWeight(int detection)
+    public void SetWeight(bool detection)
     {
-        weightOnPlateform = detection;
+        playerIsOn = detection;
     }
-    public int GetWeightOnIt()
+    public bool GetWeightOnIt()
     {
-        return weightOnPlateform;
+        return playerIsOn;
     }
 
     private void Update()
@@ -65,25 +65,25 @@ public class PressurePlateformScript : FreezeMasterScript
         {
             if (otherPlateformRef == null)
             {
-                if (weightOnPlateform > 0 && transform.position.y >= initialPosition)
+                if (playerIsOn && transform.position.y >= initialPosition)
                 {
                     transform.position += new Vector3(0, -fallSpeed * Time.deltaTime, 0);
                 }
-                else if (weightOnPlateform == 0 && transform.position.y <= initialPosition + maxHeight)
+                else if (!playerIsOn && transform.position.y <= initialPosition + maxHeight)
                 {
                     transform.position += new Vector3(0, fallSpeed * Time.deltaTime, 0);
                 }
             }
             else if(!otherPlateformRef.freezed)
             {
-                if (otherPlateformRef.GetWeightOnIt() < weightOnPlateform)
+                if (!otherPlateformRef.GetWeightOnIt() && playerIsOn)
                 {
                     if (transform.position.y >= initialPosition)
                     {
                         transform.position += new Vector3(0, -fallSpeed * Time.deltaTime, 0);
                     }
                 }
-                else if (otherPlateformRef.GetWeightOnIt() > weightOnPlateform)
+                else if (otherPlateformRef.GetWeightOnIt() && !playerIsOn)
                 {
                     if (transform.position.y <= initialPosition + maxHeight)
                     {
