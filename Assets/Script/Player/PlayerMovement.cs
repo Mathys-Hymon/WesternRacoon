@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     private CameraFollowPlayer _cameraFollowObject;
     private List<GameObject> freezedObject = new List<GameObject>();
     private Animator animator;
+    private CheckPointScript checkpoint;
 
     public void SetFreezedObject(GameObject newObject)
     {
@@ -91,6 +92,15 @@ public class PlayerMovement : MonoBehaviour
     public void OnDeviceChange(PlayerInput pi)
     {
         isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
+    }
+
+    public void SetNewCheckPoint(CheckPointScript newCheckpoint)
+    {
+        if(checkpoint != null)
+        {
+            Destroy(checkpoint);
+        }
+        checkpoint = newCheckpoint;
     }
 
     private void Start()
@@ -332,10 +342,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-
-        print("Player DEAD");
+        transform.position = checkpoint.RespawnPosition();
     }
     
+
+
+
     private void Animation()
     {
         //Jumping animations
