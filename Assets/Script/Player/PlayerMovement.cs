@@ -109,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //print(freezedObject.Length);
+        Animation();
         IsGrounded();
         if(grounded == true)
         {
@@ -117,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
             if(controlesScript.player.roll.triggered && !roll)
             {
                 roll = true;
-                Invoke("StopRoll", 0.2f);
+                Invoke("StopRoll", 0.3f);
             }
             else if(roll)
             {
@@ -134,17 +135,9 @@ public class PlayerMovement : MonoBehaviour
         }
         if (controlesScript.player.jump.triggered && (lastTimeJumpPressed - lastTimeGrounded < coyoteTime || jumpNumber < 2))
         {
-            animator.SetBool("isJumping", true);
-            
             if(lastTimeJumpPressed - lastTimeGrounded > coyoteTime)
             {
                 jumpNumber = 1;
-            }
-
-            if (jumpNumber == 1)
-            {
-                animator.SetBool("isJumping", false);
-                animator.SetTrigger("DoubleJumping");
             }
             
             jumpNumber += 1;
@@ -169,52 +162,22 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalMovement != 0)
         {
             horizontalVelocity = horizontalMovement;
-            
-            if (horizontalMovement > 0 && isFacingRight)
-            {
-                animator.SetBool("RunForward", true);
-                animator.SetBool("RunBackward", false);
-            }
-            else if (horizontalMovement < 0 && !isFacingRight)
-            {
-                animator.SetBool("RunForward", true);
-                animator.SetBool("RunBackward", false);
-            }
-            else
-            {
-                animator.SetBool("RunForward", false);
-                animator.SetBool("RunBackward", true);
-            }
-
-            if (grounded)
-            {
-                animator.SetBool("Falling", false);
-            }
         }
         else if (grounded)
         {
             horizontalVelocity -= (groundFriction / 10f) * horizontalVelocity;
-            animator.SetBool("RunForward", false);
-            animator.SetBool("RunBackward", false);
-            animator.SetBool("Falling", false);
-            animator.ResetTrigger("DoubleJumping");
         }
         else
         {
             horizontalVelocity -= (airFriction / 10f) * horizontalVelocity;
-            animator.SetBool("RunForward", false);
-            animator.SetBool("RunBackward", false);
         }
 
         if (rb.velocity.y < 0.2f && !grounded)
         {
-            animator.SetBool("Falling", true);
-            animator.SetBool("isJumping", false);
             rb.gravityScale += 20 * Time.deltaTime;
         }
         else
         {
-            animator.SetBool("Falling", false);
             rb.gravityScale = 3f;
         }
         
@@ -372,6 +335,72 @@ public class PlayerMovement : MonoBehaviour
     {
 
         print("Player DEAD");
+    }
+    
+    private void Animation()
+    {
+        //Jumping animations
+        if (controlesScript.player.jump.triggered)
+        {
+            animator.SetBool("isJumping", true);
+
+        }
+        if (controlesScript.player.jump.triggered && jumpNumber < 2)
+        {
+
+            animator.SetTrigger("DoubleJumping");
+        }
+
+        //Moving animations
+        if (horizontalMovement > 0 && isFacingRight)
+        {
+            animator.SetBool("RunForward", true);
+            animator.SetBool("RunBackward", false);
+        }
+        else if (horizontalMovement < 0 && !isFacingRight)
+        {
+            animator.SetBool("RunForward", true);
+            animator.SetBool("RunBackward", false);
+        }
+        else
+        {
+            animator.SetBool("RunForward", false);
+            animator.SetBool("RunBackward", true);
+        }
+        if (horizontalMovement == 0|| !grounded)
+        {
+            animator.SetBool("RunForward", false);
+            animator.SetBool("RunBackward", false);
+
+        }
+
+        if (grounded)
+        {
+            animator.SetBool("Falling", false);
+            animator.ResetTrigger("DoubleJumping");
+        }
+
+        //Falling animation
+        if (rb.velocity.y < 0.2f && !grounded)
+        {
+            animator.SetBool("Falling", true);
+            animator.SetBool("isJumping", false);
+        }
+        else
+        {
+            animator.SetBool("Falling", false);
+        }
+        
+        //Rolling animation
+        if(controlesScript.player.roll.triggered && !roll)
+        {
+            animator.SetBool("isRolling", true);
+        }
+        else if(!roll)
+        {
+            animator.SetBool("isRolling", false);
+        }
+
     }
 
 

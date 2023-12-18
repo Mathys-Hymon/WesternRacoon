@@ -183,7 +183,7 @@ MonoBehaviour:
   obstacle:
     serializedVersion: 2
     m_Bits: 8
-  delay: 1
+  delay: 2
   speed: 10
 --- !u!58 &3976928883465829426
 CircleCollider2D:
@@ -281,7 +281,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 7
 --- !u!95 &6491629507319767855
 Animator:
   serializedVersion: 5

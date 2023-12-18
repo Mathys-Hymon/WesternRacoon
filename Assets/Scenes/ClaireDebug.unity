@@ -1468,6 +1468,18 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.17159891
       objectReference: {fileID: 0}
+    - target: {fileID: 2264657543238237520, guid: 155b00af49c539f4f96a90ba96ec335d, type: 3}
+      propertyPath: m_Mass
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2264657543238237520, guid: 155b00af49c539f4f96a90ba96ec335d, type: 3}
+      propertyPath: m_Constraints
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2264657543238237520, guid: 155b00af49c539f4f96a90ba96ec335d, type: 3}
+      propertyPath: m_GravityScale
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3644148261644043159, guid: 155b00af49c539f4f96a90ba96ec335d, type: 3}
       propertyPath: m_Name
       value: BisonPrefab
@@ -2016,6 +2028,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1614156765902360851, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
+      propertyPath: dashForce
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2580761254646739385, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.3351882
