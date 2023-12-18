@@ -35,16 +35,17 @@ public class EnemyScript : FreezeMasterScript
             anim.speed = 1f;
             if (rushPlayer)
             {
-                if (!lookRight && IsGrounded(0.5f) && CheckWall())
+                if (((!lookRight && IsGrounded(0.5f)) || (lookRight && IsGrounded(-0.5f))) && CheckWall() )
                 {
-                    transform.position += transform.right * Time.deltaTime * speed;
-                }
-                else if (lookRight && IsGrounded(-0.5f) && CheckWall())
-                {
-                    transform.position += transform.right * Time.deltaTime * speed;
+                    anim.SetBool("Anticipate", true);
+                    Invoke("Sprinting", 0.4f);
+                    //anim.SetBool("isSprinting", true);
+                    //transform.position += transform.right * Time.deltaTime * speed;
                 }
                 else
                 {
+                    CancelInvoke("Sprinting");
+                    anim.SetBool("isSprinting", false);
                     rushPlayer = false;
                     canReach = false;
                 }
@@ -197,6 +198,16 @@ public class EnemyScript : FreezeMasterScript
         if (PlayerMovement.Instance.gameObject != null && other.gameObject == PlayerMovement.Instance.gameObject)
         {
             isInRange = false;
+        }
+    }
+
+    private void Sprinting()
+    {
+        if (!freezed)
+        {
+            anim.SetBool("Anticipate", false);
+            anim.SetBool("isSprinting", true);
+            transform.position += transform.right * Time.deltaTime * speed;
         }
     }
 }
