@@ -7,13 +7,9 @@ public class PPDetectionScript : MonoBehaviour
     [SerializeField] PressurePlateformScript plateformRef;
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<BoxScript>() != null)
+        if (collision.gameObject == PlayerMovement.Instance.gameObject)
         {
-            plateformRef.SetWeight(2);
-        }
-        else if (collision.gameObject == PlayerMovement.Instance.gameObject)
-        {
-            plateformRef.SetWeight(1);
+            plateformRef.SetWeight(true);
         }
     }
 
@@ -21,7 +17,7 @@ public class PPDetectionScript : MonoBehaviour
     {
         if (collision.gameObject == PlayerMovement.Instance.gameObject || collision.gameObject.GetComponent<BoxScript>() != null)
         {
-            plateformRef.SetWeight(0);
+            plateformRef.SetWeight(false);
         }
     }
 }
