@@ -17,7 +17,7 @@ public class SteamMachineScript : MonoBehaviour
 
     private void Start()
     {
-        if(IsValidInput == 0)
+        if(buttons.Length == 0)
         {
             pushCreate = true;
             Invoke("AutomaticSteam", steamTime);
