@@ -35,17 +35,16 @@ public class EnemyScript : FreezeMasterScript
             anim.speed = 1f;
             if (rushPlayer)
             {
-                if (((!lookRight && IsGrounded(0.5f)) || (lookRight && IsGrounded(-0.5f))) && CheckWall() )
+                if (((!lookRight && IsGrounded(1f)) || (lookRight && IsGrounded(-1f))) && CheckWall() )
                 {
                     anim.SetBool("Anticipate", true);
                     Invoke("Sprinting", 0.4f);
-                    //anim.SetBool("isSprinting", true);
-                    //transform.position += transform.right * Time.deltaTime * speed;
                 }
                 else
                 {
                     CancelInvoke("Sprinting");
                     anim.SetBool("isSprinting", false);
+                    anim.SetTrigger("Stop");
                     rushPlayer = false;
                     canReach = false;
                 }
@@ -169,6 +168,7 @@ public class EnemyScript : FreezeMasterScript
     private bool IsGrounded(float offsetX)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(offsetX,0,0), Vector2.down, 1.5f, obstacle);
+        Debug.DrawRay(transform.position + new Vector3(offsetX,0,0), Vector2.down);
         if(offsetX == 0)
         {
             floorY = hit.collider.transform.position.y;

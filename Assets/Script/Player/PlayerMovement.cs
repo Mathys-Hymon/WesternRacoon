@@ -206,18 +206,11 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("RunBackward", false);
         }
 
-        if (rb.velocity.y < 0.2f)
+        if (rb.velocity.y < 0.2f && !grounded)
         {
-            if(rb.gravityScale <= 6f)
-            {
-                animator.SetBool("Falling", true);
-                animator.SetBool("isJumping", false);
-                rb.gravityScale += 20 * Time.deltaTime;
-            }
-            else if(!grounded && rb.gravityScale >= 3)
-            {
-                animator.SetTrigger("DoubleJumping");
-            }
+            animator.SetBool("Falling", true);
+            animator.SetBool("isJumping", false);
+            rb.gravityScale += 20 * Time.deltaTime;
         }
         else
         {
