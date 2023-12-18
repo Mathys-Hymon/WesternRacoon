@@ -150,6 +150,10 @@ public class PlayerMovement : MonoBehaviour
             }
             walkParticle.Play();
         }
+        if ((Input.GetKeyUp(KeyCode.Joystick1Button0) || Input.GetKeyUp(KeyCode.Space)) && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
 
         horizontalMovement = controlesScript.player.move.ReadValue<float>();
 
@@ -184,10 +188,6 @@ public class PlayerMovement : MonoBehaviour
             horizontalVelocity -= (airFriction / 10f) * horizontalVelocity;
             animator.SetBool("RunForward", false);
             animator.SetBool("RunBackward", false);
-        }
-        if ((Input.GetKeyUp(KeyCode.Joystick1Button0) || Input.GetKeyUp(KeyCode.Space)) && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
         if (rb.velocity.y < 0.2f && grounded == true)
@@ -318,23 +318,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void Turn()
     {
+        CancelInvoke("TurnCinemachine");
         if (isFacingRight)
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = false;
-            _cameraFollowObject.CallTurn();
+            Invoke("TurnCinemachine", 0.2f);
         }
         else
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = true;
-
-            _cameraFollowObject.CallTurn();
+            Invoke("TurnCinemachine", 0.2f);
         }
     }
-    //C'EST BON
+    
+    private void TurnCinemachine()
+    {
+        _cameraFollowObject.CallTurn();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
