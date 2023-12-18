@@ -7,7 +7,8 @@ public class CollectableItem : MonoBehaviour
 {
     [SerializeField] private Item itemData;
 
-    public float speed = 10f;
+    public float speed = 5f;
+
     bool moveCoin;
 
     GameObject target;
@@ -23,7 +24,7 @@ public class CollectableItem : MonoBehaviour
             PlayerInventory.Instance.AddItemToInventory(itemData);
             gameObject.GetComponent<Collider2D>().enabled = false;
             moveCoin = true;
-            Destroy(gameObject, 5f);
+            Destroy(gameObject, 1.5f);
         }
     }
 
