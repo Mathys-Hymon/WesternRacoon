@@ -6,11 +6,12 @@ using UnityEngine;
 public class DoorScript : FreezeMasterScript
 {
 
-    [Header("ObjectReferences")]
+    [Header("ObjectReferences\n")]
     [SerializeField] private ButtonScript[] buttons;
     [SerializeField] private CogScript cogRef;
 
-    [Header("openingInfos")]
+    [Header("openingInfos\n")]
+    [SerializeField] private bool isVertical;
     [SerializeField] private float openingSize;
     [SerializeField] private float openingTime;
     [SerializeField] private bool closeBehind = false;
@@ -23,7 +24,14 @@ public class DoorScript : FreezeMasterScript
 
     private void Start()
     {
-        y = transform.position.y;
+        if(isVertical)
+        {
+            y = transform.position.y;
+        }
+        else
+        {
+            y = transform.position.x;
+        }
         initialPosition = y;
     }
     void OnDrawGizmosSelected()
@@ -77,18 +85,31 @@ public class DoorScript : FreezeMasterScript
                 doorOpen = 0;
                 y = initialPosition;
             }
-            Vector3 targetPosition = Vector3.Lerp(transform.position, new Vector3(transform.position.x, y, transform.position.z), openingTime * Time.deltaTime);
-            transform.position = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
+
+            if(isVertical)
+            {
+                Vector3 targetPosition = Vector3.Lerp(transform.position, new Vector3(transform.position.x, y, transform.position.z), openingTime * Time.deltaTime);
+                transform.position = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
             if(cogRef != null)
             {
                 cogRef.transform.rotation = Quaternion.Euler(0, 0, targetPosition.y * 80);
+            }
+            }
+            else
+            {
+                Vector3 targetPosition = Vector3.Lerp(transform.position, new Vector3(y, transform.position.y, transform.position.z), openingTime * Time.deltaTime);
+                transform.position = new Vector3(targetPosition.x, transform.position.y, transform.position.z);
+                if (cogRef != null)
+                {
+                    cogRef.transform.rotation = Quaternion.Euler(0, 0, targetPosition.x * 80);
+                }
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" && closeBehind && doorOpen < 2)
+        if (collision.gameObject.tag == "Player" && closeBehind && doorOpen < 2 && !isVertical)
         {
             doorOpen = 2;
             y = initialPosition; 
