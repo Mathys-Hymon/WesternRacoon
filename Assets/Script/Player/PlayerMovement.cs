@@ -134,12 +134,21 @@ public class PlayerMovement : MonoBehaviour
         }
         if (controlesScript.player.jump.triggered && (lastTimeJumpPressed - lastTimeGrounded < coyoteTime || jumpNumber < 2))
         {
+            animator.SetBool("isJumping", true);
+            
             if(lastTimeJumpPressed - lastTimeGrounded > coyoteTime)
             {
                 jumpNumber = 1;
             }
-            jumpNumber += 1;
 
+            if (jumpNumber == 1)
+            {
+                animator.SetBool("isJumping", false);
+                animator.SetTrigger("DoubleJumping");
+            }
+            
+            jumpNumber += 1;
+            
             if (roll)
             {
                 rb.velocity = new Vector2(rb.velocity.x * 2f, jumpForce * 1.1f);
@@ -172,12 +181,19 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("RunForward", false);
                 animator.SetBool("RunBackward", true);
             }
+
+            if (grounded)
+            {
+                animator.SetBool("Falling", false);
+            }
         }
         else if (grounded)
         {
             horizontalVelocity -= (groundFriction / 10f) * horizontalVelocity;
             animator.SetBool("RunForward", false);
             animator.SetBool("RunBackward", false);
+            animator.SetBool("Falling", false);
+            animator.ResetTrigger("DoubleJumping");
         }
         else
         {
@@ -190,14 +206,21 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
-        if (rb.velocity.y < 0.2f && grounded == true)
+        if (rb.velocity.y < 0.2f)
         {
             if(rb.gravityScale <= 6f)
             {
+                animator.SetBool("Falling", true);
+                animator.ResetTrigger("DoubleJumping");
                 rb.gravityScale += 20 * Time.deltaTime;
             }
         }
-        else rb.gravityScale = 3f;
+        else
+        {
+            animator.SetBool("Falling", false);
+            rb.gravityScale = 3f;
+        }
+        
 
         //if we are falling past a certain speed threshold
         if(rb.velocity.y < _fallSpeedYThresholdChange && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
@@ -249,8 +272,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector3(horizontalVelocity * _speed * airControl, rb.velocity.y, 0);
             }
-        }
-            TurnCheck();
+        } 
+        TurnCheck();
     }
 
     private void IsGrounded()
