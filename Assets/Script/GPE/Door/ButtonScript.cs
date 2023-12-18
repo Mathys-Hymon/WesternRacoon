@@ -8,7 +8,6 @@ public class ButtonScript : MonoBehaviour
     private bool Activate;
     [SerializeField] private bool PressurePlate;
     [SerializeField] private Sprite[] ButtonsSprites;
-    private float Delay = 1f;
     private SpriteRenderer SpriteRenderer;
     public bool IsActivated() {  return Activate; }
 
