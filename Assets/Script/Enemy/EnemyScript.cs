@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyScript : FreezeMasterScript
@@ -13,38 +14,118 @@ public class EnemyScript : FreezeMasterScript
 
     private bool canShoot = true;
     private bool isInRange;
+    private bool rushPlayer;
+    private bool canReach;
+    private bool lookRight;
+    private float floorY;
 
-    // Update is called once per frame
+
+    private void Start()
+    {
+        IsGrounded(0);
+    }
+
     void Update()
     {
-        if (!freezed && isInRange)
+        if (!freezed)
         {
-            float distance = Vector3.Distance(transform.position, PlayerMovement.Instance.transform.position);
-            RaycastHit2D touchPlayer =
-                Physics2D.Raycast(transform.position, (transform.position - PlayerMovement.Instance.transform.position)*(-1), distance, obstacle);
-            Debug.DrawRay(transform.position, (transform.position - PlayerMovement.Instance.transform.position)*(-1));
-
-            if (touchPlayer.collider == null && canShoot)
+            if (rushPlayer)
             {
-                if (transform.position.x - PlayerMovement.Instance.transform.position.x < 0)
+                if (!lookRight && IsGrounded(0.5f) && CheckWall())
                 {
-                    Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
-                    transform.rotation = Quaternion.Euler(rotator);
+                    transform.position += transform.right * Time.deltaTime * 5;
+                }
+                else if (lookRight && IsGrounded(-0.5f) && CheckWall())
+                {
+                    transform.position += transform.right * Time.deltaTime * 5;
                 }
                 else
                 {
-                    Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
-                    transform.rotation = Quaternion.Euler(rotator);
+                    rushPlayer = false;
+                    canReach = false;
                 }
-                
-                canShoot = false;
-                Shoot();
             }
 
-           
+            if(isInRange)
+            {
+                if (floorY >= PlayerMovement.Instance.GetFloorY() - 0.2f && floorY <= PlayerMovement.Instance.GetFloorY() + 0.2 && !rushPlayer)
+                {
+                    for (int i = 1; i < (int)Vector2.Distance(transform.position, PlayerMovement.Instance.transform.position) + 1; i++)
+                    {
+                        if (!lookRight)
+                        {
+                            RaycastHit2D touchPlayer = Physics2D.Raycast(transform.position + new Vector3(i, 0, 0), Vector2.down, 1.5f, obstacle);
+                            if (touchPlayer.collider == null)
+                            {
+                                canReach = false;
+                                break;
+                            }
+                            else
+                            {
+                                canReach = true;
+                            }
+                        }
+                        else
+                        {
+                            RaycastHit2D touchPlayer = Physics2D.Raycast(transform.position + new Vector3(-i, 0, 0), Vector2.down, 1.5f, obstacle);
+                            if (touchPlayer.collider == null)
+                            {
+                                canReach = false;
+                                break;
+                            }
+                            else
+                            {
+                                canReach = true;
+                            }
+                        }
+                    }
+                    if(canReach)
+                    {
+                    float distance = Vector3.Distance(transform.position, PlayerMovement.Instance.transform.position);
+                    RaycastHit2D WallDetection = Physics2D.Raycast(transform.position, (transform.position - PlayerMovement.Instance.transform.position) * (-1), distance, obstacle);
+                    Debug.DrawRay(transform.position, (transform.position - PlayerMovement.Instance.transform.position) * (-1));
+                        if(WallDetection.collider == null)
+                        {
+                            rushPlayer = canReach;
+                        }
+                        else
+                        {
+                            rushPlayer = false;
+                        }
+                    }
+                    else
+                    {
+                        rushPlayer = false;
+                    }
+                }
+
+                if (!rushPlayer)
+                {
+                    float distance = Vector3.Distance(transform.position, PlayerMovement.Instance.transform.position);
+                    RaycastHit2D touchPlayer = Physics2D.Raycast(transform.position, (transform.position - PlayerMovement.Instance.transform.position) * (-1), distance, obstacle);
+                    Debug.DrawRay(transform.position, (transform.position - PlayerMovement.Instance.transform.position) * (-1));
+
+                    if (transform.position.x - PlayerMovement.Instance.transform.position.x < 0 && !rushPlayer && touchPlayer.collider == null)
+                    {
+                        Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+                        transform.rotation = Quaternion.Euler(rotator);
+                        lookRight = false;
+                    }
+                    else if (transform.position.x - PlayerMovement.Instance.transform.position.x > 0 && !rushPlayer && touchPlayer.collider == null)
+                    {
+                        Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+                        transform.rotation = Quaternion.Euler(rotator);
+                        lookRight = true;
+                    }
+
+                    if (touchPlayer.collider == null && canShoot)
+                    {
+                        canShoot = false;
+                        Shoot();
+                    }
+                }
+            }
         }
-        
-       
     }
 
     public void Shoot()
@@ -61,6 +142,39 @@ public class EnemyScript : FreezeMasterScript
     {
         canShoot = true;
     }
+    
+    private bool CheckWall()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 1f, obstacle);
+        if(hit.collider == null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    private bool IsGrounded(float offsetX)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(offsetX,0,0), Vector2.down, 1.5f, obstacle);
+        if(offsetX == 0)
+        {
+            floorY = hit.collider.transform.position.y;
+        }
+        if(hit.collider == null )
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
+
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -72,7 +186,7 @@ public class EnemyScript : FreezeMasterScript
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject == PlayerMovement.Instance.gameObject)
+        if (PlayerMovement.Instance.gameObject != null && other.gameObject == PlayerMovement.Instance.gameObject)
         {
             isInRange = false;
         }
