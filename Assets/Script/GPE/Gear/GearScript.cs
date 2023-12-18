@@ -18,6 +18,21 @@ public class GearScript : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 0, rotationSpeed * Time.timeSinceLevelLoad);
         }
-        
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject == PlayerMovement.Instance.gameObject)
+        {
+            if(rotateRight)
+            {
+                collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x + (rotationSpeed/6f)*Time.deltaTime, collision.gameObject.transform.position.y, collision.gameObject.transform.position.z);
+            }
+            
+            else
+            {
+                Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
+                rb.velocity = new Vector3(rb.velocity.x - rotationSpeed*10, rb.velocity.y, 0);
+            }
+        }
     }
 }
