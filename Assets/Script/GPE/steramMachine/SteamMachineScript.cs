@@ -8,9 +8,35 @@ public class SteamMachineScript : MonoBehaviour
     [Header("ObjectReferences")]
     [SerializeField] private ButtonScript[] buttons;
     [SerializeField] private ParticleSystem steamParticle;
+    [Header("Only for automatic Steam")]
+    [SerializeField] private float pauseTime;
+    [SerializeField] private float steamTime;
 
     private int IsValidInput;
+    private bool pushCreate;
 
+    private void Start()
+    {
+        if(IsValidInput == 0)
+        {
+            pushCreate = true;
+            Invoke("AutomaticSteam", steamTime);
+        }
+    }
+
+    private void AutomaticSteam()
+    {
+        if(pushCreate)
+        {
+            pushCreate = false;
+            Invoke("AutomaticSteam", pauseTime);
+        }
+        else
+        {
+            pushCreate = true;
+            Invoke("AutomaticSteam", steamTime);
+        }
+    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (buttons.Length > 0)
@@ -34,6 +60,18 @@ public class SteamMachineScript : MonoBehaviour
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity = (transform.up * 10) / Vector3.Distance(transform.position, collision.transform.position);
             }
             else if(IsValidInput != buttons.Length)
+            {
+                steamParticle.Stop();
+            }
+        }
+        else
+        {
+            if (pushCreate && collision.gameObject.GetComponent<BoxScript>() != null && collision.gameObject.GetComponent<Rigidbody2D>() != null)
+            {
+                steamParticle.Play();
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity = (transform.up * 10) / Vector3.Distance(transform.position, collision.transform.position);
+            }
+            else if (!pushCreate)
             {
                 steamParticle.Stop();
             }
