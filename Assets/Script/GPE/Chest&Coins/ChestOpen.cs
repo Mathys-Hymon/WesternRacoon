@@ -4,11 +4,46 @@ using UnityEngine;
 
 public class ChestOpen : CollectableItem
 {
-    private void OnCollisionEnter2D(Collider2D collision)
+    public GameObject coinPrefab;
+
+    private bool isOpened = false;
+    private int collisionCount = 0;
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player") && !isOpened)
         {
-            
+            Debug.Log("colliding");
+            Animator animator = GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetTrigger("ChestOpens");
+            }
+            SpawnCoin();
+            isOpened = true;
+            collisionCount++;
+            //AfterSpawnCoin();
         }
     }
+
+    private void SpawnCoin()
+    {
+        if (coinPrefab != null)
+        {
+            Instantiate(coinPrefab, transform.position + Vector3.up, Quaternion.identity);
+        }
+    }
+
+    //private void AfterSpawnCoin()
+    //{
+    //    if (collisionCount >= 1)
+    //    {
+    //        Collider2D chestCollider = GetComponent<Collider2D>();
+    //        if (chestCollider != null)
+    //        {
+    //            chestCollider.enabled = false;
+    //        }
+    //    }
+    //}
 }
