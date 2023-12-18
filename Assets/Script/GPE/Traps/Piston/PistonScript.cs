@@ -17,23 +17,19 @@ public class PistonScript : FreezeMasterScript
 
     private float initialPositionY;
     private float y;
-    private float oldY;
 
     private bool moveUp;
 
 
     void Start()
-    {
-
+    { 
         if (!isHorizontal)
         {
             y = transform.localPosition.y;
-            oldY = transform.localPosition.y;
         }
         else
         {
             y = transform.localPosition.x;
-            oldY = transform.localPosition.x;
         }
 
         initialPositionY = y;
@@ -66,7 +62,6 @@ public class PistonScript : FreezeMasterScript
 
     private void FlipFlopPosition()
     {
-        oldY = y;
         if (!moveUp)
         {
             moveUp = true;
