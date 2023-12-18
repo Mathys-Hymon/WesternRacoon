@@ -8,16 +8,7 @@ public class ButtonScript : MonoBehaviour
     private bool Activate;
     [SerializeField] private bool PressurePlate;
     [SerializeField] private Sprite[] ButtonsSprites;
-    private float Delay = 1f;
     private SpriteRenderer SpriteRenderer;
-
-    private void Update()
-    {
-        if (Delay <= 1f)
-        {
-            Delay += Time.deltaTime;
-        }
-    }
     public bool IsActivated() {  return Activate; }
 
     private void Start()
@@ -26,13 +17,7 @@ public class ButtonScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Box" && Delay >= 1f)
-        {
-            Activate = true;
-            SpriteRenderer.sprite = ButtonsSprites[0];
-        }
-
-        else if (collision.gameObject.tag == "Player")
+        if(collision.gameObject.GetComponent<BoxScript>() != null || collision.gameObject.tag == "Player" || collision.gameObject.GetComponent<EnemyScript>() != null)
         {
             Activate = true;
             SpriteRenderer.sprite = ButtonsSprites[0];
@@ -40,18 +25,14 @@ public class ButtonScript : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Box")
-        {
-            Activate = true;
-        }
-        else if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.GetComponent<BoxScript>() != null || collision.gameObject.tag == "Player" || collision.gameObject.GetComponent<EnemyScript>() != null)
         {
             Activate = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if ((collision.gameObject.tag == "Player" || collision.gameObject.tag == "Box") && PressurePlate)
+        if (collision.gameObject.GetComponent<BoxScript>() != null || collision.gameObject.tag == "Player" || collision.gameObject.GetComponent<EnemyScript>() != null)
         {
             Activate = false;
             SpriteRenderer.sprite = ButtonsSprites[1];
