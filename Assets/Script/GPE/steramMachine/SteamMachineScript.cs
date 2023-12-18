@@ -79,6 +79,5 @@ public class SteamMachineScript : MonoBehaviour
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity = (transform.up * 10) / Vector3.Distance(transform.position, collision.transform.position);
             }
         }
-
     }
 }

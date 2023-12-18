@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MovingPlateformScript : FreezeMasterScript
 {
+    [Header("ObjectReferences\n")]
+    [SerializeField] private ButtonScript[] buttons;
+    [SerializeField] private CogScript cogRef;
+
     [Header("MOVEMENT INFOS\n")]
     [SerializeField] private float speed;
     [SerializeField] private float waitTime;
@@ -18,11 +23,17 @@ public class MovingPlateformScript : FreezeMasterScript
     private bool goPointB;
     private GameObject target = null;
     private Vector3 offset;
+    private Vector3 cogOffset;
+    private int IsValidInput;
 
 
     void Start()
     {
         target = null;
+        if(cogRef != null)
+        {
+            cogOffset = cogRef.transform.position - transform.position;
+        }
         if (!isHorizontal)
         {
             y = transform.position.y;
@@ -32,7 +43,11 @@ public class MovingPlateformScript : FreezeMasterScript
             y = transform.position.x;
         }
         initialPositionY = y;
-        Invoke("FlipFlopPosition", waitTime);
+
+        if(buttons.Length == 0)
+        {
+            Invoke("FlipFlopPosition", waitTime);
+        }
     }
 
     private void FlipFlopPosition()
@@ -52,17 +67,66 @@ public class MovingPlateformScript : FreezeMasterScript
 
     private void Update()
     {
-        if (!freezed)
+        if (!freezed && !cogRef.isFreezed())
         {
-            if (!isHorizontal)
+            if(buttons.Length == 0)
             {
-                float targetPosition = Mathf.Lerp(transform.position.y, y, (speed/50) * Time.deltaTime);
-                transform.position = new Vector3(transform.position.x, targetPosition, 0);
+                if (!isHorizontal)
+                {
+                    float targetPosition = Mathf.Lerp(transform.position.y, y, (speed / 50) * Time.deltaTime);
+                    transform.position = new Vector3(transform.position.x, targetPosition, 0);
+                }
+                else
+                {
+                    float targetPosition = Mathf.Lerp(transform.position.x, y, (speed / 50) * Time.deltaTime);
+                    transform.position = new Vector3(targetPosition, transform.position.y, 0);
+                    if (cogRef != null)
+                    {
+                        cogRef.transform.position = new Vector3(targetPosition, transform.position.y, 0) + cogOffset;
+                        cogRef.transform.rotation = Quaternion.Euler(0, 0, targetPosition * 80);
+                    }
+
+                }
             }
             else
             {
-                float targetPosition = Mathf.Lerp(transform.position.x, y, (speed/50) * Time.deltaTime);
-                transform.position = new Vector3(targetPosition, transform.position.y, 0);
+                IsValidInput = 0;
+                for (int i = 0; i < buttons.Length; i++)
+                {
+                    if (buttons[i].IsActivated())
+                    {
+                        IsValidInput++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                if (IsValidInput == buttons.Length)
+                {
+                    y = targetPosition;
+                }
+                else if (IsValidInput < buttons.Length)
+                {
+                    y = initialPositionY;
+                }
+
+                if (!isHorizontal)
+                {
+                    float targetPosition = Mathf.Lerp(transform.position.y, y, (speed / 50) * Time.deltaTime);
+                    transform.position = new Vector3(transform.position.x, targetPosition, 0);
+                }
+                else
+                {
+                    float targetPosition = Mathf.Lerp(transform.position.x, y, (speed / 50) * Time.deltaTime);
+                    transform.position = new Vector3(targetPosition, transform.position.y, 0);
+                    if (cogRef != null)
+                    {
+                        cogRef.transform.position = new Vector3(targetPosition, transform.position.y, 0) + cogOffset;
+                        cogRef.transform.rotation = Quaternion.Euler(0, 0, targetPosition * 80);
+                    }
+
+                }
             }
         }
     }
