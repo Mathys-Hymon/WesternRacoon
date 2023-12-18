@@ -2398,7 +2398,7 @@ Transform:
   m_GameObject: {fileID: 150883949}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.3351877, y: 0.8408518, z: -9.929868}
+  m_LocalPosition: {x: 3.335188, y: 0.8408518, z: -9.929868}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3257,7 +3257,7 @@ Transform:
   m_GameObject: {fileID: 230057017}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.3351877, y: 0.8408518, z: -9.929868}
+  m_LocalPosition: {x: 3.335188, y: 0.8408518, z: -9.929868}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16621,8 +16621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc156cbc99eea743b9d85782a6f6cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshairRef: {fileID: 816940508}
-  ArmTarget: {fileID: 0}
   bulletRef: {fileID: 8736122095815300506, guid: 059fb016940bac641b7ef4cd97831c6b, type: 3}
   cartridgeRef: {fileID: 9119777075786067958, guid: 9623fcadcd27c5f4bba1daa8f662cc78, type: 3}
 --- !u!114 &1148901039
@@ -16642,13 +16640,13 @@ MonoBehaviour:
   walkParticle: {fileID: 2052322738}
   groundFriction: 1
   airFriction: 0.5
+  dashForce: 3
   jumpForce: 12
   airControl: 0.6
   coyoteTime: 0.1
   floorLayer:
     serializedVersion: 2
     m_Bits: 8
-  _cameraFollow: {fileID: 1437208582}
   deadZoneXOffset: 1
   deadZoneMinusXOffset: 0
   lastCheckpoint: {fileID: 0}
@@ -21593,10 +21591,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb348b1a881b73469ffee0e6f61c128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 1148901042}
   _flipYRotationTime: 0.7
   yOffset: 4
   xOffset: 0
+  _player: {fileID: 0}
 --- !u!1 &1478193404
 GameObject:
   m_ObjectHideFlags: 0
