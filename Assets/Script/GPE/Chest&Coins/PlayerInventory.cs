@@ -32,7 +32,7 @@ public class PlayerInventory : MonoBehaviour
         if (items.Count < MAX_INVENTORY)
         {
             items.Add(newItem);
-            InventoryUI.Instance.UpdateUI();
+            InventoryUI.Instance.Wait();
             return true;
         }
         else

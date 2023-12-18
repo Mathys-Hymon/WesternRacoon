@@ -17,7 +17,19 @@ public class InventoryUI : MonoBehaviour
         {
             inventoryBoxes.Add(child);
         }
+        
     }
+    public void Wait()
+    {
+        StartCoroutine(DelayedItemAddition());
+    }
+
+    public IEnumerator DelayedItemAddition()
+    {
+        yield return new WaitForSeconds(1f);
+        UpdateUI();
+    }
+
     public void UpdateUI()
     {
         int itemCount = 0;

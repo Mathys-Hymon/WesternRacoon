@@ -7,7 +7,7 @@ public class CollectableItem : MonoBehaviour
 {
     [SerializeField] private Item itemData;
 
-    public float speed = 5f;
+    public float speed = 10f;
 
     bool moveCoin;
 
