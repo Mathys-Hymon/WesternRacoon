@@ -3476,7 +3476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1614156765902360851, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: airControl
-      value: 0.4
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 1614156765902360851, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: airFriction
@@ -3866,6 +3866,10 @@ PrefabInstance:
     - target: {fileID: 6763200624208742888, guid: b813e03f9634b6c4aab5f62d50df75c0, type: 3}
       propertyPath: otherPlateformRef
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763200624208742888, guid: b813e03f9634b6c4aab5f62d50df75c0, type: 3}
+      propertyPath: startPositionInPercent
+      value: 75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
