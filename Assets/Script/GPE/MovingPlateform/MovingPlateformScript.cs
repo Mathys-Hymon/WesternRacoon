@@ -25,11 +25,11 @@ public class MovingPlateformScript : FreezeMasterScript
         target = null;
         if (!isHorizontal)
         {
-            y = transform.localPosition.y;
+            y = transform.position.y;
         }
         else
         {
-            y = transform.localPosition.x;
+            y = transform.position.x;
         }
         initialPositionY = y;
         Invoke("FlipFlopPosition", waitTime);
@@ -56,13 +56,13 @@ public class MovingPlateformScript : FreezeMasterScript
         {
             if (!isHorizontal)
             {
-                float targetPosition = Mathf.Lerp(transform.localPosition.y, y, (speed/50) * Time.deltaTime);
-                transform.localPosition = new Vector3(0, targetPosition, 0);
+                float targetPosition = Mathf.Lerp(transform.position.y, y, (speed/50) * Time.deltaTime);
+                transform.position = new Vector3(transform.position.x, targetPosition, 0);
             }
             else
             {
-                float targetPosition = Mathf.Lerp(transform.localPosition.x, y, (speed/50) * Time.deltaTime);
-                transform.localPosition = new Vector3(targetPosition, 0, 0);
+                float targetPosition = Mathf.Lerp(transform.position.x, y, (speed/50) * Time.deltaTime);
+                transform.position = new Vector3(targetPosition, transform.position.y, 0);
             }
         }
     }

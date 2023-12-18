@@ -32,7 +32,7 @@ public class ButtonScript : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<BoxScript>() != null || collision.gameObject.tag == "Player" || collision.gameObject.GetComponent<EnemyScript>() != null)
+        if ((collision.gameObject == PlayerMovement.Instance.gameObject || collision.gameObject.GetComponent<EnemyScript>() != null) && PressurePlate)
         {
             Activate = false;
             SpriteRenderer.sprite = ButtonsSprites[1];
