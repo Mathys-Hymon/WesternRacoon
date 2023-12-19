@@ -99,7 +99,6 @@ public class SteamMachineScript : MonoBehaviour
             float distance = Vector3.Distance(transform.position, collision.gameObject.transform.position);
             RaycastHit2D touchPlayer = Physics2D.Raycast(transform.position, (transform.position - collision.gameObject.transform.position) * (-1), distance, obstacle);
             Debug.DrawRay(transform.position, (transform.position - collision.gameObject.transform.position) * (-1));
-
             if (touchPlayer.collider == null)
             {
                 PlayerMovement.Instance.Die();
