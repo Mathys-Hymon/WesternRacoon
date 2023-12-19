@@ -98,9 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85dd5497f702854c88c01075868550e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData:
-    uniqueID: Coin1
-    icon: {fileID: 0}
+  target: {fileID: 5136560006004117971, guid: fe7a349630ffe3345a200f3e426f6c53, type: 3}
+  speed: 10
 --- !u!58 &186362929583147097
 CircleCollider2D:
   m_ObjectHideFlags: 0
