@@ -171,7 +171,6 @@ public class EnemyScript : FreezeMasterScript
         }
 
     }
-
     private bool IsGrounded(float offsetX)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(offsetX,0,0), Vector2.down, 1.5f, obstacle);
@@ -190,8 +189,6 @@ public class EnemyScript : FreezeMasterScript
         }
 
     }
-
-
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject == PlayerMovement.Instance.gameObject)
