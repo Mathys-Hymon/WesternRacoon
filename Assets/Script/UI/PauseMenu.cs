@@ -1,19 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject optionMenu;
     
+    private PlayerInput playerinput;
+    private Controles controlesScript;
+    
     public Button closeOption;
     public Button optionButton;
 
-    private bool DoNotCall;
+    //private bool DoNotCall;
+
+    private void Awake()
+    {
+        controlesScript = new Controles();
+        playerinput = GetComponent<PlayerInput>();
+    }
+
     void Start()
     {
         pauseMenu.SetActive(false);
@@ -22,11 +34,30 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Joystick1Button7))
+        if (controlesScript.menu.quitMenu.triggered && pauseMenu.activeSelf == true)
+        {
+            ClosePauseMenu();
+        }
+
+        else if (controlesScript.menu.openMenu.triggered && pauseMenu.activeSelf != true && optionMenu.activeSelf != true)
         {
             GetPauseMenu();
-            Debug.Log("Opens");
         }
+        
+        else if (controlesScript.menu.quitOption.triggered && optionMenu.activeSelf == true)
+        {
+            CloseOptionsPanel();
+        }
+    }
+    
+    private void OnEnable()
+    {
+        controlesScript.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controlesScript.Disable();
     }
 
     public void ClosePauseMenu()
@@ -43,9 +74,14 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void Menu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void GetPauseMenu()
     {
-        if (pauseMenu != null  && !DoNotCall)
+        if (pauseMenu != null)
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0;
@@ -57,7 +93,6 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         optionMenu.SetActive(true);
-        DoNotCall = true;
         closeOption.Select();
     }
 
@@ -65,7 +100,6 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         optionMenu.SetActive(false);
-        DoNotCall = false;
         optionButton.Select();
     }
 }

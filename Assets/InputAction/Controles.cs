@@ -262,6 +262,118 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""menu"",
+            ""id"": ""a621199b-a715-4314-82ec-8bb6818ce030"",
+            ""actions"": [
+                {
+                    ""name"": ""quitMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bb89651-8dc7-4e4b-b884-0995325ef8ed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""openMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8749c0e-f776-4231-b182-b8538c276350"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""quitOption"",
+                    ""type"": ""Button"",
+                    ""id"": ""a84a904d-6324-40b0-8c18-62cc4ffa11a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""88e1d17e-f114-4189-a7de-275c9c7acc9e"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""quitMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f87eb5ef-6582-4eaa-971a-7818f32f9c3f"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""quitMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b06ca97e-2928-417c-a2a3-70a38f224251"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""quitMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a428a1a-0ab9-40a7-b3d8-eeb953412e54"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""openMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""650e39fc-09d9-4a74-85ba-a4903310919b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""openMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be121443-6a8d-4926-8842-8144d053f0ab"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""quitOption"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba9f671b-dca2-4f7a-ab14-d7ebad0bf14d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""quitOption"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -301,6 +413,11 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         m_player_jump = m_player.FindAction("jump", throwIfNotFound: true);
         m_player_roll = m_player.FindAction("roll", throwIfNotFound: true);
         m_player_shoot = m_player.FindAction("shoot", throwIfNotFound: true);
+        // menu
+        m_menu = asset.FindActionMap("menu", throwIfNotFound: true);
+        m_menu_quitMenu = m_menu.FindAction("quitMenu", throwIfNotFound: true);
+        m_menu_openMenu = m_menu.FindAction("openMenu", throwIfNotFound: true);
+        m_menu_quitOption = m_menu.FindAction("quitOption", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -436,6 +553,68 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @player => new PlayerActions(this);
+
+    // menu
+    private readonly InputActionMap m_menu;
+    private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
+    private readonly InputAction m_menu_quitMenu;
+    private readonly InputAction m_menu_openMenu;
+    private readonly InputAction m_menu_quitOption;
+    public struct MenuActions
+    {
+        private @Controles m_Wrapper;
+        public MenuActions(@Controles wrapper) { m_Wrapper = wrapper; }
+        public InputAction @quitMenu => m_Wrapper.m_menu_quitMenu;
+        public InputAction @openMenu => m_Wrapper.m_menu_openMenu;
+        public InputAction @quitOption => m_Wrapper.m_menu_quitOption;
+        public InputActionMap Get() { return m_Wrapper.m_menu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void AddCallbacks(IMenuActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MenuActionsCallbackInterfaces.Add(instance);
+            @quitMenu.started += instance.OnQuitMenu;
+            @quitMenu.performed += instance.OnQuitMenu;
+            @quitMenu.canceled += instance.OnQuitMenu;
+            @openMenu.started += instance.OnOpenMenu;
+            @openMenu.performed += instance.OnOpenMenu;
+            @openMenu.canceled += instance.OnOpenMenu;
+            @quitOption.started += instance.OnQuitOption;
+            @quitOption.performed += instance.OnQuitOption;
+            @quitOption.canceled += instance.OnQuitOption;
+        }
+
+        private void UnregisterCallbacks(IMenuActions instance)
+        {
+            @quitMenu.started -= instance.OnQuitMenu;
+            @quitMenu.performed -= instance.OnQuitMenu;
+            @quitMenu.canceled -= instance.OnQuitMenu;
+            @openMenu.started -= instance.OnOpenMenu;
+            @openMenu.performed -= instance.OnOpenMenu;
+            @openMenu.canceled -= instance.OnOpenMenu;
+            @quitOption.started -= instance.OnQuitOption;
+            @quitOption.performed -= instance.OnQuitOption;
+            @quitOption.canceled -= instance.OnQuitOption;
+        }
+
+        public void RemoveCallbacks(IMenuActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMenuActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MenuActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MenuActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MenuActions @menu => new MenuActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -461,5 +640,11 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+    }
+    public interface IMenuActions
+    {
+        void OnQuitMenu(InputAction.CallbackContext context);
+        void OnOpenMenu(InputAction.CallbackContext context);
+        void OnQuitOption(InputAction.CallbackContext context);
     }
 }
