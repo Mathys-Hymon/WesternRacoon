@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 
 public class EnemyScript : FreezeMasterScript
 {
@@ -58,7 +59,7 @@ public class EnemyScript : FreezeMasterScript
                     CancelInvoke("Sprinting");
                     anim.SetBool("isSprinting", false);
                     anim.SetTrigger("Stop");
-                    Invoke("EnableArm", 1.1f);
+                    Invoke("EnableArm", 1.2f);
                     rushPlayer = false;
                     canReach = false;
                 }
@@ -127,21 +128,47 @@ public class EnemyScript : FreezeMasterScript
                     {
                         Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
                         transform.rotation = Quaternion.Euler(rotator);
+                        targetArmPos.transform.position = transform.position + new Vector3(Mathf.Clamp((PlayerMovement.Instance.transform.position.x - transform.position.x)/10,-0.5f,0.5f), (PlayerMovement.Instance.transform.position.y - transform.position.y)/10, 0);
                         lookRight = false;
                     }
                     else if (transform.position.x - PlayerMovement.Instance.transform.position.x > 0 && !rushPlayer && touchPlayer.collider == null)
                     {
                         Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
                         transform.rotation = Quaternion.Euler(rotator);
+                        targetArmPos.transform.position = transform.position + new Vector3(Mathf.Clamp((PlayerMovement.Instance.transform.position.x - transform.position.x) / 10, -0.5f, 0.5f), (PlayerMovement.Instance.transform.position.y - transform.position.y) / 10, 0);
                         lookRight = true;
                     }
 
-                    if (touchPlayer.collider == null && canShoot)
+                    if (touchPlayer.collider == null && canShoot && !rushPlayer && !canReach)
                     {
                         canShoot = false;
                         Shoot();
                     }
+                    else if(touchPlayer.collider != null)
+                    {
+                        if (lookRight)
+                        {
+                            targetArmPos.transform.localPosition = new Vector3(0.06f, -0.86f, 0);
+                        }
+                        else
+                        {
+                            targetArmPos.transform.localPosition = new Vector3(0.06f, -0.86f, 0);
+                        }
+                    }
+
                 }
+            }
+            else
+            {
+                if(lookRight)
+                {
+                    targetArmPos.transform.localPosition = new Vector3(0.06f, -0.86f, 0);
+                }
+                else
+                {
+                    targetArmPos.transform.localPosition = new Vector3(0.06f, -0.86f, 0);
+                }
+                
             }
         }
         else if (freezed)
@@ -154,7 +181,7 @@ public class EnemyScript : FreezeMasterScript
     {
         directiontoTarget = PlayerMovement.Instance.transform.position - transform.position;
         float angle = -90+Mathf.Atan2(directiontoTarget.y, directiontoTarget.x) * Mathf.Rad2Deg;
-        Instantiate(bulletRef, transform.position, Quaternion.Euler(0,0,angle));
+        Instantiate(bulletRef, targetArmPos.transform.position, Quaternion.Euler(0,0,angle));
         
         Invoke("ResetShoot",delay);
         
