@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,24 +7,25 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement Instance;
     public bool isFacingRight = true;
 
-    [Header("Movement")]
+    [Header("Movement\n")]
     [SerializeField] private float _speed = 15f;
     [SerializeField] private ParticleSystem walkParticle;
     [SerializeField] private float groundFriction;
     [SerializeField] private float airFriction;
+    [SerializeField] private float dashForce = 3;
 
-    [Header("Jump")]
+    [Header("Jump\n")]
     [SerializeField] private float jumpForce = 6;
     [SerializeField] private float airControl = 0.8f;
     [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private LayerMask floorLayer;
 
-    [Header("Camera Stuff")]
+    [Header("Camera Stuff\n")]
     [SerializeField] private float deadZoneXOffset;
     [SerializeField] private float deadZoneMinusXOffset;
     
 
-    [Header("CheckPoint")]
+    [Header("CheckPoint\n")]
     [SerializeField] private GameObject lastCheckpoint;
 
     private float horizontalMovement;
@@ -44,12 +42,14 @@ public class PlayerMovement : MonoBehaviour
     private int jumpNumber;
 
     private Rigidbody2D rb;
-    private CapsuleCollider2D cc2d;
+    private CircleCollider2D cc2d;
     private Controles controlesScript;
     private GameObject _cameraFollow;
     private PlayerInput playerinput;
     private CameraFollowPlayer _cameraFollowObject;
     private List<GameObject> freezedObject = new List<GameObject>();
+    private Animator animator;
+    private CheckPointScript checkpoint;
 
     public void SetFreezedObject(GameObject newObject)
     {
@@ -76,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
         controlesScript = new Controles();
         _cameraFollow = GameObject.Find("CameraFollowPlayer");
         playerinput = GetComponent<PlayerInput>();
+        animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -93,12 +94,21 @@ public class PlayerMovement : MonoBehaviour
         isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
     }
 
+    public void SetNewCheckPoint(CheckPointScript newCheckpoint)
+    {
+        if(checkpoint != null)
+        {
+            Destroy(checkpoint);
+        }
+        checkpoint = newCheckpoint;
+    }
+
     private void Start()
     {
         Instance = this;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
-        cc2d = GetComponent<CapsuleCollider2D>();
+        cc2d = GetComponent<CircleCollider2D>();
         _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowPlayer>();
         _fallSpeedYThresholdChange = CameraManager.instance._fallspeedYThresholdChange;
     }
@@ -106,23 +116,26 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //print(freezedObject.Length);
+        Animation();
         IsGrounded();
         if(grounded == true)
         {
             lastTimeGrounded = Time.time;
 
-            if(controlesScript.player.roll.triggered && roll == false)
+            if(controlesScript.player.roll.triggered && !roll)
             {
                 roll = true;
-                Invoke("StopRoll", 0.2f);
+                Invoke("StopRoll", 0.3f);
             }
-            else if(roll && Mathf.Abs(rb.velocity.x) > 0.1f)
+            else if(roll)
             {
-                cc2d.size = new Vector2(1, Mathf.Lerp(0.6f, 1.2f, 1f * Time.deltaTime));
+                cc2d.radius = Mathf.Lerp(0.25f, 0.55f, 1f * Time.deltaTime);
+                cc2d.offset = new Vector2(0,Mathf.Lerp(-0.37f, -0.1f, 1f * Time.deltaTime));
             }
-            else if(!roll && cc2d.size.y < 2.4f)
+            else if(!roll && cc2d.radius < 0.5f)
             {
-                cc2d.size = new Vector2(1, Mathf.Lerp(1.2f, 0.6f, 1f * Time.deltaTime));
+                cc2d.radius = Mathf.Lerp(0.55f, 0.25f, 1f * Time.deltaTime);
+                cc2d.offset = new Vector2(0,Mathf.Lerp(-0.1f, -0.37f, 1f * Time.deltaTime));
             }
         }
         if (controlesScript.player.jump.triggered)
@@ -135,7 +148,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 jumpNumber = 1;
             }
+            
             jumpNumber += 1;
+            
             if (roll)
             {
                 rb.velocity = new Vector2(rb.velocity.x * 2f, jumpForce * 1.1f);
@@ -145,6 +160,10 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
             walkParticle.Play();
+        }
+        if ((Input.GetKeyUp(KeyCode.Joystick1Button0) || Input.GetKeyUp(KeyCode.Space)) && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
         horizontalMovement = controlesScript.player.move.ReadValue<float>();
@@ -161,19 +180,16 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontalVelocity -= (airFriction / 10f) * horizontalVelocity;
         }
-        if ((Input.GetKeyUp(KeyCode.Joystick1Button0) || Input.GetKeyUp(KeyCode.Space)) && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
 
-        if (rb.velocity.y < 0.2f && grounded == true)
+        if (rb.velocity.y < 0.2f && !grounded)
         {
-            if(rb.gravityScale <= 6f)
-            {
-                rb.gravityScale += 20 * Time.deltaTime;
-            }
+            rb.gravityScale += 20 * Time.deltaTime;
         }
-        else rb.gravityScale = 3f;
+        else
+        {
+            rb.gravityScale = 3f;
+        }
+        
 
         //if we are falling past a certain speed threshold
         if(rb.velocity.y < _fallSpeedYThresholdChange && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
@@ -199,7 +215,21 @@ public class PlayerMovement : MonoBehaviour
     {
         if(roll)
         {
-            rb.velocity = new Vector3(horizontalVelocity * _speed*2, rb.velocity.y, 0);
+            if(Mathf.Abs(horizontalVelocity) >= 0.1f)
+            {
+                rb.velocity = new Vector3(Mathf.Clamp(horizontalVelocity * _speed * dashForce, -30, 30), rb.velocity.y, 0);
+            }
+            else
+            {
+                if (isFacingRight)
+                {
+                    rb.velocity = new Vector2(10 * dashForce, rb.velocity.y);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(-10 * dashForce, rb.velocity.y);
+                }
+            }
         }
         else
         {
@@ -211,8 +241,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector3(horizontalVelocity * _speed * airControl, rb.velocity.y, 0);
             }
-        }
-            TurnCheck();
+        } 
+        TurnCheck();
     }
 
     private void IsGrounded()
@@ -229,9 +259,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-
-    //PAS TOUCHE
+    public float GetFloorY()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, floorLayer);
+        if (hit.collider != null)
+        {
+            return hit.collider.transform.position.y;
+        }
+        else
+        {
+            return 1000000f;
+        }
+    }
     private void TurnCheck()
     {
         if (isGamepad)
@@ -250,7 +289,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     Turn();
                 }
-                else if (horizontalMovement < 0 && !isFacingRight)
+                else if (horizontalMovement < 0 && isFacingRight)
                 {
                     Turn();
                 }
@@ -271,23 +310,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void Turn()
     {
+        CancelInvoke("TurnCinemachine");
         if (isFacingRight)
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = false;
-            _cameraFollowObject.CallTurn();
+            Invoke("TurnCinemachine", 0.2f);
         }
         else
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = true;
-
-            _cameraFollowObject.CallTurn();
+            Invoke("TurnCinemachine", 0.2f);
         }
     }
-    //C'EST BON
+    
+    private void TurnCinemachine()
+    {
+        _cameraFollowObject.CallTurn();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -299,8 +342,76 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
+        transform.position = checkpoint.RespawnPosition();
+    }
+    
 
-        print("Player DEAD");
+
+
+    private void Animation()
+    {
+        //Jumping animations
+        
+        if (controlesScript.player.jump.triggered)
+        {
+            animator.SetBool("isJumping", true);
+        }
+        if (controlesScript.player.jump.triggered && !grounded)
+        {
+            animator.SetBool("isJumping", false);
+            animator.SetTrigger("DoubleJumping");
+        }
+
+        //Moving animations
+        if (horizontalMovement > 0 && isFacingRight)
+        {
+            animator.SetBool("RunForward", true);
+            animator.SetBool("RunBackward", false);
+        }
+        else if (horizontalMovement < 0 && !isFacingRight)
+        {
+            animator.SetBool("RunForward", true);
+            animator.SetBool("RunBackward", false);
+        }
+        else
+        {
+            animator.SetBool("RunForward", false);
+            animator.SetBool("RunBackward", true);
+        }
+        if (horizontalMovement == 0|| !grounded)
+        {
+            animator.SetBool("RunForward", false);
+            animator.SetBool("RunBackward", false);
+
+        }
+
+        if (grounded)
+        {
+            animator.SetBool("Falling", false);
+            animator.ResetTrigger("DoubleJumping");
+        }
+
+        //Falling animation
+        if (rb.velocity.y < 0.2f && !grounded)
+        {
+            animator.SetBool("Falling", true);
+            animator.SetBool("isJumping", false);
+        }
+        else
+        {
+            animator.SetBool("Falling", false);
+        }
+        
+        //Rolling animation
+        if(controlesScript.player.roll.triggered && !roll)
+        {
+            animator.SetBool("isRolling", true);
+        }
+        else if(!roll)
+        {
+            animator.SetBool("isRolling", false);
+        }
+
     }
 
 

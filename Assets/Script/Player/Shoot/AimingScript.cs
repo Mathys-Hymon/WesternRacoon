@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class AimingScript : MonoBehaviour
 {
-    [Header("REFERENCES")]
+    [Header("REFERENCES\n")]
     [SerializeField] private GameObject bulletRef;
     [SerializeField] private GameObject cartridgeRef;
     private bool isGamepad;
@@ -19,15 +19,10 @@ public class AimingScript : MonoBehaviour
         ArmTarget = GameObject.Find("ArmTargetPosition");
         crosshairRef = GameObject.Find("Crosshair");
     }
-
-    private void Start()
-    {
-    }
     private void OnEnable()
     {
         controlesScript.Enable();
     }
-
     private void OnDisable()
     {
         controlesScript.Disable();
@@ -52,12 +47,23 @@ public class AimingScript : MonoBehaviour
 
                 crosshairRef.transform.position = new Vector3(transform.position.x + (4 * mouseMultiplyer.x), transform.position.y + (4 * mouseMultiplyer.y), 0);
                 ArmTarget.transform.position = new Vector3(transform.position.x+mouseMultiplyer.x, transform.position.y + mouseMultiplyer.y, 0);
+
             if (controlesScript.player.shoot.triggered)
             {
-                Vector2 DirectiontoTarget = crosshairRef.transform.position - transform.position;
-                float angle = -90+Mathf.Atan2(DirectiontoTarget.y, DirectiontoTarget.x) * Mathf.Rad2Deg;
-                Instantiate(bulletRef, transform.position, Quaternion.Euler(0,0,angle));
+                if(crosshairRef.GetComponent<SpriteRenderer>().enabled)
+                {
+                    Vector2 DirectiontoTarget = crosshairRef.transform.position - transform.position;
+                    float angle = -90 + Mathf.Atan2(DirectiontoTarget.y, DirectiontoTarget.x) * Mathf.Rad2Deg;
+                    Instantiate(bulletRef, transform.position, Quaternion.Euler(0, 0, angle));
 
+                }
+                else
+                {
+                    Vector2 DirectiontoTarget = PlayerMovement.Instance.transform.right;
+                    float angle = -Mathf.Atan2(DirectiontoTarget.x, DirectiontoTarget.y)*Mathf.Rad2Deg;
+
+                    Instantiate(bulletRef, transform.position, Quaternion.Euler(0, 0, angle));
+                }
                 //GameObject emptyMun = Instantiate(cartridgeRef, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 350)));
                 //emptyMun.GetComponent<Rigidbody2D>().velocity = new Vector3(-3 * mouseMultiplyer.x, 4, 0);
             }
