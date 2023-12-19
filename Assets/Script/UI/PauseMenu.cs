@@ -64,8 +64,10 @@ public class PauseMenu : MonoBehaviour
     {
         if (pauseMenu != null)
         {
+            PlayerMovement.Instance.gameObject.SetActive(true);
             pauseMenu.SetActive(false);
             Time.timeScale = 1;
+            
         }
     }
 
@@ -86,6 +88,7 @@ public class PauseMenu : MonoBehaviour
             pauseMenu.SetActive(true);
             Time.timeScale = 0;
             optionButton.Select();
+            PlayerMovement.Instance.gameObject.SetActive(false);
         }
     }
 
