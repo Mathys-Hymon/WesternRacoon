@@ -46,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
     private Controles controlesScript;
     private GameObject _cameraFollow;
     private PlayerInput playerinput;
-    private CameraFollowPlayer _cameraFollowObject;
     private List<GameObject> freezedObject = new List<GameObject>();
     private Animator animator;
     private CheckPointScript checkpoint;
@@ -109,8 +108,6 @@ public class PlayerMovement : MonoBehaviour
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
         cc2d = GetComponent<CircleCollider2D>();
-        _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowPlayer>();
-        _fallSpeedYThresholdChange = CameraManager.instance._fallspeedYThresholdChange;
     }
 
     void Update()
@@ -189,22 +186,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.gravityScale = 3f;
         }
-        
-
-        //if we are falling past a certain speed threshold
-        if(rb.velocity.y < _fallSpeedYThresholdChange && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
-        {
-            CameraManager.instance.LerpYDamping(true);
-        }
-
-        //if we are standing still or moving up
-        if(rb.velocity.y >= 0f && !CameraManager.instance.isLerpingYDamping && CameraManager.instance.LerpedFromPlayerFalling)
-        {
-            //reset so it can be called again
-            CameraManager.instance.LerpedFromPlayerFalling = false;
-            CameraManager.instance.LerpYDamping(false);
-        }
-
     }
     private void StopRoll()
     {
@@ -310,28 +291,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void Turn()
     {
-        CancelInvoke("TurnCinemachine");
         if (isFacingRight)
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = false;
-            Invoke("TurnCinemachine", 0.2f);
         }
         else
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = true;
-            Invoke("TurnCinemachine", 0.2f);
         }
     }
-    
-    private void TurnCinemachine()
-    {
-        _cameraFollowObject.CallTurn();
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.layer == 8)
