@@ -326,6 +326,11 @@ public class PlayerMovement : MonoBehaviour
             Invoke("TurnCinemachine", 0.2f);
         }
     }
+
+    public bool getGrounded()
+    {
+        return grounded;
+    }
     
     private void TurnCinemachine()
     {

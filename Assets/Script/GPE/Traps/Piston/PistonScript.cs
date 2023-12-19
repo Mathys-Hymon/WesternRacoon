@@ -86,7 +86,8 @@ public class PistonScript : FreezeMasterScript
     {
         if (!freezed)
         {
-            if (collision.gameObject.CompareTag("Player"))
+
+            if (collision.gameObject.CompareTag("Player") && PlayerMovement.Instance.getGrounded())
             {
                 collision.gameObject.GetComponent<PlayerMovement>().Die();
             }
