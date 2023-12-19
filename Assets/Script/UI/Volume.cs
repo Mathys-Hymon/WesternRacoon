@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Volume : MonoBehaviour
 {
-    [SerializeField] private float mainVolume = 0.5f;
+    [SerializeField] private float mainVolume;
     [SerializeField] private Slider mainVolumeSlider;
     [SerializeField] private AudioSource mainMusic;
 

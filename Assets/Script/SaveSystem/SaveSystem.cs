@@ -22,7 +22,6 @@ public class SaveSystem : MonoBehaviour
             string json = File.ReadAllText(Application.persistentDataPath + "/data.save");
             saveInfo = JsonUtility.FromJson<AllInfo>(json);
             
-            
             PlayerMovement.Instance.transform.position = new Vector3(saveInfo.x, saveInfo.y, saveInfo.z);
             GameManager.instance.money = saveInfo.money;
             
@@ -53,21 +52,5 @@ public class SaveSystem : MonoBehaviour
         }
         File.WriteAllText(Application.persistentDataPath + "/data.save", json);
 
-    }
-
-    public void DeleteFile()
-    {
-        string json = Application.persistentDataPath + "/data.save";
-    
-        // check if file exists
-        if (!File.Exists(json))
-        {
-            SceneManager.LoadScene("ClaireDebug");
-        }
-        else
-        {
-            File.Delete(json);
-            SceneManager.LoadScene("ClaireDebug");
-        }
     }
 }

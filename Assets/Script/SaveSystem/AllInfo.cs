@@ -12,3 +12,5 @@ public class AllInfo
     public bool chest;
     //porte
 }
+
+

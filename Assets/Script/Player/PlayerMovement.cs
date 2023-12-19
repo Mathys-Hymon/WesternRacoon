@@ -111,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
+        //GetComponent<Volume>().OnVolumeSlide();
         
         Instance = this;
         walkParticle.Stop();
