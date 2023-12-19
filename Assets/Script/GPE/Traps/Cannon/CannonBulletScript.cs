@@ -33,16 +33,6 @@ public class CannonBulletScript : FreezeMasterScript
                 Destroy(gameObject);
             }
         }
-        else
-        {
-            if (freezed)
-            {
-                if (collision.gameObject.GetComponent<CannonBulletScript>() != null)
-                {
-                    Destroy(collision.gameObject);
-                    Destroy(gameObject);
-                }
-            }
-        }
+       
     }
 }
