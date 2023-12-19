@@ -44,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private CircleCollider2D cc2d;
     private Controles controlesScript;
-    private GameObject _cameraFollow;
     private PlayerInput playerinput;
     private List<GameObject> freezedObject = new List<GameObject>();
     private Animator animator;
@@ -73,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         controlesScript = new Controles();
-        _cameraFollow = GameObject.Find("CameraFollowPlayer");
         playerinput = GetComponent<PlayerInput>();
         animator = GetComponent<Animator>();
     }
@@ -112,7 +110,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //print(freezedObject.Length);
         Animation();
         IsGrounded();
         if(grounded == true)
