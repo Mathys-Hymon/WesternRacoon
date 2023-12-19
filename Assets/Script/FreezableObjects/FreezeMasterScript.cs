@@ -6,6 +6,7 @@ public class FreezeMasterScript : MonoBehaviour
 {
     protected bool freezed;
     protected float freezeTime = 3f;
+    
     public void FreezeObject(float freezetime)
     {
         CancelInvoke("ResetTimer");
@@ -14,7 +15,7 @@ public class FreezeMasterScript : MonoBehaviour
         Invoke("ResetTimer", freezeTime);
     }
    
-    private void ResetTimer()
+    public void ResetTimer()
     {
         freezed = false;
     }

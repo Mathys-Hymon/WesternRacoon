@@ -110,6 +110,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
+        
         Instance = this;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
@@ -208,6 +210,15 @@ public class PlayerMovement : MonoBehaviour
             //reset so it can be called again
             CameraManager.instance.LerpedFromPlayerFalling = false;
             CameraManager.instance.LerpYDamping(false);
+        }
+        
+        if (controlesScript.player.unfreeze.triggered)
+        {
+            for (int i = 0; i < freezedObject.Count; i++)
+            {
+                freezedObject[i].GetComponent<FreezeMasterScript>().ResetTimer();
+            }
+            freezedObject.Clear();
         }
 
     }

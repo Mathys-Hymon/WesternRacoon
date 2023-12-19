@@ -8,9 +8,14 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public void ButtonStart()
+    public void Continue()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("ClaireDebug");
+    }
+
+    public void NewGame()
+    {
+        SaveSystem.instance.DeleteFile();
     }
 
     public void Quit()
