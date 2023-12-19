@@ -83,9 +83,9 @@ public class EnemyScript : FreezeMasterScript
                     if(canReach)
                     {
                     float distance = Vector3.Distance(transform.position, PlayerMovement.Instance.transform.position);
-                    RaycastHit2D WallDetection = Physics2D.Raycast(transform.position, (transform.position - PlayerMovement.Instance.transform.position) * (-1), distance, obstacle);
+                    RaycastHit2D WallDetection = Physics2D.Raycast(transform.position, (transform.position + transform.forward), distance, obstacle);
                     Debug.DrawRay(transform.position, (transform.position - PlayerMovement.Instance.transform.position) * (-1));
-                        if(WallDetection.collider == null)
+                        if (WallDetection.collider == null)
                         {
                             rushPlayer = canReach;
                         }
@@ -150,7 +150,7 @@ public class EnemyScript : FreezeMasterScript
     
     private bool CheckWall()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 1f, obstacle);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 1.5f, obstacle);
         if(hit.collider == null)
         {
             return true;
@@ -205,6 +205,14 @@ public class EnemyScript : FreezeMasterScript
             anim.SetBool("Anticipate", false);
             anim.SetBool("isSprinting", true);
             transform.position += transform.right * Time.deltaTime * speed;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject == PlayerMovement.Instance.gameObject)
+        {
+            PlayerMovement.Instance.Die();
         }
     }
 }
