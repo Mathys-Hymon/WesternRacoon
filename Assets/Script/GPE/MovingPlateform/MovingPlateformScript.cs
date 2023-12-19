@@ -89,11 +89,15 @@ public class MovingPlateformScript : FreezeMasterScript
         {
             if (!isHorizontal)
             {
-                if ((transform.position.y - y) < 0)
+                if(transform.position.y == y)
+                {
+                    
+                }
+                else if ((transform.position.y - y) < -0.3f)
                 {
                     transform.position += new Vector3(0, (speed / 5) * Time.deltaTime, 0);
                 }
-                else if ((transform.position.y - y) > 0)
+                else if ((transform.position.y - y) > 0.3f)
                 {
                     transform.position -= new Vector3(0, (speed / 5) * Time.deltaTime, 0);
                 }
@@ -104,11 +108,11 @@ public class MovingPlateformScript : FreezeMasterScript
             }
             else
             {
-                if ((transform.position.x - y) < 0)
+                if ((transform.position.x - y) < -0.3f)
                 {
                     transform.position += new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }
-                else if ((transform.position.x - y) > 0)
+                else if ((transform.position.x - y) > 0.3f)
                 {
                     transform.position -= new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }
@@ -144,11 +148,11 @@ public class MovingPlateformScript : FreezeMasterScript
 
             if (!isHorizontal)
             {
-                if ((transform.position.y - y) < 0)
+                if ((transform.position.y - y) < -0.3f)
                 {
                     transform.position += new Vector3(0, (speed / 5) * Time.deltaTime, 0);
                 }
-                else if ((transform.position.y - y) > 0)
+                else if ((transform.position.y - y) > 0.3f)
                 {
                     transform.position -= new Vector3(0, (speed / 5) * Time.deltaTime, 0);
                 }
@@ -159,11 +163,11 @@ public class MovingPlateformScript : FreezeMasterScript
             }
             else
             {
-                if ((transform.position.x - y) < 0)
+                if ((transform.position.x - y) < -0.3f)
                 {
                     transform.position += new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }
-                else if ((transform.position.x - y) > 0)
+                else if ((transform.position.x - y) > 0.3f)
                 {
                     transform.position -= new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }

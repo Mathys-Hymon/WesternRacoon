@@ -347,6 +347,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
+        freezedObject.Clear();
         transform.position = checkpoint.RespawnPosition();
     }
     
