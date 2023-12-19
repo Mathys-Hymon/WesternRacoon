@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyScript : FreezeMasterScript
 {
     [SerializeField] private GameObject bulletRef;
+    [SerializeField] private GameObject targetArmPos;
+    [SerializeField] private GameObject armRef;
     [SerializeField] private LayerMask obstacle;
     [SerializeField] private float delay;
     [SerializeField] private float speed;
@@ -26,6 +28,11 @@ public class EnemyScript : FreezeMasterScript
         anim = GetComponent<Animator>();
     }
 
+    private void EnableArm()
+    {
+        armRef.SetActive(true);
+    }
+
     void Update()
     {
         if (!freezed)
@@ -35,6 +42,7 @@ public class EnemyScript : FreezeMasterScript
             {
                 if (((!lookRight && IsGrounded(1f)) || (lookRight && IsGrounded(-1f))) && CheckWall() )
                 {
+                    armRef.SetActive(false);
                     anim.SetBool("Anticipate", true);
                     Invoke("Sprinting", 0.4f);
                 }
@@ -43,6 +51,7 @@ public class EnemyScript : FreezeMasterScript
                     CancelInvoke("Sprinting");
                     anim.SetBool("isSprinting", false);
                     anim.SetTrigger("Stop");
+                    Invoke("EnableArm", 1.05f);
                     rushPlayer = false;
                     canReach = false;
                 }
@@ -203,6 +212,7 @@ public class EnemyScript : FreezeMasterScript
     {
         if (!freezed)
         {
+            armRef.SetActive(false);
             anim.SetBool("Anticipate", false);
             anim.SetBool("isSprinting", true);
             transform.position += transform.right * Time.deltaTime * speed;
