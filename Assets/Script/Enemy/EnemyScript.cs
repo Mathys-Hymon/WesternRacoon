@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyScript : FreezeMasterScript
@@ -9,8 +6,10 @@ public class EnemyScript : FreezeMasterScript
     [SerializeField] private GameObject bulletRef;
     [SerializeField] private LayerMask obstacle;
     [SerializeField] private float delay;
+    [SerializeField] private float speed;
 
     private Vector2 directiontoTarget;
+    private Animator anim;
 
     private bool canShoot = true;
     private bool isInRange;
@@ -23,24 +22,26 @@ public class EnemyScript : FreezeMasterScript
     private void Start()
     {
         IsGrounded(0);
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
         if (!freezed)
         {
+            anim.speed = 1f;
             if (rushPlayer)
             {
-                if (!lookRight && IsGrounded(0.5f) && CheckWall())
+                if (((!lookRight && IsGrounded(1f)) || (lookRight && IsGrounded(-1f))) && CheckWall() )
                 {
-                    transform.position += transform.right * Time.deltaTime * 5;
-                }
-                else if (lookRight && IsGrounded(-0.5f) && CheckWall())
-                {
-                    transform.position += transform.right * Time.deltaTime * 5;
+                    anim.SetBool("Anticipate", true);
+                    Invoke("Sprinting", 0.4f);
                 }
                 else
                 {
+                    CancelInvoke("Sprinting");
+                    anim.SetBool("isSprinting", false);
+                    anim.SetTrigger("Stop");
                     rushPlayer = false;
                     canReach = false;
                 }
@@ -126,6 +127,10 @@ public class EnemyScript : FreezeMasterScript
                 }
             }
         }
+        else if (freezed)
+        {
+            anim.speed = 0f;
+        }
     }
 
     public void Shoot()
@@ -160,6 +165,7 @@ public class EnemyScript : FreezeMasterScript
     private bool IsGrounded(float offsetX)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(offsetX,0,0), Vector2.down, 1.5f, obstacle);
+        Debug.DrawRay(transform.position + new Vector3(offsetX,0,0), Vector2.down);
         if(offsetX == 0)
         {
             floorY = hit.collider.transform.position.y;
@@ -189,6 +195,16 @@ public class EnemyScript : FreezeMasterScript
         if (PlayerMovement.Instance.gameObject != null && other.gameObject == PlayerMovement.Instance.gameObject)
         {
             isInRange = false;
+        }
+    }
+
+    private void Sprinting()
+    {
+        if (!freezed)
+        {
+            anim.SetBool("Anticipate", false);
+            anim.SetBool("isSprinting", true);
+            transform.position += transform.right * Time.deltaTime * speed;
         }
     }
 }
