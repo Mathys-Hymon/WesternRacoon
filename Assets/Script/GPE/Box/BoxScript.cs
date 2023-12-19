@@ -25,6 +25,4 @@ public class BoxScript : FreezeMasterScript
             rb2d.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
         }
     }
-
-
 }

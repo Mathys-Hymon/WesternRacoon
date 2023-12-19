@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4711080275857004602}
   m_Layer: 0
   m_Name: MovingPlateform
-  m_TagString: Untagged
+  m_TagString: Freezeable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d762d9869f85d9345b63bfc09fbe72fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttons: []
+  cogRef: {fileID: 0}
   speed: 20
   waitTime: 4
   isHorizontal: 1
@@ -274,7 +276,7 @@ GameObject:
   - component: {fileID: 8704623241808749346}
   - component: {fileID: 1255599552833538925}
   - component: {fileID: 8226982574156937260}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
