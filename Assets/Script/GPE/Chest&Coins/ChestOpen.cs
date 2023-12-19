@@ -7,22 +7,22 @@ public class ChestOpen : CollectableItem
     public GameObject coinPrefab;
 
     private bool isOpened = false;
-    private int collisionCount = 0;
+    //private int collisionCount = 0;
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player") && !isOpened)
         {
-            Debug.Log("colliding");
-            Animator animator = GetComponent<Animator>();
-            if (animator != null)
-            {
-                animator.SetTrigger("ChestOpens");
-            }
+            // Debug.Log("colliding");
+            // Animator animator = GetComponent<Animator>();
+            // if (animator != null)
+            // {
+            //     animator.SetTrigger("ChestOpens");
+            // }
             SpawnCoin();
             isOpened = true;
-            collisionCount++;
+            //collisionCount++;
             //AfterSpawnCoin();
         }
     }
