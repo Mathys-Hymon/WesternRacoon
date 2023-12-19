@@ -91,11 +91,11 @@ public class MovingPlateformScript : FreezeMasterScript
             {
                 if ((transform.position.y - y) < 0)
                 {
-                    transform.position += new Vector3(0, speed / 50 * Time.deltaTime, 0);
+                    transform.position += new Vector3(0, (speed / 5) * Time.deltaTime, 0);
                 }
                 else if ((transform.position.y - y) > 0)
                 {
-                    transform.position -= new Vector3(0, speed / 50 * Time.deltaTime, 0);
+                    transform.position -= new Vector3(0, (speed / 5) * Time.deltaTime, 0);
                 }
                 if (cogRef != null)
                 {
@@ -107,11 +107,11 @@ public class MovingPlateformScript : FreezeMasterScript
             {
                 if ((transform.position.x - y) < 0)
                 {
-                    transform.position += new Vector3(speed / 50 * Time.deltaTime, 0, 0);
+                    transform.position += new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }
                 else if ((transform.position.x - y) > 0)
                 {
-                    transform.position -= new Vector3(speed / 50 * Time.deltaTime, 0, 0);
+                    transform.position -= new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }
                 if (cogRef != null)
                 {
@@ -147,11 +147,11 @@ public class MovingPlateformScript : FreezeMasterScript
             {
                 if ((transform.position.y - y) < 0)
                 {
-                    transform.position += new Vector3(0, speed / 30 * Time.deltaTime, 0);
+                    transform.position += new Vector3(0, (speed / 5) * Time.deltaTime, 0);
                 }
                 else if ((transform.position.y - y) > 0)
                 {
-                    transform.position -= new Vector3(0, speed / 30 * Time.deltaTime, 0);
+                    transform.position -= new Vector3(0, (speed / 5) * Time.deltaTime, 0);
                 }
                 if (cogRef != null)
                 {
@@ -163,11 +163,11 @@ public class MovingPlateformScript : FreezeMasterScript
             {
                 if ((transform.position.x - y) < 0)
                 {
-                    transform.position += new Vector3(speed / 30 * Time.deltaTime, 0, 0);
+                    transform.position += new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }
                 else if ((transform.position.x - y) > 0)
                 {
-                    transform.position -= new Vector3(speed / 30 * Time.deltaTime, 0, 0);
+                    transform.position -= new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }
                 if (cogRef != null)
                 {
