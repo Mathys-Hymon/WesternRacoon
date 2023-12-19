@@ -326,6 +326,11 @@ public class PlayerMovement : MonoBehaviour
             Invoke("TurnCinemachine", 0.2f);
         }
     }
+
+    public bool getGrounded()
+    {
+        return grounded;
+    }
     
     private void TurnCinemachine()
     {
@@ -342,6 +347,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
+        freezedObject.Clear();
         transform.position = checkpoint.RespawnPosition();
     }
     
