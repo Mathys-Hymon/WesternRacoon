@@ -26,7 +26,7 @@ public class InventoryUI : MonoBehaviour
 
     public IEnumerator DelayedItemAddition()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         UpdateUI();
     }
 
