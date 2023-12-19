@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 2765580911109109869}
   - component: {fileID: 1585821154763092810}
   - component: {fileID: 6559596525053377846}
-  - component: {fileID: 3310377507977017666}
+  - component: {fileID: -8061527143910748436}
   m_Layer: 0
   m_Name: MovingSolid
   m_TagString: Freezeable
@@ -228,7 +228,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 0.2}
   m_EdgeRadius: 0
---- !u!61 &3310377507977017666
+--- !u!61 &-8061527143910748436
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -271,5 +271,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
