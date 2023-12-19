@@ -150,7 +150,7 @@ public class MovingPlateformScript : FreezeMasterScript
             {
                 if ((transform.position.y - y) < -0.1f)
                 {
-                    transform.position += new Vector3(0, (transform.position.y - y) * Time.deltaTime, 0);
+                    transform.position += new Vector3(0, (speed / 5) * Time.deltaTime, 0);
                 }
                 else if ((transform.position.y - y) > 0.1f)
                 {
