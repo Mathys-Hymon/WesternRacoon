@@ -6,7 +6,7 @@ public class EnemyScript : FreezeMasterScript
 {
     [SerializeField] private GameObject bulletRef;
     [SerializeField] private GameObject targetArmPos;
-    [SerializeField] private GameObject armRef;
+    [SerializeField] private GameObject[] ArmSR;
     [SerializeField] private LayerMask obstacle;
     [SerializeField] private float delay;
     [SerializeField] private float speed;
@@ -30,7 +30,10 @@ public class EnemyScript : FreezeMasterScript
 
     private void EnableArm()
     {
-        armRef.SetActive(true);
+        for(int i = 0; i < ArmSR.Length; i++)
+        {
+            ArmSR[i].SetActive(true);
+        }
     }
 
     void Update()
@@ -40,9 +43,13 @@ public class EnemyScript : FreezeMasterScript
             anim.speed = 1f;
             if (rushPlayer)
             {
-                if (((!lookRight && IsGrounded(1f)) || (lookRight && IsGrounded(-1f))) && CheckWall() )
+                if (((!lookRight && IsGrounded(1f)) || (lookRight && IsGrounded(-1f))) && CheckWall())
                 {
-                    armRef.SetActive(false);
+                    for (int i = 0; i < ArmSR.Length; i++)
+                    {
+                        ArmSR[i].SetActive(false);
+                    }
+
                     anim.SetBool("Anticipate", true);
                     Invoke("Sprinting", 0.4f);
                 }
@@ -51,7 +58,7 @@ public class EnemyScript : FreezeMasterScript
                     CancelInvoke("Sprinting");
                     anim.SetBool("isSprinting", false);
                     anim.SetTrigger("Stop");
-                    Invoke("EnableArm", 1.05f);
+                    Invoke("EnableArm", 1.1f);
                     rushPlayer = false;
                     canReach = false;
                 }
@@ -209,7 +216,10 @@ public class EnemyScript : FreezeMasterScript
     {
         if (!freezed)
         {
-            armRef.SetActive(false);
+            for (int i = 0; i < ArmSR.Length; i++)
+            {
+                ArmSR[i].SetActive(false);
+            }
             anim.SetBool("Anticipate", false);
             anim.SetBool("isSprinting", true);
             transform.position += transform.right * Time.deltaTime * speed;
