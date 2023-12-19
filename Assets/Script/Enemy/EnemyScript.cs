@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -205,6 +206,14 @@ public class EnemyScript : FreezeMasterScript
             anim.SetBool("Anticipate", false);
             anim.SetBool("isSprinting", true);
             transform.position += transform.right * Time.deltaTime * speed;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!freezed)
+        {
+            PlayerMovement.Instance.Die();
         }
     }
 }
