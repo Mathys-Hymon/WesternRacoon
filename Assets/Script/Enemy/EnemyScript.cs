@@ -209,7 +209,7 @@ public class EnemyScript : FreezeMasterScript
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!freezed)
         {

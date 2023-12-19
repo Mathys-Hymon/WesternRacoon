@@ -34,16 +34,4 @@ public class ChestOpen : CollectableItem
             Instantiate(coinPrefab, transform.position + Vector3.up, Quaternion.identity);
         }
     }
-
-    //private void AfterSpawnCoin()
-    //{
-    //    if (collisionCount >= 1)
-    //    {
-    //        Collider2D chestCollider = GetComponent<Collider2D>();
-    //        if (chestCollider != null)
-    //        {
-    //            chestCollider.enabled = false;
-    //        }
-    //    }
-    //}
 }
