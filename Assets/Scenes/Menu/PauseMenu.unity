@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1289593
 RectTransform:
   m_ObjectHideFlags: 0
@@ -259,7 +259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f9e98bf90eb1f44b2a02a019210794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolutionDropdown: {fileID: 1290062108}
+  resolutionDropdown: {fileID: 0}
+  currentRefreshRate: 0
+  currentResolutionIndex: 0
 --- !u!1 &61935020
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8e3102f8d617b43a21afef3ac5c096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
 --- !u!1 &149285805
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,9 +950,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fe17f231bd04f428f7b43236ca55a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasRef: {fileID: 780495987}
+  canvasRef: {fileID: 963128593}
   textWriter: {fileID: 1001366586}
-  ui_Assistant: {fileID: 0}
+  ui_Assistant: {fileID: 1067069799}
 --- !u!1 &258314817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,7 +1458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16fbe86594f9bad48917aefbd71a1f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolutionDropdown: {fileID: 0}
+  resolutionDropdown: {fileID: 1290062108}
 --- !u!1 &488606851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,14 +1546,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverBehaviourType: 0
-  hoverBehaviour_Color_Enter: {r: 0, g: 0, b: 0, a: 0}
-  hoverBehaviour_Color_Exit: {r: 0, g: 0, b: 0, a: 0}
+  hoverBehaviour_Color_Enter:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  hoverBehaviour_Color_Exit:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
   hoverBehaviour_Image: {fileID: 0}
   hoverBehaviour_Sprite_Exit: {fileID: 0}
   hoverBehaviour_Sprite_Enter: {fileID: 0}
   hoverBehaviour_Move: 0
   hoverBehaviour_Move_Amount: {x: 0, y: 0}
+  posExit: {x: 0, y: 0}
+  posEnter: {x: 0, y: 0}
   triggerMouseOutFuncOnClick: 0
+  mouseOver: 0
+  mouseOverPerSecFuncTimer: 0
 --- !u!1 &617124501
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,9 +2387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1289592}
   optionMenu: {fileID: 399343731}
-  closeButton: {fileID: 1256625591}
   closeOption: {fileID: 1087820093}
-  cancelButton: {fileID: 1259252354}
   optionButton: {fileID: 1493411327}
 --- !u!114 &963128599
 MonoBehaviour:
@@ -2617,10 +2629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countMessage: 0
-  messageArray:
-  - Heloooooooo
-  - KKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-  - HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAH
+  messageArray: []
 --- !u!1 &1087820091
 GameObject:
   m_ObjectHideFlags: 0
@@ -3306,7 +3315,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1256625592}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 963128598}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: ClosePauseMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1256625592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3427,7 +3448,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1259252355}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 963128598}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1259252355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3784,19 +3817,7 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 30506066}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1290062109
 MonoBehaviour:
@@ -4404,9 +4425,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a568d0b3cadd064a80593ca646269b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 50
+  volume: 0.5
   volumeSlider: {fileID: 1771460183}
-  audioSource: {fileID: 937849247}
+  audioSource: {fileID: 0}
 --- !u!1 &1824418229
 GameObject:
   m_ObjectHideFlags: 0
