@@ -10,11 +10,17 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     
     [SerializeField] private TextMeshProUGUI coinText;
-    [SerializeField] private int money;
+    public int money;
 
     private void Awake()
     {
         instance = this;
+        coinText.text = "" + money;
+    }
+
+    private void Update()
+    {
+        coinText.text = "" + money;
     }
 
     public void SetCoin()

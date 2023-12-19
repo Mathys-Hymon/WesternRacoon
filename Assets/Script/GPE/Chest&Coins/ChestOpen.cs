@@ -5,8 +5,7 @@ using UnityEngine;
 public class ChestOpen : MonoBehaviour
 {
     public GameObject coinPrefab;
-
-    private bool isOpened = false;
+    public bool isOpened = false;
     
     private void OnCollisionEnter2D(Collision2D collision)
     {

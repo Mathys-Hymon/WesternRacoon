@@ -1,18 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AllInfo : MonoBehaviour
+[Serializable]
+public class AllInfo
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float x, y, z;
+    public int money;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public bool chest;
+    //porte
 }
