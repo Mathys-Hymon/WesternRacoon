@@ -71,8 +71,8 @@ public class SteamMachineScript : MonoBehaviour
             if (IsValidInput == buttons.Length && collision.gameObject.GetComponent<BoxScript>() != null && collision.gameObject.GetComponent<Rigidbody2D>() != null)
             {
                 float distance = Vector3.Distance(transform.position, collision.gameObject.transform.position);
-                RaycastHit2D touchPlayer = Physics2D.Raycast(transform.position, (transform.position - collision.gameObject.transform.position) * (-1), distance, obstacle);
-                Debug.DrawRay(transform.position, (transform.position - collision.gameObject.transform.position) * (-1));
+                RaycastHit2D touchPlayer = Physics2D.Raycast(transform.position + transform.up, (transform.position - collision.gameObject.transform.position) * (-1), distance, obstacle);
+                Debug.DrawRay(transform.position + transform.up, (transform.position - collision.gameObject.transform.position) * (-1));
 
                 if (touchPlayer.collider == null || touchPlayer.collider.gameObject.GetComponent<BoxScript>())
                 {
@@ -97,8 +97,9 @@ public class SteamMachineScript : MonoBehaviour
         if (collision.gameObject == PlayerMovement.Instance.gameObject && pushCreate)
         {
             float distance = Vector3.Distance(transform.position, collision.gameObject.transform.position);
-            RaycastHit2D touchPlayer = Physics2D.Raycast(transform.position, (transform.position - collision.gameObject.transform.position) * (-1), distance, obstacle);
-            Debug.DrawRay(transform.position, (transform.position - collision.gameObject.transform.position) * (-1));
+            RaycastHit2D touchPlayer = Physics2D.Raycast(transform.position + transform.up, (transform.position - collision.gameObject.transform.position) * (-1), distance, obstacle);
+            Debug.DrawRay(transform.position + transform.up, (transform.position - collision.gameObject.transform.position) * (-1));
+
             if (touchPlayer.collider == null)
             {
                 PlayerMovement.Instance.Die();

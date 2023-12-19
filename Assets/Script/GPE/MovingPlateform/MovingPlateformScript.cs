@@ -99,7 +99,6 @@ public class MovingPlateformScript : FreezeMasterScript
                 }
                 if (cogRef != null)
                 {
-                    cogRef.transform.position = transform.position + cogOffset;
                     cogRef.transform.rotation = Quaternion.Euler(0, 0, transform.position.y * 80);
                 }
             }
@@ -155,7 +154,6 @@ public class MovingPlateformScript : FreezeMasterScript
                 }
                 if (cogRef != null)
                 {
-                    cogRef.transform.position = transform.position + cogOffset;
                     cogRef.transform.rotation = Quaternion.Euler(0, 0, transform.position.y * 80);
                 }
             }
