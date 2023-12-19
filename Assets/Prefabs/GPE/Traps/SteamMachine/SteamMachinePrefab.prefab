@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3063283294172809896}
   - component: {fileID: 7567019352309371531}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 6799480172628737686}
   - component: {fileID: 2931907035254843637}
   - component: {fileID: 3963135414191787798}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SteamMachinePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -5.982, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.6179075, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8714709731460865598}
@@ -277,6 +277,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttons: []
   steamParticle: {fileID: 3594800505241068755}
+  obstacle:
+    serializedVersion: 2
+    m_Bits: 8
   pauseTime: 0
   steamTime: 0
 --- !u!1 &6478010414029734576
@@ -306,7 +309,7 @@ Transform:
   m_GameObject: {fileID: 6478010414029734576}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 0}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2354,7 +2357,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    inWorldSpace: 0
+    inWorldSpace: 1
   InheritVelocityModule:
     enabled: 0
     m_Mode: 0

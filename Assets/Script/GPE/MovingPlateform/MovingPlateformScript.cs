@@ -67,65 +67,112 @@ public class MovingPlateformScript : FreezeMasterScript
 
     private void Update()
     {
-        if (!freezed && !cogRef.isFreezed())
+        if (cogRef != null)
         {
-            if(buttons.Length == 0)
+            if (!freezed && !cogRef.isFreezed())
             {
-                if (!isHorizontal)
-                {
-                    float targetPosition = Mathf.Lerp(transform.position.y, y, (speed / 50) * Time.deltaTime);
-                    transform.position = new Vector3(transform.position.x, targetPosition, 0);
-                }
-                else
-                {
-                    float targetPosition = Mathf.Lerp(transform.position.x, y, (speed / 50) * Time.deltaTime);
-                    transform.position = new Vector3(targetPosition, transform.position.y, 0);
-                    if (cogRef != null)
-                    {
-                        cogRef.transform.position = new Vector3(targetPosition, transform.position.y, 0) + cogOffset;
-                        cogRef.transform.rotation = Quaternion.Euler(0, 0, targetPosition * 80);
-                    }
+                UpdatePlateformPosition();
+            }
+        }
+        else
+        {
+            if (!freezed)
+            {
+                UpdatePlateformPosition();
+            }
+        }
+    }
 
+    private void UpdatePlateformPosition()
+    {
+        if (buttons.Length == 0)
+        {
+            if (!isHorizontal)
+            {
+                if ((transform.position.y - y) < 0)
+                {
+                    transform.position += new Vector3(0, (speed / 5) * Time.deltaTime, 0);
+                }
+                else if ((transform.position.y - y) > 0)
+                {
+                    transform.position -= new Vector3(0, (speed / 5) * Time.deltaTime, 0);
+                }
+                if (cogRef != null)
+                {
+                    cogRef.transform.position = transform.position + cogOffset;
+                    cogRef.transform.rotation = Quaternion.Euler(0, 0, transform.position.y * 80);
                 }
             }
             else
             {
-                IsValidInput = 0;
-                for (int i = 0; i < buttons.Length; i++)
+                if ((transform.position.x - y) < 0)
                 {
-                    if (buttons[i].IsActivated())
-                    {
-                        IsValidInput++;
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    transform.position += new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }
-                if (IsValidInput == buttons.Length)
+                else if ((transform.position.x - y) > 0)
                 {
-                    y = targetPosition;
+                    transform.position -= new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }
-                else if (IsValidInput < buttons.Length)
+                if (cogRef != null)
                 {
-                    y = initialPositionY;
+                    cogRef.transform.position = transform.position + cogOffset;
+                    cogRef.transform.rotation = Quaternion.Euler(0, 0, transform.position.x * 80);
                 }
-
-                if (!isHorizontal)
+            }
+        }
+        else
+        {
+            IsValidInput = 0;
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                if (buttons[i].IsActivated())
                 {
-                    float targetPosition = Mathf.Lerp(transform.position.y, y, (speed / 50) * Time.deltaTime);
-                    transform.position = new Vector3(transform.position.x, targetPosition, 0);
+                    IsValidInput++;
                 }
                 else
                 {
-                    float targetPosition = Mathf.Lerp(transform.position.x, y, (speed / 50) * Time.deltaTime);
-                    transform.position = new Vector3(targetPosition, transform.position.y, 0);
-                    if (cogRef != null)
-                    {
-                        cogRef.transform.position = new Vector3(targetPosition, transform.position.y, 0) + cogOffset;
-                        cogRef.transform.rotation = Quaternion.Euler(0, 0, targetPosition * 80);
-                    }
+                    break;
+                }
+            }
+            if (IsValidInput == buttons.Length)
+            {
+                y = targetPosition;
+            }
+            else if (IsValidInput < buttons.Length)
+            {
+                y = initialPositionY;
+            }
 
+            if (!isHorizontal)
+            {
+                if ((transform.position.y - y) < 0)
+                {
+                    transform.position += new Vector3(0, (speed / 5) * Time.deltaTime, 0);
+                }
+                else if ((transform.position.y - y) > 0)
+                {
+                    transform.position -= new Vector3(0, (speed / 5) * Time.deltaTime, 0);
+                }
+                if (cogRef != null)
+                {
+                    cogRef.transform.position = transform.position + cogOffset;
+                    cogRef.transform.rotation = Quaternion.Euler(0, 0, transform.position.y * 80);
+                }
+            }
+            else
+            {
+                if ((transform.position.x - y) < 0)
+                {
+                    transform.position += new Vector3((speed / 5) * Time.deltaTime, 0, 0);
+                }
+                else if ((transform.position.x - y) > 0)
+                {
+                    transform.position -= new Vector3((speed / 5) * Time.deltaTime, 0, 0);
+                }
+                if (cogRef != null)
+                {
+                    cogRef.transform.position = transform.position + cogOffset;
+                    cogRef.transform.rotation = Quaternion.Euler(0, 0, transform.position.x * 80);
                 }
             }
         }
