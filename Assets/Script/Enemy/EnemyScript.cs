@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -210,9 +211,12 @@ public class EnemyScript : FreezeMasterScript
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject == PlayerMovement.Instance.gameObject)
+        if (!freezed)
         {
-            PlayerMovement.Instance.Die();
+            if(collision.gameObject == PlayerMovement.Instance.gameObject)
+            {
+                PlayerMovement.Instance.Die();
+            }
         }
     }
 }
