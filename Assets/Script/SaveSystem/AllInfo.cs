@@ -8,7 +8,6 @@ public class AllInfo
 {
     public float x, y, z;
     public int money;
-
     public bool chest;
     //porte
 }

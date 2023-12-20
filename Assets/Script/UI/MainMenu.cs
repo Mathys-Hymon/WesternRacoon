@@ -34,7 +34,8 @@ public class MainMenu : MonoBehaviour
 
     public void Continue()
     {
-        SceneManager.LoadScene("ClaireDebug");
+        //SaveSystem.instance.Load();
+        SceneManager.LoadScene(1);
     }
 
     public void NewGame()
