@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2170317444921127203}
   - component: {fileID: 778455718675844003}
   - component: {fileID: 1410665731290631419}
+  - component: {fileID: 1852190184416451170}
   m_Layer: 3
   m_Name: Ledge
   m_TagString: Untagged
@@ -98,6 +99,18 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!210 &1852190184416451170
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3029396096608564078}
+  m_Enabled: 1
+  m_SortingLayerID: 403406171
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &3241993048883301111
 GameObject:
   m_ObjectHideFlags: 0

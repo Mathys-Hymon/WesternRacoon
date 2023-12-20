@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 4892180432721587068}
   - component: {fileID: 3098173025887298174}
   - component: {fileID: 3736462672556018390}
+  - component: {fileID: 1545957608497806791}
   m_Layer: 3
   m_Name: GearPrefab
   m_TagString: Freezeable
@@ -306,6 +307,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4.6
+--- !u!210 &1545957608497806791
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736149019530323122}
+  m_Enabled: 1
+  m_SortingLayerID: 403406171
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &8896092174495066984
 GameObject:
   m_ObjectHideFlags: 0

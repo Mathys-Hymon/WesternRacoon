@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 1585821154763092810}
   - component: {fileID: 6559596525053377846}
   - component: {fileID: -8061527143910748436}
+  - component: {fileID: 7670537362972707445}
   m_Layer: 0
   m_Name: MovingSolid
   m_TagString: Freezeable
@@ -273,3 +274,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!210 &7670537362972707445
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3812815766992352097}
+  m_Enabled: 1
+  m_SortingLayerID: 403406171
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
