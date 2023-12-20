@@ -15,6 +15,7 @@ public class SteamMachineScript : MonoBehaviour
 
     private int IsValidInput;
     private bool pushCreate;
+    private bool particlesEnable;
 
     private void Start()
     {
@@ -41,13 +42,14 @@ public class SteamMachineScript : MonoBehaviour
 
     private void Update()
     {
-        if (pushCreate)
+        if (pushCreate && !particlesEnable)
         {
+            particlesEnable = true;
             steamParticle.Play();
-            print("push create");
         }
-        else if (!pushCreate)
+        else if (!pushCreate && particlesEnable)
         {
+            particlesEnable = false;
             steamParticle.Stop();
         }
     }
