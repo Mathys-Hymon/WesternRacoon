@@ -44,6 +44,7 @@ public class SteamMachineScript : MonoBehaviour
         if (pushCreate)
         {
             steamParticle.Play();
+            print("push create");
         }
         else if (!pushCreate)
         {
@@ -67,9 +68,14 @@ public class SteamMachineScript : MonoBehaviour
                     break;
                 }
             }
+            if(IsValidInput != buttons.Length)
+            {
+                pushCreate = false;
+            }
 
             if (IsValidInput == buttons.Length && collision.gameObject.GetComponent<BoxScript>() != null && collision.gameObject.GetComponent<Rigidbody2D>() != null)
             {
+                pushCreate = true;
                 float distance = Vector3.Distance(transform.position, collision.gameObject.transform.position);
                 RaycastHit2D touchPlayer = Physics2D.Raycast((transform.position + transform.up), ((transform.position + transform.up) - collision.gameObject.transform.position) * (-1), distance, obstacle);
                 Debug.DrawRay(transform.position + transform.up, ((transform.position + transform.up) - collision.gameObject.transform.position) * (-1));
