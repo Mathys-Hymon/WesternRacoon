@@ -25,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float deadZoneMinusXOffset;
     
 
-    [Header("CheckPoint\n")]
-    [SerializeField] private GameObject lastCheckpoint;
+    [Header("Die\n")]
+    [SerializeField] private ParticleSystem diedParticle;
 
     private float horizontalMovement;
     private float lastTimeGrounded;
@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     private int jumpNumber;
 
+    private GameObject lastCheckpoint;
     private Rigidbody2D rb;
     private CircleCollider2D cc2d;
     private Controles controlesScript;
@@ -351,7 +352,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        Invoke("Respawn", 1f);
+        diedParticle.Play();
+        Invoke("Respawn", 0.1f);
     }
 
     private void Respawn()
