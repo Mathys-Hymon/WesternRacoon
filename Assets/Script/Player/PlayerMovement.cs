@@ -24,9 +24,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float deadZoneXOffset;
     [SerializeField] private float deadZoneMinusXOffset;
     
-
     [Header("Die\n")]
     [SerializeField] private ParticleSystem diedParticle;
+    
 
     private float horizontalMovement;
     private float lastTimeGrounded;
@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     private List<GameObject> freezedObject = new List<GameObject>();
     private Animator animator;
     private CheckPointScript checkpoint;
+    //private SoundPlayer _audioPlayer;
 
     public void SetFreezedObject(GameObject newObject)
     {
@@ -118,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
         cc2d = GetComponent<CircleCollider2D>();
+        //_audioPlayer = GetComponent<SoundPlayer>();
         _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowPlayer>();
         _fallSpeedYThresholdChange = CameraManager.instance._fallspeedYThresholdChange;
     }
@@ -125,6 +127,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Animation();
+        //Sound();
         IsGrounded();
         if(grounded == true)
         {
@@ -364,6 +367,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
+        //_audioPlayer.PlayAudio(SoundFX.Death);
         diedParticle.Play();
         Invoke("Respawn", 0.1f);
     }
@@ -380,7 +384,6 @@ public class PlayerMovement : MonoBehaviour
     private void Animation()
     {
         //Jumping animations
-        
         if (controlesScript.player.jump.triggered)
         {
             animator.SetBool("isJumping", true);
@@ -440,8 +443,31 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isRolling", false);
         }
-
     }
+
+    // private void Sound()
+    // {
+    //     if (controlesScript.player.jump.triggered)
+    //     {
+    //         _audioPlayer.PlayAudio(SoundFX.Jump);
+    //     }
+    //     
+    //     if ((horizontalMovement > 0 || horizontalMovement < 0) && grounded)
+    //     {
+    //         _audioPlayer.PlayAudio(SoundFX.Walk);
+    //     }
+    //
+    //     if (roll)
+    //     {
+    //         _audioPlayer.PlayAudio(SoundFX.Roll);
+    //     }
+    //
+    //     if (controlesScript.player.shoot.triggered)
+    //     {
+    //         _audioPlayer.PlayAudio(SoundFX.Shoot);
+    //     }
+    //     
+    // }
 
 
 }
