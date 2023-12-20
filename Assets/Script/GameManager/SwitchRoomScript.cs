@@ -12,7 +12,7 @@ public class SwitchRoomScript : MonoBehaviour
         SwitchRoomScript[] otherRooms = GameObject.FindObjectsOfType<SwitchRoomScript>();
         for (int i = 0; i < otherRooms.Length; i++)
         {
-            if(otherRooms[i].Room() == previousRoom)
+            if(otherRooms[i].Room() == previousRoom + 1)
             {
                 roomBoundary.x = otherRooms[i].transform.position.x;
                 break;
@@ -21,7 +21,7 @@ public class SwitchRoomScript : MonoBehaviour
     }
     public int Room()
     {
-        return previousRoom + 1;
+        return previousRoom;
     }
     
     public Vector2 GetBoundary()
@@ -33,7 +33,6 @@ public class SwitchRoomScript : MonoBehaviour
     {
         if (collision.gameObject == PlayerMovement.Instance.gameObject)
         {
-            print(roomBoundary);
             CameraScript.Instance.NewCameraBoundary(roomBoundary);
         }
     }
