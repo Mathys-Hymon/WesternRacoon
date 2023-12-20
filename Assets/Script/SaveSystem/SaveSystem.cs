@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
@@ -8,10 +9,15 @@ public class SaveSystem : MonoBehaviour
 {
     public static SaveSystem instance;
     public AllInfo saveInfo;
-    
-    void Start()
+
+    private void Awake()
     {
         instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
         Load();
     }
 

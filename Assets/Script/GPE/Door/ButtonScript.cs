@@ -28,7 +28,6 @@ public class ButtonScript : MonoBehaviour
         if (collision.gameObject.GetComponent<BoxScript>() != null || collision.gameObject.tag == "Player" || collision.gameObject.GetComponent<EnemyScript>() != null)
         {
             Activate = true;
-            print("activate");
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
