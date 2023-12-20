@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101350825586712620}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.19578758, w: 0.9806464}
+  m_LocalRotation: {x: -0, y: -0, z: -0.19578692, w: 0.9806465}
   m_LocalPosition: {x: 0.299, y: -0.004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -408,7 +408,7 @@ MonoBehaviour:
     m_Bits: 8
   deadZoneXOffset: 0.1
   deadZoneMinusXOffset: 0.1
-  lastCheckpoint: {fileID: 0}
+  diedParticle: {fileID: 4881247095658623612}
 --- !u!114 &371311576083862503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,6 +506,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a84a904d-6324-40b0-8c18-62cc4ffa11a1
     m_ActionName: menu/quitOption[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 025f0e21-ce6f-4df0-be56-375a5b082f4c
+    m_ActionName: player/unfreeze[/XInputControllerWindows/buttonNorth,/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: player
@@ -888,7 +892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4999154077748941920}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.49286777, w: 0.87010425}
+  m_LocalRotation: {x: 0, y: 0, z: -0.49286795, w: 0.8701042}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5883,7 +5887,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7496322697331448584}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.65368456, w: 0.7567671}
+  m_LocalRotation: {x: 0, y: 0, z: 0.65368414, w: 0.75676745}
   m_LocalPosition: {x: 0.47000116, y: 0.0017320663, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
