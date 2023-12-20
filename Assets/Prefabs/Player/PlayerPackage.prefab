@@ -307,8 +307,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 403406171
-  m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6c23f47a49aaed347ad88043edb037f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -408,7 +408,7 @@ MonoBehaviour:
     m_Bits: 8
   deadZoneXOffset: 0.1
   deadZoneMinusXOffset: 0.1
-  lastCheckpoint: {fileID: 0}
+  diedParticle: {fileID: 4881247095658623612}
 --- !u!114 &371311576083862503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,7 +541,7 @@ SortingGroup:
   m_GameObject: {fileID: 3305133647993923695}
   m_Enabled: 1
   m_SortingLayerID: 403406171
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &3406182885603333597
@@ -5962,7 +5962,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -101858715
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 68139810069753b46b4411a4ee356c73, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}

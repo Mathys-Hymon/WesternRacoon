@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6799480172628737686}
   - component: {fileID: 2931907035254843637}
   - component: {fileID: 3963135414191787798}
+  - component: {fileID: 8176585437535225029}
   m_Layer: 2
   m_Name: SteamMachinePrefab
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 403406171
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -197,6 +198,18 @@ MonoBehaviour:
     m_Bits: 8
   pauseTime: 0
   steamTime: 0
+--- !u!210 &8176585437535225029
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384746735458079595}
+  m_Enabled: 1
+  m_SortingLayerID: 403406171
+  m_SortingLayer: 3
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
 --- !u!1 &6478010414029734576
 GameObject:
   m_ObjectHideFlags: 0
@@ -4993,7 +5006,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 403406171
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
