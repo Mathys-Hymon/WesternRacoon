@@ -25,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float deadZoneMinusXOffset;
     
 
-    [Header("CheckPoint\n")]
-    [SerializeField] private GameObject lastCheckpoint;
+    [Header("Die\n")]
+    [SerializeField] private ParticleSystem diedParticle;
 
     private float horizontalMovement;
     private float lastTimeGrounded;
@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     private int jumpNumber;
 
+    private GameObject lastCheckpoint;
     private Rigidbody2D rb;
     private CircleCollider2D cc2d;
     private Controles controlesScript;
@@ -110,6 +111,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
+        //GetComponent<Volume>().OnVolumeSlide();
+        
         Instance = this;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
@@ -120,7 +124,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //print(freezedObject.Length);
         Animation();
         IsGrounded();
         if(grounded == true)
@@ -208,6 +211,15 @@ public class PlayerMovement : MonoBehaviour
             //reset so it can be called again
             CameraManager.instance.LerpedFromPlayerFalling = false;
             CameraManager.instance.LerpYDamping(false);
+        }
+        
+        if (controlesScript.player.unfreeze.triggered)
+        {
+            for (int i = 0; i < freezedObject.Count; i++)
+            {
+                freezedObject[i].GetComponent<FreezeMasterScript>().ResetTimer();
+            }
+            freezedObject.Clear();
         }
 
     }
@@ -352,8 +364,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        freezedObject.Clear();
+        diedParticle.Play();
+        Invoke("Respawn", 0.1f);
+    }
+
+    private void Respawn()
+    {
         transform.position = checkpoint.RespawnPosition();
+        freezedObject.Clear();
     }
     
 

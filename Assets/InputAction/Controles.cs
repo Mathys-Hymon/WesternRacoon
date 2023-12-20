@@ -71,6 +71,15 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""unfreeze"",
+                    ""type"": ""Button"",
+                    ""id"": ""025f0e21-ce6f-4df0-be56-375a5b082f4c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -260,6 +269,28 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""action"": ""shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5882edf4-0c72-43a7-8d3d-7d3e665b7d61"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""unfreeze"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8cba003-8bb7-4556-9e46-f8146c92eec7"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""unfreeze"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -413,6 +444,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         m_player_jump = m_player.FindAction("jump", throwIfNotFound: true);
         m_player_roll = m_player.FindAction("roll", throwIfNotFound: true);
         m_player_shoot = m_player.FindAction("shoot", throwIfNotFound: true);
+        m_player_unfreeze = m_player.FindAction("unfreeze", throwIfNotFound: true);
         // menu
         m_menu = asset.FindActionMap("menu", throwIfNotFound: true);
         m_menu_quitMenu = m_menu.FindAction("quitMenu", throwIfNotFound: true);
@@ -484,6 +516,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
     private readonly InputAction m_player_jump;
     private readonly InputAction m_player_roll;
     private readonly InputAction m_player_shoot;
+    private readonly InputAction m_player_unfreeze;
     public struct PlayerActions
     {
         private @Controles m_Wrapper;
@@ -493,6 +526,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         public InputAction @jump => m_Wrapper.m_player_jump;
         public InputAction @roll => m_Wrapper.m_player_roll;
         public InputAction @shoot => m_Wrapper.m_player_shoot;
+        public InputAction @unfreeze => m_Wrapper.m_player_unfreeze;
         public InputActionMap Get() { return m_Wrapper.m_player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -517,6 +551,9 @@ public partial class @Controles: IInputActionCollection2, IDisposable
             @shoot.started += instance.OnShoot;
             @shoot.performed += instance.OnShoot;
             @shoot.canceled += instance.OnShoot;
+            @unfreeze.started += instance.OnUnfreeze;
+            @unfreeze.performed += instance.OnUnfreeze;
+            @unfreeze.canceled += instance.OnUnfreeze;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -536,6 +573,9 @@ public partial class @Controles: IInputActionCollection2, IDisposable
             @shoot.started -= instance.OnShoot;
             @shoot.performed -= instance.OnShoot;
             @shoot.canceled -= instance.OnShoot;
+            @unfreeze.started -= instance.OnUnfreeze;
+            @unfreeze.performed -= instance.OnUnfreeze;
+            @unfreeze.canceled -= instance.OnUnfreeze;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -640,6 +680,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnUnfreeze(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
