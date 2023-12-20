@@ -75,6 +75,10 @@ public class AimingScript : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(controlesScript.player.aim.ReadValue<Vector2>());
             mousePos.z = 0;
             crosshairRef.transform.position = mousePos;
+            if(mousePos.x == 0 && mousePos.y == 0)
+            {
+                ArmTarget.transform.localPosition = new Vector3(4.13500023f, -1.06799996f, 0);
+            }
             ArmTarget.transform.position = mousePos;
             if (controlesScript.player.shoot.triggered)
             {
