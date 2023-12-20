@@ -17,15 +17,6 @@ public class CircleTimeFreezeScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void Update()
-    {
-        if(!PlayerMovement.Instance.GetFreezedObject().Contains(freezedObjectRef))
-        {
-            PlayerMovement.Instance.DestroyFreezedObject(freezedObjectRef);
-            Destroy(gameObject);
-        }
-    }
     
     private void ChangeClock()
     {
