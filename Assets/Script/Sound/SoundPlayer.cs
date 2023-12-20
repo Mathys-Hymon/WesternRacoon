@@ -21,11 +21,11 @@ public class SoundPlayer : MonoBehaviour
             case SoundFX.Jump:
                 _audioSource.PlayOneShot(jumpSfx);
                 break;
-            case SoundFX.Walk:
-                _audioSource.PlayOneShot(walkSfx);
-                break;
-            case SoundFX.Roll:
-                _audioSource.PlayOneShot(rollSfx);
+            // case SoundFX.Walk:
+            //     _audioSource.PlayOneShot(walkSfx);
+            //     break;
+            // case SoundFX.Roll:
+            //     _audioSource.PlayOneShot(rollSfx);
                 break;
             case SoundFX.Shoot:
                 _audioSource.PlayOneShot(shootSfx);
@@ -41,8 +41,8 @@ public class SoundPlayer : MonoBehaviour
 public enum SoundFX
 {
     Jump,
-    Walk,
-    Roll,
+    // Walk,
+    // Roll,
     Shoot,
     Death
 }
