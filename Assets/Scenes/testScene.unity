@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e93d88df0e6dd4b86cc0ae59d2eb3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1228968299
+--- !u!1001 &1195747661
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -644,11 +644,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.402331
+      value: 3.8905115
       objectReference: {fileID: 0}
     - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.6263456
+      value: -2.9390588
       objectReference: {fileID: 0}
     - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -681,6 +681,71 @@ PrefabInstance:
     - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935399002916197097, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: nextLevel
+      value: JaneScene_Traps
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990534527272169901, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: m_Name
+      value: LevelLoader (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+--- !u!1001 &1228968299
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -483
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -219
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.062506
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935399002916197097, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: nextLevel
+      value: JaneScene_Traps
       objectReference: {fileID: 0}
     - target: {fileID: 6990534527272169901, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
       propertyPath: m_Name
@@ -1318,3 +1383,4 @@ SceneRoots:
   - {fileID: 1164500877}
   - {fileID: 814518582}
   - {fileID: 1660843405}
+  - {fileID: 1195747661}

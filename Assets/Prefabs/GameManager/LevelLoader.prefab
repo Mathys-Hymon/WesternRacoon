@@ -305,9 +305,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716444d87b6365f4084d8b15fc167cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: 
+  nextLevel: testScene
   transition: {fileID: 1720530280916958079}
-  transitionTime: 1
+  transitionTime: 2
+  closeAnimation: {fileID: 7400000, guid: 9b5abcfbf745e934f8584f3f74f57315, type: 2}
+  openAnimation: {fileID: 7400000, guid: 3194466720466414d856f6d00a12f287, type: 2}
 --- !u!1 &8203663190590252406
 GameObject:
   m_ObjectHideFlags: 0

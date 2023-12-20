@@ -11,34 +11,38 @@ public class AnimTransitionForEachLevel : MonoBehaviour
 
     public float transitionTime = 1f;
 
+    public AnimationClip closeAnimation;
+    public AnimationClip openAnimation;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == PlayerMovement.Instance.gameObject)
         {
-            StartCoroutine(LoadLevel(nextLevel));
+            Invoke(nameof(LoadNextScene), transitionTime);
         }
     }
-    IEnumerator LoadLevel(string nextLevel)
+
+    private void LoadNextScene()
     {
+        if (closeAnimation != null)
+        {
+            transition.Play(closeAnimation.name);
+        }
 
-        transition.SetTrigger("Close");
-        yield return new WaitForSeconds(transitionTime);
+        Invoke(nameof(SceneLoaded), transitionTime);
+    }
 
+    private void SceneLoaded()
+    {
+        
         AsyncOperation operation = SceneManager.LoadSceneAsync(nextLevel);
-
-        while (!operation.isDone)
-        {
-            yield return null;
-        }
-        var transitionScriptInNewScene = FindObjectOfType<AnimTransitionForEachLevel>();
-        if (transitionScriptInNewScene != null)
-        {
-            transitionScriptInNewScene.PlayOpenAnimation();
-        }
-    }
-
-    public void PlayOpenAnimation()
-    {
-        transition.SetTrigger("Open");
+            if (operation.isDone)
+            {
+                if (openAnimation != null)
+                {
+                    transition.Play(openAnimation.name);
+                }
+                operation.allowSceneActivation = true;
+            }
     }
 }
