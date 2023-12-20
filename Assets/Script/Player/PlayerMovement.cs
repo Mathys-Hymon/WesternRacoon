@@ -35,13 +35,11 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalVelocity;
 
     private bool grounded;
-    private bool invincibilityFrame;
     private bool roll;
     private bool isGamepad;
 
     private int jumpNumber;
 
-    private GameObject lastCheckpoint;
     private Rigidbody2D rb;
     private CircleCollider2D cc2d;
     private Controles controlesScript;
