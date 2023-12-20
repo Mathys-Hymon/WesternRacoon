@@ -11,6 +11,7 @@ public class AimingScript : MonoBehaviour
     private PlayerInput playerinput;
     private GameObject crosshairRef;
     private GameObject ArmTarget;
+    private bool enableCrosshair = true;
 
     private void Awake()
     {
@@ -36,7 +37,7 @@ public class AimingScript : MonoBehaviour
         if(isGamepad)
         {
             Vector2 mouseMultiplyer = controlesScript.player.aim.ReadValue<Vector2>();
-            if (Mathf.Abs(mouseMultiplyer.x) + Mathf.Abs(mouseMultiplyer.y) <= 0.2f)
+            if (Mathf.Abs(mouseMultiplyer.x) + Mathf.Abs(mouseMultiplyer.y) <= 0.2f || !enableCrosshair)
             {
                 crosshairRef.GetComponent<SpriteRenderer>().enabled = false;
             }
@@ -70,12 +71,20 @@ public class AimingScript : MonoBehaviour
         }
         else
         {
-            Cursor.visible = false;
-            crosshairRef.GetComponent<SpriteRenderer>().enabled = true;
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(controlesScript.player.aim.ReadValue<Vector2>());
-            mousePos.z = 0;
-            crosshairRef.transform.position = mousePos;
-            ArmTarget.transform.position = mousePos;
+            if (!enableCrosshair)
+            {
+                crosshairRef.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                Cursor.visible = false;
+                crosshairRef.GetComponent<SpriteRenderer>().enabled = true;
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(controlesScript.player.aim.ReadValue<Vector2>());
+                mousePos.z = 0;
+                crosshairRef.transform.position = mousePos;
+                ArmTarget.transform.position = mousePos;
+            }
+           
             if (controlesScript.player.shoot.triggered)
             {
                 Vector2 DirectiontoTarget = crosshairRef.transform.position - transform.position;
@@ -87,5 +96,10 @@ public class AimingScript : MonoBehaviour
                 //emptyMun.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 350));
             }
         }
+    }
+
+    public bool CrosshairState(bool crosshairState)
+    {
+        return enableCrosshair = crosshairState;
     }
 }
