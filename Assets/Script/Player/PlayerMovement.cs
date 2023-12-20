@@ -120,7 +120,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //print(freezedObject.Length);
         Animation();
         IsGrounded();
         if(grounded == true)
@@ -352,8 +351,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        freezedObject.Clear();
+        Invoke("Respawn", 1f);
+    }
+
+    private void Respawn()
+    {
         transform.position = checkpoint.RespawnPosition();
+        freezedObject.Clear();
     }
     
 
