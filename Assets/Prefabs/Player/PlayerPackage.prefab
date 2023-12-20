@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 371311576083862503}
   - component: {fileID: 2083458069802310440}
   - component: {fileID: 8211064800730227996}
+  - component: {fileID: 3485270961986345737}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -305,8 +306,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 403406171
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6c23f47a49aaed347ad88043edb037f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -378,7 +379,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1}
+  m_Offset: {x: 0, y: -0.04}
   serializedVersion: 2
   m_Radius: 0.55
 --- !u!114 &1614156765902360851
@@ -493,6 +494,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 68d934d7-3159-4be8-b47c-81e8c22269df
     m_ActionName: player/shoot[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9bb89651-8dc7-4e4b-b884-0995325ef8ed
+    m_ActionName: menu/quitMenu[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d8749c0e-f776-4231-b182-b8538c276350
+    m_ActionName: menu/openMenu[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a84a904d-6324-40b0-8c18-62cc4ffa11a1
+    m_ActionName: menu/quitOption[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: player
@@ -519,6 +532,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &3485270961986345737
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305133647993923695}
+  m_Enabled: 1
+  m_SortingLayerID: 403406171
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &3406182885603333597
 GameObject:
   m_ObjectHideFlags: 0
@@ -5936,8 +5961,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -101858715
+  m_SortingLayer: 4
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 68139810069753b46b4411a4ee356c73, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
