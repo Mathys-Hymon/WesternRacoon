@@ -8,6 +8,7 @@ public class SteamMachineScript : MonoBehaviour
     [Header("ObjectReferences")]
     [SerializeField] private ButtonScript[] buttons;
     [SerializeField] private ParticleSystem steamParticle;
+    [SerializeField] private ParticleSystem orangeLightParticle;
     [SerializeField] private LayerMask obstacle;
     [Header("Only for automatic Steam")]
     [SerializeField] private float pauseTime;
@@ -32,12 +33,19 @@ public class SteamMachineScript : MonoBehaviour
         {
             pushCreate = false;
             Invoke("AutomaticSteam", pauseTime);
+            Invoke("BeforePushing", pauseTime / 3f);
         }
         else
         {
             pushCreate = true;
+            orangeLightParticle.Stop();
             Invoke("AutomaticSteam", steamTime);
         }
+    }
+
+    private void BeforePushing()
+    {
+        orangeLightParticle.Play();
     }
 
     private void Update()
