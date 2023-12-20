@@ -7,6 +7,7 @@ public class CannonScript : MonoBehaviour
     [Header("SHOOT INFOS")]
     [SerializeField] private float shootFrequency;
     [SerializeField] private float bulletSpeed;
+    [SerializeField] private bool startShooting;
 
     [Header("BULLET REFERENCE")]
     [SerializeField] public GameObject bulletPrefab;
@@ -14,7 +15,15 @@ public class CannonScript : MonoBehaviour
 
     void Start()
     {
-        ShootBullet();
+        if(startShooting)
+        {
+            ShootBullet();
+        }
+        else
+        {
+            Invoke("ShootBullet", 10f / shootFrequency);
+        }
+        
     }
     private void ShootBullet()
     {
