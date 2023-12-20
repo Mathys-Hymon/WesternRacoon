@@ -108,11 +108,11 @@ public class MovingPlateformScript : FreezeMasterScript
             }
             else
             {
-                if ((transform.position.x - y) < -0.3f)
+                if ((transform.position.x - y) < -0.01f)
                 {
                     transform.position += new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }
-                else if ((transform.position.x - y) > 0.3f)
+                else if ((transform.position.x - y) > 0.01f)
                 {
                     transform.position -= new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }
@@ -148,11 +148,11 @@ public class MovingPlateformScript : FreezeMasterScript
 
             if (!isHorizontal)
             {
-                if ((transform.position.y - y) < -0.3f)
+                if ((transform.position.y - y) < -0.1f)
                 {
                     transform.position += new Vector3(0, (speed / 5) * Time.deltaTime, 0);
                 }
-                else if ((transform.position.y - y) > 0.3f)
+                else if ((transform.position.y - y) > 0.1f)
                 {
                     transform.position -= new Vector3(0, (speed / 5) * Time.deltaTime, 0);
                 }
@@ -163,11 +163,11 @@ public class MovingPlateformScript : FreezeMasterScript
             }
             else
             {
-                if ((transform.position.x - y) < -0.3f)
+                if ((transform.position.x - y) < -0.01f)
                 {
                     transform.position += new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }
-                else if ((transform.position.x - y) > 0.3f)
+                else if ((transform.position.x - y) > 0.01f)
                 {
                     transform.position -= new Vector3((speed / 5) * Time.deltaTime, 0, 0);
                 }

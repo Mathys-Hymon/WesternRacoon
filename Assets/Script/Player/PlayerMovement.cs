@@ -103,6 +103,11 @@ public class PlayerMovement : MonoBehaviour
         checkpoint = newCheckpoint;
     }
 
+    public Vector3 GetCheckpoint()
+    {
+        return checkpoint.RespawnPosition();
+    }
+
     private void Start()
     {
         Instance = this;
