@@ -18,14 +18,14 @@ public class LoadingAnimation : MonoBehaviour
         Time.timeScale = 1.0f;
         loadingCanvas.enabled = true;
         animator = GetComponentInChildren<Animator>();
-        DontDestroyOnLoad(gameObject);
-        StartCoroutine("AnimateOpen", 1f);
+        //DontDestroyOnLoad(gameObject);
+        StartCoroutine("AnimateOpen", 0.5f);
     }
 
     IEnumerator AnimateOpen()
     {
         circle.gameObject.SetActive(true);
-        GetComponentInChildren<Mask>().showMaskGraphic = true;
+        //GetComponentInChildren<Mask>().showMaskGraphic = true;
         yield return null;
         GetComponentInChildren<Mask>().showMaskGraphic = false;
         animator.SetTrigger("Open");
@@ -53,8 +53,8 @@ public class LoadingAnimation : MonoBehaviour
 
             yield return null;
         }
-        animator.SetTrigger("Close");
-        yield return new WaitForSecondsRealtime(0.5f);
-        Destroy(gameObject);
+        //animator.SetTrigger("Close");
+        yield return new WaitForSecondsRealtime(1f);
+        //Destroy(gameObject);
     }
 }
