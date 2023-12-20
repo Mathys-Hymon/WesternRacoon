@@ -11,7 +11,7 @@ public class CollectableItem : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameManager.instance.SetCoin();
+            GameManager.Instance.SetCoin();
             Destroy(gameObject, 0.5f);
         }
     }

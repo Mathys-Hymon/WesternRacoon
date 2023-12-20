@@ -26,7 +26,7 @@ public class SoundPlayer : MonoBehaviour
             //     break;
             // case SoundFX.Roll:
             //     _audioSource.PlayOneShot(rollSfx);
-                break;
+                //break;
             case SoundFX.Shoot:
                 _audioSource.PlayOneShot(shootSfx);
                 break;

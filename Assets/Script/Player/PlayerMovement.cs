@@ -75,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Awake()
     {
+        Instance = this;
+ 
         controlesScript = new Controles();
         _cameraFollow = GameObject.Find("CameraFollowPlayer");
         playerinput = GetComponent<PlayerInput>();
@@ -113,9 +115,8 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
+        //SaveSystem.instance.Load();
         //GetComponent<Volume>().OnVolumeSlide();
-        
-        Instance = this;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
         cc2d = GetComponent<CircleCollider2D>();
