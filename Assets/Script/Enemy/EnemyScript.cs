@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 
 public class EnemyScript : FreezeMasterScript
 {
     [SerializeField] private GameObject bulletRef;
     [SerializeField] private GameObject targetArmPos;
-    [SerializeField] private GameObject armRef;
+    [SerializeField] private GameObject[] ArmSR;
     [SerializeField] private LayerMask obstacle;
     [SerializeField] private float delay;
     [SerializeField] private float speed;
@@ -30,7 +31,10 @@ public class EnemyScript : FreezeMasterScript
 
     private void EnableArm()
     {
-        armRef.SetActive(true);
+        for(int i = 0; i < ArmSR.Length; i++)
+        {
+            ArmSR[i].SetActive(true);
+        }
     }
 
     void Update()
@@ -40,9 +44,13 @@ public class EnemyScript : FreezeMasterScript
             anim.speed = 1f;
             if (rushPlayer)
             {
-                if (((!lookRight && IsGrounded(1f)) || (lookRight && IsGrounded(-1f))) && CheckWall() )
+                if (((!lookRight && IsGrounded(1f)) || (lookRight && IsGrounded(-1f))) && CheckWall())
                 {
-                    armRef.SetActive(false);
+                    for (int i = 0; i < ArmSR.Length; i++)
+                    {
+                        ArmSR[i].SetActive(false);
+                    }
+
                     anim.SetBool("Anticipate", true);
                     Invoke("Sprinting", 0.4f);
                 }
@@ -51,7 +59,7 @@ public class EnemyScript : FreezeMasterScript
                     CancelInvoke("Sprinting");
                     anim.SetBool("isSprinting", false);
                     anim.SetTrigger("Stop");
-                    Invoke("EnableArm", 1.05f);
+                    Invoke("EnableArm", 1.2f);
                     rushPlayer = false;
                     canReach = false;
                 }
@@ -120,21 +128,47 @@ public class EnemyScript : FreezeMasterScript
                     {
                         Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
                         transform.rotation = Quaternion.Euler(rotator);
+                        targetArmPos.transform.position = transform.position + new Vector3(Mathf.Clamp((PlayerMovement.Instance.transform.position.x - transform.position.x)/10,-0.5f,0.5f), (PlayerMovement.Instance.transform.position.y - transform.position.y)/10, 0);
                         lookRight = false;
                     }
                     else if (transform.position.x - PlayerMovement.Instance.transform.position.x > 0 && !rushPlayer && touchPlayer.collider == null)
                     {
                         Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
                         transform.rotation = Quaternion.Euler(rotator);
+                        targetArmPos.transform.position = transform.position + new Vector3(Mathf.Clamp((PlayerMovement.Instance.transform.position.x - transform.position.x) / 10, -0.5f, 0.5f), (PlayerMovement.Instance.transform.position.y - transform.position.y) / 10, 0);
                         lookRight = true;
                     }
 
-                    if (touchPlayer.collider == null && canShoot)
+                    if (touchPlayer.collider == null && canShoot && !rushPlayer && !canReach)
                     {
                         canShoot = false;
                         Shoot();
                     }
+                    else if(touchPlayer.collider != null)
+                    {
+                        if (lookRight)
+                        {
+                            targetArmPos.transform.localPosition = new Vector3(0.06f, -0.86f, 0);
+                        }
+                        else
+                        {
+                            targetArmPos.transform.localPosition = new Vector3(0.06f, -0.86f, 0);
+                        }
+                    }
+
                 }
+            }
+            else
+            {
+                if(lookRight)
+                {
+                    targetArmPos.transform.localPosition = new Vector3(0.06f, -0.86f, 0);
+                }
+                else
+                {
+                    targetArmPos.transform.localPosition = new Vector3(0.06f, -0.86f, 0);
+                }
+                
             }
         }
         else if (freezed)
@@ -147,7 +181,7 @@ public class EnemyScript : FreezeMasterScript
     {
         directiontoTarget = PlayerMovement.Instance.transform.position - transform.position;
         float angle = -90+Mathf.Atan2(directiontoTarget.y, directiontoTarget.x) * Mathf.Rad2Deg;
-        Instantiate(bulletRef, transform.position, Quaternion.Euler(0,0,angle));
+        Instantiate(bulletRef, targetArmPos.transform.position, Quaternion.Euler(0,0,angle));
         
         Invoke("ResetShoot",delay);
         
@@ -171,7 +205,6 @@ public class EnemyScript : FreezeMasterScript
         }
 
     }
-
     private bool IsGrounded(float offsetX)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(offsetX,0,0), Vector2.down, 1.5f, obstacle);
@@ -190,8 +223,6 @@ public class EnemyScript : FreezeMasterScript
         }
 
     }
-
-
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject == PlayerMovement.Instance.gameObject)
@@ -212,7 +243,10 @@ public class EnemyScript : FreezeMasterScript
     {
         if (!freezed)
         {
-            armRef.SetActive(false);
+            for (int i = 0; i < ArmSR.Length; i++)
+            {
+                ArmSR[i].SetActive(false);
+            }
             anim.SetBool("Anticipate", false);
             anim.SetBool("isSprinting", true);
             transform.position += transform.right * Time.deltaTime * speed;

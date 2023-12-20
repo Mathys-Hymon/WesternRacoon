@@ -21,10 +21,10 @@ public class PistonScript : FreezeMasterScript
     private bool moveUp;
     private BoxCollider2D bc;
 
-
     void Start()
     { 
         bc = GetComponent<BoxCollider2D>();
+        bc.enabled = false;
         if (!isHorizontal)
         {
             y = transform.localPosition.y;
