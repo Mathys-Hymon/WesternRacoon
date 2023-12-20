@@ -11,10 +11,6 @@ public class AnimTransitionForEachLevel : MonoBehaviour
 
     public float transitionTime = 1f;
 
-    private void Start()
-    {
-        transition.SetTrigger("Open");
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == PlayerMovement.Instance.gameObject)
@@ -34,6 +30,15 @@ public class AnimTransitionForEachLevel : MonoBehaviour
         {
             yield return null;
         }
+        var transitionScriptInNewScene = FindObjectOfType<AnimTransitionForEachLevel>();
+        if (transitionScriptInNewScene != null)
+        {
+            transitionScriptInNewScene.PlayOpenAnimation();
+        }
+    }
+
+    public void PlayOpenAnimation()
+    {
         transition.SetTrigger("Open");
     }
 }
