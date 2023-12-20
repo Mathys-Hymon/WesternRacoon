@@ -17,7 +17,7 @@ public class CircleTimeFreezeScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
     private void ChangeClock()
     {
         if (freezedObjectRef != null)
