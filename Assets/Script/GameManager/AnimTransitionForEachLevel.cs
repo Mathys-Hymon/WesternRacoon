@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Transition : MonoBehaviour
+public class AnimTransitionForEachLevel : MonoBehaviour
 {
     [SerializeField] string nextLevel;
 
@@ -11,31 +11,29 @@ public class Transition : MonoBehaviour
 
     public float transitionTime = 1f;
 
-    private bool isTransitioning = false;
-
+    private void Start()
+    {
+        transition.SetTrigger("Open");
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isTransitioning && collision.gameObject == PlayerMovement.Instance.gameObject)
+        if (collision.gameObject == PlayerMovement.Instance.gameObject)
         {
             StartCoroutine(LoadLevel(nextLevel));
-            DontDestroyOnLoad(gameObject);
         }
     }
-
     IEnumerator LoadLevel(string nextLevel)
     {
-        //isTransitioning = true;
 
-        transition.SetTrigger("Open");
-
+        transition.SetTrigger("Close");
         yield return new WaitForSeconds(transitionTime);
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(nextLevel);
 
-        //while (!operation.isDone)
-        //{
-        //    yield return null;
-        //}
-        //isTransitioning = false;
+        while (!operation.isDone)
+        {
+            yield return null;
+        }
+        transition.SetTrigger("Open");
     }
 }

@@ -1317,6 +1317,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!95 &1049152369 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1720530280916958079, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+  m_PrefabInstance: {fileID: 2798692524949960792}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1180754381 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3305133647993923695, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
@@ -3289,6 +3294,18 @@ PrefabInstance:
     - target: {fileID: 1712350477303264488, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935399002916197097, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: nextLevel
+      value: testScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935399002916197097, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: transition
+      value: 
+      objectReference: {fileID: 1049152369}
+    - target: {fileID: 2935399002916197097, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
+      propertyPath: transitionTime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6990534527272169901, guid: 4149d02d394a00d4783f15e0a542c0d0, type: 3}
       propertyPath: m_Name
