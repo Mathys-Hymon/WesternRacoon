@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -18,7 +19,6 @@ public class Volume : MonoBehaviour
         mainVolumeSlider.value = mainVolume * 100;
         OnVolumeSlide();
     }
-    
 
     public void OnVolumeSlide()
     {
