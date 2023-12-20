@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 7771064576351904705}
   - component: {fileID: 7684165897437453020}
   - component: {fileID: 7366683035810942615}
+  - component: {fileID: 2440532913005528840}
   m_Layer: 3
   m_Name: Cannon
   m_TagString: Untagged
@@ -231,3 +232,15 @@ MonoBehaviour:
   shootFrequency: 0
   bulletSpeed: 0
   bulletPrefab: {fileID: 3315467442001867978, guid: 96c7f070302235a418b823e6f1793d33, type: 3}
+--- !u!210 &2440532913005528840
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6221858562757663522}
+  m_Enabled: 1
+  m_SortingLayerID: 403406171
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0

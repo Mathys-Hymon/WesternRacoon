@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class Volume : MonoBehaviour
 {
-    [SerializeField] private float mainVolume = 0.5f;
+    [SerializeField] private float mainVolume;
     [SerializeField] private Slider mainVolumeSlider;
     [SerializeField] private AudioSource mainMusic;
 
@@ -18,7 +19,6 @@ public class Volume : MonoBehaviour
         mainVolumeSlider.value = mainVolume * 100;
         OnVolumeSlide();
     }
-    
 
     public void OnVolumeSlide()
     {
