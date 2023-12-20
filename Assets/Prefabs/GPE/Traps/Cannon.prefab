@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 7771064576351904705}
   - component: {fileID: 7684165897437453020}
   - component: {fileID: 7366683035810942615}
+  - component: {fileID: 2440532913005528840}
   m_Layer: 3
   m_Name: Cannon
   m_TagString: Untagged
@@ -112,8 +113,8 @@ Transform:
   m_GameObject: {fileID: 6221858562757663522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.64655, y: 1.7080488, z: 0}
-  m_LocalScale: {x: 2.399416, y: 1, z: 1}
+  m_LocalPosition: {x: 4655, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5643319525864990752}
@@ -157,8 +158,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 403406171
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -231,3 +232,15 @@ MonoBehaviour:
   shootFrequency: 0
   bulletSpeed: 0
   bulletPrefab: {fileID: 3315467442001867978, guid: 96c7f070302235a418b823e6f1793d33, type: 3}
+--- !u!210 &2440532913005528840
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6221858562757663522}
+  m_Enabled: 1
+  m_SortingLayerID: 403406171
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
