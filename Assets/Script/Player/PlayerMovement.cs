@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGamepad;
 
     private int jumpNumber;
+    private int actualRoom = 1;
 
     private Rigidbody2D rb;
     private CircleCollider2D cc2d;
@@ -89,6 +90,11 @@ public class PlayerMovement : MonoBehaviour
     public void OnDeviceChange(PlayerInput pi)
     {
         isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
+    }
+
+    public int ActualRoom()
+    {
+        return actualRoom;
     }
 
     public void SetNewCheckPoint(CheckPointScript newCheckpoint)
