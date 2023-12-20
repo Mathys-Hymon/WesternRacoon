@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2919065235038284765}
   - component: {fileID: 3835545317394867355}
   - component: {fileID: 6502401919131616882}
-  - component: {fileID: 5529313681481201891}
+  - component: {fileID: 4083158736866865184}
   - component: {fileID: -409813682255516072}
   m_Layer: 0
   m_Name: TimeCapsule
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2115127217
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 04a835ef29e00124d98e30d953af5199, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -102,8 +102,8 @@ MonoBehaviour:
   timer: {fileID: 6271782246426197651, guid: cd6572873592fa3478ef084f7bcbfe15, type: 3}
   speed: 20
   freezeDuration: 8
---- !u!61 &5529313681481201891
-BoxCollider2D:
+--- !u!58 &4083158736866865184
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -117,7 +117,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1092
+    m_Bits: 68
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -135,18 +135,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.51666665, y: 0.51666665}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.12
 --- !u!50 &-409813682255516072
 Rigidbody2D:
   serializedVersion: 4

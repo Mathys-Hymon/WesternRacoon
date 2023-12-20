@@ -14,6 +14,7 @@ public class CheckPointScript : MonoBehaviour
         if(collision.gameObject == PlayerMovement.Instance.gameObject)
         {
             PlayerMovement.Instance.SetNewCheckPoint(this);
+            SaveSystem.instance.Save();
         }
     }
 

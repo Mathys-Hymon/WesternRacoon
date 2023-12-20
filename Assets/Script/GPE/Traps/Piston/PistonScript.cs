@@ -21,10 +21,10 @@ public class PistonScript : FreezeMasterScript
     private bool moveUp;
     private BoxCollider2D bc;
 
-
     void Start()
     { 
         bc = GetComponent<BoxCollider2D>();
+        bc.enabled = false;
         if (!isHorizontal)
         {
             y = transform.localPosition.y;
@@ -86,7 +86,8 @@ public class PistonScript : FreezeMasterScript
     {
         if (!freezed)
         {
-            if (collision.gameObject.CompareTag("Player"))
+
+            if (collision.gameObject.CompareTag("Player") && PlayerMovement.Instance.getGrounded())
             {
                 collision.gameObject.GetComponent<PlayerMovement>().Die();
             }
