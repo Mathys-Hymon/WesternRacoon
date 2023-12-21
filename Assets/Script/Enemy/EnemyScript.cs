@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 
@@ -45,7 +44,7 @@ public class EnemyScript : FreezeMasterScript
             anim.speed = 1f;
             if (rushPlayer)
             {
-                if (((!lookRight && IsGrounded(1f)) || (lookRight && IsGrounded(-1f))) && CheckWall(1.5f))
+                if (((!lookRight && IsGrounded(1f)) || (lookRight && IsGrounded(-1f))) && CheckWall())
                 {
                     for (int i = 0; i < ArmSR.Length; i++)
                     {
@@ -102,7 +101,9 @@ public class EnemyScript : FreezeMasterScript
                     if(canReach)
                     {
                     float distance = Vector3.Distance(transform.position, PlayerMovement.Instance.transform.position);
-                        if (CheckWall(distance) == true)
+                    RaycastHit2D WallDetection = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y-0.5f), (transform.position + transform.forward), distance, obstacle);
+                    Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.5f), (transform.position - PlayerMovement.Instance.transform.position) * (-1));
+                        if (WallDetection.collider == null)
                         {
                             rushPlayer = canReach;
                         }
@@ -191,12 +192,10 @@ public class EnemyScript : FreezeMasterScript
         canShoot = true;
     }
     
-    private bool CheckWall(float Distance)
+    private bool CheckWall()
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y-0.5f, transform.position.z), transform.right, Distance, obstacle);
-        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), transform.right*Distance);
-
-        if (hit.collider == null)
+        RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y-1, transform.position.z), transform.right, 1.5f, obstacle);
+        if(hit.collider == null)
         {
             return true;
         }
