@@ -125,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         {
             lastTimeGrounded = Time.time;
 
-            if(controlesScript.player.roll.triggered && !roll)
+            if(controlesScript.player.roll.triggered && !roll && !dead)
             {
                 roll = true;
                 Invoke("StopRoll", 0.3f);
@@ -141,11 +141,11 @@ public class PlayerMovement : MonoBehaviour
                 cc2d.offset = new Vector2(0,Mathf.Lerp(-0.1f, -0.37f, 1f * Time.deltaTime));
             }
         }
-        if (controlesScript.player.jump.triggered)
+        if (controlesScript.player.jump.triggered && !dead)
         {
             lastTimeJumpPressed = Time.time;
         }
-        if (controlesScript.player.jump.triggered && (lastTimeJumpPressed - lastTimeGrounded < coyoteTime || jumpNumber < 2))
+        if (controlesScript.player.jump.triggered && (lastTimeJumpPressed - lastTimeGrounded < coyoteTime || jumpNumber < 2) && !dead)
         {
             if(lastTimeJumpPressed - lastTimeGrounded > coyoteTime)
             {
@@ -168,8 +168,14 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
-
-        horizontalMovement = controlesScript.player.move.ReadValue<float>();
+        if(!dead)
+        {
+            horizontalMovement = controlesScript.player.move.ReadValue<float>();
+        }
+        else
+        {
+            horizontalMovement = 0f;
+        }
 
         if (horizontalMovement != 0)
         {
@@ -357,13 +363,13 @@ public class PlayerMovement : MonoBehaviour
             freezedObject[i].GetComponent<FreezeMasterScript>().ResetTimer();
         }
         freezedObject.Clear();
-        dead = false;
         Invoke("ResetParticle",1f);
     }
     
     private void ResetParticle()
     {
         diedParticle.transform.position = transform.position;
+        dead = false;
     }
 
 
