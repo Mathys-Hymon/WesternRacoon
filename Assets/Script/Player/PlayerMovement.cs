@@ -19,10 +19,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float airControl = 0.8f;
     [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private LayerMask floorLayer;
-
-    [Header("Camera Stuff\n")]
-    [SerializeField] private float deadZoneXOffset;
-    [SerializeField] private float deadZoneMinusXOffset;
     
     [Header("Die\n")]
     [SerializeField] private ParticleSystem diedParticle;
@@ -31,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMovement;
     private float lastTimeGrounded;
     private float lastTimeJumpPressed;
-    private float _fallSpeedYThresholdChange;
     private float horizontalVelocity;
 
     private bool grounded;
@@ -45,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private CircleCollider2D cc2d;
     private Controles controlesScript;
-    private PlayerInput playerinput;
     private List<GameObject> freezedObject = new List<GameObject>();
     private Animator animator;
     private CheckPointScript checkpoint;
@@ -76,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
         Instance = this;
  
         controlesScript = new Controles();
-        playerinput = GetComponent<PlayerInput>();
         animator = GetComponent<Animator>();
     }
 
@@ -462,6 +455,4 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
-
-
 }
