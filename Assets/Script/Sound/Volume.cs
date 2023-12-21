@@ -35,14 +35,6 @@ public class Volume : MonoBehaviour
         
         sfxSlider.value = sfxVolume * 100;
         
-        // if (PlayerPrefs.HasKey("MasterVolume"))
-        // {
-        //     masterVolume = PlayerPrefs.GetFloat("MasterVolume");
-        // }
-        //
-        // masterSlider.value = masterVolume * 100;
-        //
-        //
         OnVolumeSlide();
     }
 
@@ -55,11 +47,5 @@ public class Volume : MonoBehaviour
         sfxVolume = sfxSlider.value / 100;
         sfxMusic.volume = sfxVolume;
         PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
-
-        // masterVolume = masterSlider.value / 100;
-        // sfxMusic.volume = masterVolume;
-        // mainMusic.volume = masterVolume;
-        // PlayerPrefs.SetFloat("MasterVolume", masterVolume);
-        
     }
 }

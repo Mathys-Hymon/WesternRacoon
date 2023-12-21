@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using System.IO;
+using Random = UnityEngine.Random;
 
 public class CameraScript : MonoBehaviour
 {
@@ -16,7 +18,9 @@ public class CameraScript : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(transform.gameObject);
     }
+
     private void Start()
     {
         offset.x = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height / 2, 0)).x;
@@ -82,5 +86,10 @@ public class CameraScript : MonoBehaviour
     public Vector2 GetBoundaries()
     {
         return boundary;
+    }
+
+    private void CheckBoudaries()
+    {
+        
     }
 }
