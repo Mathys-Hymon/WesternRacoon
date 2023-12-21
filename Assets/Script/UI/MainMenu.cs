@@ -11,7 +11,7 @@ using System.IO;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject optionMenu;
-    
+    [SerializeField] int sceneToLoad;
     public Button closeOption, newGameButton, continueButton, optionButton, quitButton;
     
 
@@ -86,12 +86,12 @@ public class MainMenu : MonoBehaviour
         // check if file exists
         if (!File.Exists(json))
         {
-            SceneManager.LoadScene("ClaireDebug");
+            SceneManager.LoadScene(sceneToLoad);
         }
         else
         {
             File.Delete(json);
-            SceneManager.LoadScene("ClaireDebug");
+            SceneManager.LoadScene(sceneToLoad);
         }
     }
 }
