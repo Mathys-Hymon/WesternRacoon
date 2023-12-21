@@ -339,7 +339,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        if(!dead)
+        Debug.Log("objet freezed" + freezedObject.Count);
+        if (!dead)
         {
             dead = true;
             _audioPlayer.PlayAudio(SoundFX.Death);
@@ -351,9 +352,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Respawn(Vector3 oldPosition)
     {
+        for (int i = 0; i < freezedObject.Count; i++)
+        {
+            freezedObject[i].GetComponent<FreezeMasterScript>().ResetTimer();
+        }
         transform.position = checkpoint.RespawnPosition();
         diedParticle.transform.position = oldPosition;
         freezedObject.Clear();
+        Debug.Log("objet freezed" + freezedObject.Count);
         dead = false;
         Invoke("ResetParticle",1f);
     }
