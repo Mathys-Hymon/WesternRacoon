@@ -29,6 +29,7 @@ public class MainMenu : MonoBehaviour
         if (!File.Exists(Application.persistentDataPath + "/data.save"))
         {
             continueButton.interactable = false;
+            continueButton.enabled = false;
         }
         
         if (inOption)
