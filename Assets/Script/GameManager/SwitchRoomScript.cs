@@ -6,13 +6,13 @@ public class SwitchRoomScript : MonoBehaviour
 
     private Vector2 roomBoundary;
 
-    private void Start()
+    private void Awake()
     {
         roomBoundary.y = transform.position.x;
         SwitchRoomScript[] otherRooms = GameObject.FindObjectsOfType<SwitchRoomScript>();
         for (int i = 0; i < otherRooms.Length; i++)
         {
-            if(otherRooms[i].Room() == previousRoom + 1)
+            if (otherRooms[i].Room() == previousRoom + 1)
             {
                 roomBoundary.x = otherRooms[i].transform.position.x;
                 break;
