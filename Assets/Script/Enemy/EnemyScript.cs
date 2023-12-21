@@ -101,8 +101,8 @@ public class EnemyScript : FreezeMasterScript
                     if(canReach)
                     {
                     float distance = Vector3.Distance(transform.position, PlayerMovement.Instance.transform.position);
-                    RaycastHit2D WallDetection = Physics2D.Raycast(transform.position, (transform.position + transform.forward), distance, obstacle);
-                    Debug.DrawRay(transform.position, (transform.position - PlayerMovement.Instance.transform.position) * (-1));
+                    RaycastHit2D WallDetection = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y-0.5f), (transform.position + transform.forward), distance, obstacle);
+                    Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.5f), (transform.position - PlayerMovement.Instance.transform.position) * (-1));
                         if (WallDetection.collider == null)
                         {
                             rushPlayer = canReach;
@@ -194,7 +194,7 @@ public class EnemyScript : FreezeMasterScript
     
     private bool CheckWall()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 1.5f, obstacle);
+        RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y-1, transform.position.z), transform.right, 1.5f, obstacle);
         if(hit.collider == null)
         {
             return true;
