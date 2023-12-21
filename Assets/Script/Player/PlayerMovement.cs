@@ -77,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Awake()
     {
+        Instance = this;
+ 
         controlesScript = new Controles();
         playerinput = GetComponent<PlayerInput>();
         animator = GetComponent<Animator>();
@@ -119,9 +121,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
-        //GetComponent<Volume>().OnVolumeSlide();
-        
-        Instance = this;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
         cc2d = GetComponent<CircleCollider2D>();
@@ -131,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Animation();
-        //Sound();
+        Sound();
         IsGrounded();
         if(grounded == true)
         {
@@ -447,9 +446,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Sound()
     {
-        if (controlesScript.player.jump.triggered)
+        if (controlesScript.player.jump.triggered && grounded)
         {
             _audioPlayer.PlayAudio(SoundFX.Jump);
+        }
+
+        if (controlesScript.player.jump.triggered && !grounded)
+        {
+            _audioPlayer.PlayAudio(SoundFX.DoubleJump);
         }
         
         // if ((horizontalMovement > 0 || horizontalMovement < 0) && grounded)
@@ -457,10 +461,10 @@ public class PlayerMovement : MonoBehaviour
         //     _audioPlayer.PlayAudio(SoundFX.Walk);
         // }
         //
-        // if (roll)
-        // {
-        //     _audioPlayer.PlayAudio(SoundFX.Roll);
-        // }
+        if (controlesScript.player.roll.triggered && grounded)
+        {
+            _audioPlayer.PlayAudio(SoundFX.Roll);
+        }
     
         if (controlesScript.player.shoot.triggered)
         {

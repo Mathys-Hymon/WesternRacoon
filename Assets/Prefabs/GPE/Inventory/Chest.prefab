@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3210131629399192509}
   - component: {fileID: 5010166339119349334}
   - component: {fileID: 2442920396328272976}
+  - component: {fileID: 792694829027217658}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 403406171
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ab11e8578e2baf240a6d02f27e421059, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,11 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7aada85028cc4e45a99bfdbb0d50ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData:
-    uniqueID: 
-    icon: {fileID: 0}
-  speed: 10
   coinPrefab: {fileID: 8274529853046983856, guid: c0e1dbc01c4faae4e88458158fe020d0, type: 3}
+  isOpened: 0
 --- !u!61 &2442920396328272976
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -135,16 +133,37 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.00000047683716, y: -0.26784623}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.2727156, y: 0.7175443}
   m_EdgeRadius: 0
+--- !u!95 &792694829027217658
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979874842909521604}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 86e1cdf370892214bbffe15320dc0570, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

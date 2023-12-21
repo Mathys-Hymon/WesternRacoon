@@ -7,7 +7,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
     
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] Sprite fullBullet;
@@ -19,8 +19,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         coinText.text = "" + money;
+    }
+
+    private void Start()
+    {
+        Invoke("LoadScene", 0.1f);
     }
 
     private void Update()
@@ -39,6 +44,11 @@ public class GameManager : MonoBehaviour
             bullets[freezeCount].sprite = fullBullet;
 
         }
+    }
+
+    private void LoadScene()
+    {
+        SaveSystem.Instance.Load();
     }
 
     public void SetCoin()
