@@ -439,11 +439,6 @@ public class PlayerMovement : MonoBehaviour
             _audioPlayer.PlayAudio(SoundFX.DoubleJump);
         }
         
-        // if ((horizontalMovement > 0 || horizontalMovement < 0) && grounded)
-        // {
-        //     _audioPlayer.PlayAudio(SoundFX.Walk);
-        // }
-        //
         if (controlesScript.player.roll.triggered && grounded)
         {
             _audioPlayer.PlayAudio(SoundFX.Roll);

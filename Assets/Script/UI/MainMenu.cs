@@ -22,11 +22,6 @@ public class MainMenu : MonoBehaviour
         
         newGameButton.Select();
         optionMenu.SetActive(false);
-        
-        if (!File.Exists(Application.persistentDataPath + "/data.save"))
-        {
-            continueButton.interactable = false;
-        }
     }
 
     private void Update()
