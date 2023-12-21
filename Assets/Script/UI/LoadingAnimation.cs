@@ -32,14 +32,14 @@ public class LoadingAnimation : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject == PlayerMovement.Instance.gameObject)
-        {
-            animator.SetTrigger("Close");
-            StartCoroutine(LoadSceneAsync());
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject == PlayerMovement.Instance.gameObject)
+    //    {
+    //        animator.SetTrigger("Close");
+    //        StartCoroutine(LoadSceneAsync());
+    //    }
+    //}
     IEnumerator LoadSceneAsync()
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(nextLevel);
