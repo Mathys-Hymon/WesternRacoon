@@ -9,8 +9,9 @@ using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu;
-    [SerializeField] GameObject optionMenu;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject optionMenu;
+    //[SerializeField] private Toggle fullscreenToggle;
     
     private PlayerInput playerinput;
     private Controles controlesScript;
@@ -105,4 +106,19 @@ public class PauseMenu : MonoBehaviour
         optionMenu.SetActive(false);
         optionButton.Select();
     }
+    
+    // public void SetFullscreen()
+    // {
+    //     if (fullscreenToggle.isOn)
+    //     {
+    //         Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+    //         //RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
+    //     }
+    //
+    //     else
+    //     {
+    //         Screen.fullScreenMode = FullScreenMode.Windowed;
+    //         //RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
+    //     }
+    // }
 }

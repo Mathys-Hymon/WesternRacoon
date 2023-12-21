@@ -182,6 +182,8 @@ MonoBehaviour:
   floorLayer:
     serializedVersion: 2
     m_Bits: 8
+  deadZoneXOffset: 0.1
+  deadZoneMinusXOffset: 0.1
   diedParticle: {fileID: 4881247095658623612}
 --- !u!114 &371311576083862503
 MonoBehaviour:
@@ -430,10 +432,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b1cb6242cd8fb42b080880a6df9a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSfx: {fileID: 8300000, guid: 511a17bccb7af6148a00f6ce3bb04436, type: 3}
-  doubleJumpSfx: {fileID: 0}
+  jumpSfx: {fileID: 8300000, guid: 8f0974b38e27c894a9cf37152df796be, type: 3}
+  doubleJumpSfx: {fileID: 8300000, guid: 90b7bd644c878be42b07b3195507aa5d, type: 3}
   walkSfx: {fileID: 0}
-  rollSfx: {fileID: 0}
+  rollSfx: {fileID: 8300000, guid: 0062647ae4a6a164ba290f35b9a6c081, type: 3}
   shootSfx: {fileID: 8300000, guid: 51bb5535278fa014e9873b2b341d704a, type: 3}
   deathSfx: {fileID: 8300000, guid: 3dc5f1e2892fbb847a09756d89c6dff1, type: 3}
 --- !u!1 &4284346273338822788
@@ -587,7 +589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothSpeed: 100
-  startRoom: 0
+  boundary: {x: 0, y: 0}
 --- !u!1 &4610899084756055938
 GameObject:
   m_ObjectHideFlags: 0
@@ -5506,7 +5508,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7176849566693614043}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.29368868, w: 0.95590115}
+  m_LocalRotation: {x: -0, y: -0, z: 0.29368877, w: 0.95590115}
   m_LocalPosition: {x: 0.1841, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10582,11 +10584,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9468193
+      value: 0.9468194
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.3217657
+      value: 0.3217656
       objectReference: {fileID: 0}
     - target: {fileID: 386791141387813222, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_Layer
@@ -10606,11 +10608,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8105667
+      value: 0.8105668
       objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.58564633
+      value: -0.5856463
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

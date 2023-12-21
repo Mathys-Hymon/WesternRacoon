@@ -28,6 +28,8 @@ public class SaveSystem : MonoBehaviour
             GameObject Chest1 = GameObject.Find("Chest01");
             Chest1.GetComponent<ChestOpen>().isOpened = saveInfo.chest;
             
+            CameraScript.Instance.NewCameraBoundary(saveInfo.cameraPos);
+            
             string mySavedScene = PlayerPrefs.GetString("sceneName");
         }
     }
@@ -43,6 +45,9 @@ public class SaveSystem : MonoBehaviour
 
         int coins = GameManager.Instance.money;
         saveInfo.money = coins;
+
+        Vector2 cameraPosition = CameraScript.Instance.GetBoundaries();
+        saveInfo.cameraPos = cameraPosition;
         
         GameObject Chest1 = GameObject.Find("Chest01");
         bool chestOpen01 = Chest1.GetComponent<ChestOpen>().isOpened;

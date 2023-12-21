@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System.IO;
 
 public class CameraScript : MonoBehaviour
 {
@@ -18,8 +19,7 @@ public class CameraScript : MonoBehaviour
         Instance = this;
         offset.x = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height / 2, 0)).x;
         offset.y = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2, 0)).x;
-
-        if(boundary == new Vector2(0,0) && startRoom != 0)
+        if(!File.Exists(Application.persistentDataPath + "/data.save") && startRoom != 0)
         {
             SwitchRoomScript[] otherRooms = GameObject.FindObjectsOfType<SwitchRoomScript>();
             for (int i = 0; i < otherRooms.Length; i++)
@@ -75,5 +75,10 @@ public class CameraScript : MonoBehaviour
     public void NewCameraBoundary(Vector2 newBoundary)
     {
         boundary = newBoundary;
+    }
+
+    public Vector2 GetBoundaries()
+    {
+        return boundary;
     }
 }
