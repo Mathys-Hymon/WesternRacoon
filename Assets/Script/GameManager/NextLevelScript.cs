@@ -33,6 +33,7 @@ public class NextLevelScript : MonoBehaviour
     }
     IEnumerator LoadNextLevel()
     {
+        
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(levelToLoad);
     }
