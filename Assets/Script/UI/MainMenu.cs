@@ -18,6 +18,8 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
+        
         newGameButton.Select();
         optionMenu.SetActive(false);
         
@@ -34,7 +36,8 @@ public class MainMenu : MonoBehaviour
 
     public void Continue()
     {
-        SceneManager.LoadScene("ClaireDebug");
+        //SaveSystem.instance.Load();
+        SceneManager.LoadScene(1);
     }
 
     public void NewGame()

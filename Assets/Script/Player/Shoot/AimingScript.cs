@@ -11,6 +11,7 @@ public class AimingScript : MonoBehaviour
     private PlayerInput playerinput;
     private GameObject crosshairRef;
     private GameObject ArmTarget;
+    private bool enableCrosshair = true;
 
     private void Awake()
     {
@@ -36,7 +37,7 @@ public class AimingScript : MonoBehaviour
         if(isGamepad)
         {
             Vector2 mouseMultiplyer = controlesScript.player.aim.ReadValue<Vector2>();
-            if (Mathf.Abs(mouseMultiplyer.x) + Mathf.Abs(mouseMultiplyer.y) <= 0.2f)
+            if (Mathf.Abs(mouseMultiplyer.x) + Mathf.Abs(mouseMultiplyer.y) <= 0.2f || !enableCrosshair)
             {
                 crosshairRef.GetComponent<SpriteRenderer>().enabled = false;
             }
@@ -45,8 +46,8 @@ public class AimingScript : MonoBehaviour
                 crosshairRef.GetComponent<SpriteRenderer>().enabled = true;
             }
 
-                crosshairRef.transform.position = new Vector3(transform.position.x + (4 * mouseMultiplyer.x), transform.position.y + (4 * mouseMultiplyer.y), 0);
-                ArmTarget.transform.position = new Vector3(transform.position.x+mouseMultiplyer.x, transform.position.y + mouseMultiplyer.y, 0);
+            crosshairRef.transform.position = new Vector3(transform.position.x + (4 * mouseMultiplyer.x), transform.position.y + (4 * mouseMultiplyer.y), 0);
+            ArmTarget.transform.position = new Vector3(transform.position.x+mouseMultiplyer.x, transform.position.y + mouseMultiplyer.y, 0);
 
             if (controlesScript.player.shoot.triggered)
             {
@@ -64,22 +65,24 @@ public class AimingScript : MonoBehaviour
 
                     Instantiate(bulletRef, spawnBulletRef.transform.position, Quaternion.Euler(0, 0, angle));
                 }
-                //GameObject emptyMun = Instantiate(cartridgeRef, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 350)));
-                //emptyMun.GetComponent<Rigidbody2D>().velocity = new Vector3(-3 * mouseMultiplyer.x, 4, 0);
             }
         }
         else
         {
-            Cursor.visible = false;
-            crosshairRef.GetComponent<SpriteRenderer>().enabled = true;
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(controlesScript.player.aim.ReadValue<Vector2>());
-            mousePos.z = 0;
-            crosshairRef.transform.position = mousePos;
-            if(mousePos.x == 0 && mousePos.y == 0)
+            if (!enableCrosshair)
             {
-                ArmTarget.transform.localPosition = new Vector3(4.13500023f, -1.06799996f, 0);
+                crosshairRef.GetComponent<SpriteRenderer>().enabled = false;
             }
-            ArmTarget.transform.position = mousePos;
+            else
+            {
+                Cursor.visible = false;
+                crosshairRef.GetComponent<SpriteRenderer>().enabled = true;
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(controlesScript.player.aim.ReadValue<Vector2>());
+                mousePos.z = 0;
+                crosshairRef.transform.position = mousePos;
+                ArmTarget.transform.position = mousePos;
+            }
+           
             if (controlesScript.player.shoot.triggered)
             {
                 Vector2 DirectiontoTarget = crosshairRef.transform.position - transform.position;
@@ -91,5 +94,10 @@ public class AimingScript : MonoBehaviour
                 //emptyMun.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 350));
             }
         }
+    }
+
+    public bool CrosshairState(bool crosshairState)
+    {
+        return enableCrosshair = crosshairState;
     }
 }

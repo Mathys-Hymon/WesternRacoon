@@ -7,20 +7,43 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
     
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] Sprite fullBullet;
     [SerializeField] Sprite emptyBullet;
     [SerializeField] List<Image> bullets = new List<Image>();
+    [SerializeField] GameObject[] objectsToKeep;
     
     int freezeCount = 0;
     public int money;
 
+    public static GameManager instance;
     private void Awake()
     {
-        instance = this;
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        foreach (var item in objectsToKeep)
+        {
+            DontDestroyOnLoad(item);
+        }
+
+        for (int i = 0; i < bullets.Count; i++)
+        { 
+            bullets[i].sprite = fullBullet;
+        }
+
+        Instance = this;
         coinText.text = "" + money;
+    }
+
+    private void Start()
+    {
+        Invoke("LoadScene", 0.2f);
     }
 
     private void Update()
@@ -39,6 +62,11 @@ public class GameManager : MonoBehaviour
             bullets[freezeCount].sprite = fullBullet;
 
         }
+    }
+
+    private void LoadScene()
+    {
+        SaveSystem.Instance.Load();
     }
 
     public void SetCoin()
