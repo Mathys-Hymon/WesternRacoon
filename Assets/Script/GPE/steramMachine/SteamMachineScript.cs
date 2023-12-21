@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SteamMachineScript : MonoBehaviour
@@ -8,6 +5,7 @@ public class SteamMachineScript : MonoBehaviour
     [Header("ObjectReferences")]
     [SerializeField] private ButtonScript[] buttons;
     [SerializeField] private ParticleSystem steamParticle;
+    [SerializeField] private ParticleSystem orangeLightParticle;
     [SerializeField] private LayerMask obstacle;
     [Header("Only for automatic Steam")]
     [SerializeField] private float pauseTime;
@@ -15,6 +13,7 @@ public class SteamMachineScript : MonoBehaviour
 
     private int IsValidInput;
     private bool pushCreate;
+    private bool particlesEnable;
 
     private void Start()
     {
@@ -31,22 +30,31 @@ public class SteamMachineScript : MonoBehaviour
         {
             pushCreate = false;
             Invoke("AutomaticSteam", pauseTime);
+            Invoke("BeforePushing", pauseTime / 3f);
         }
         else
         {
             pushCreate = true;
+            orangeLightParticle.Stop();
             Invoke("AutomaticSteam", steamTime);
         }
     }
 
+    private void BeforePushing()
+    {
+        orangeLightParticle.Play();
+    }
+
     private void Update()
     {
-        if (pushCreate)
+        if (pushCreate && !particlesEnable)
         {
+            particlesEnable = true;
             steamParticle.Play();
         }
-        else if (!pushCreate)
+        else if (!pushCreate && particlesEnable)
         {
+            particlesEnable = false;
             steamParticle.Stop();
         }
     }
@@ -67,9 +75,14 @@ public class SteamMachineScript : MonoBehaviour
                     break;
                 }
             }
+            if(IsValidInput != buttons.Length)
+            {
+                pushCreate = false;
+            }
 
             if (IsValidInput == buttons.Length && collision.gameObject.GetComponent<BoxScript>() != null && collision.gameObject.GetComponent<Rigidbody2D>() != null)
             {
+                pushCreate = true;
                 float distance = Vector3.Distance(transform.position, collision.gameObject.transform.position);
                 RaycastHit2D touchPlayer = Physics2D.Raycast((transform.position + transform.up), ((transform.position + transform.up) - collision.gameObject.transform.position) * (-1), distance, obstacle);
                 Debug.DrawRay(transform.position + transform.up, ((transform.position + transform.up) - collision.gameObject.transform.position) * (-1));
