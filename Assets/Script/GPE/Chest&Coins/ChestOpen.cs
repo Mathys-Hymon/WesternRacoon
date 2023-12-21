@@ -6,11 +6,17 @@ public class ChestOpen : MonoBehaviour
 {
     public GameObject coinPrefab;
     public bool isOpened = false;
-    
+    Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player") && !isOpened)
         {
+            animator.SetBool("Opening", true);
             SpawnCoin();
             isOpened = true;
         }

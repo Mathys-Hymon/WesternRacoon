@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2299122592412568091}
+  - component: {fileID: 513931710396760019}
   m_Layer: 0
   m_Name: PressurePlateform
   m_TagString: Untagged
@@ -33,6 +34,18 @@ Transform:
   - {fileID: 8119158337260054407}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &513931710396760019
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720824686749988737}
+  m_Enabled: 1
+  m_SortingLayerID: 403406171
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &6371850798423159391
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +345,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 7}
+  m_Offset: {x: 0, y: 6.2782955}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -343,7 +356,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 2}
+  m_Size: {x: 0.73143804, y: 3.8042622}
   m_EdgeRadius: 0
 --- !u!114 &8454830848808107373
 MonoBehaviour:
