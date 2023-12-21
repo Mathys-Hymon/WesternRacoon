@@ -107,18 +107,9 @@ public class PauseMenu : MonoBehaviour
         optionButton.Select();
     }
     
-    // public void SetFullscreen()
-    // {
-    //     if (fullscreenToggle.isOn)
-    //     {
-    //         Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-    //         //RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
-    //     }
-    //
-    //     else
-    //     {
-    //         Screen.fullScreenMode = FullScreenMode.Windowed;
-    //         //RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
-    //     }
-    // }
+    public void SetFullscreen()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
+    
 }

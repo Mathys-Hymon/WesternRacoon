@@ -30,6 +30,7 @@ public class Volume : MonoBehaviour
         }
         
         sfxSlider.value = sfxVolume * 100;
+        sfxMusic.Pause(); 
         
         OnVolumeSlide();
     }
