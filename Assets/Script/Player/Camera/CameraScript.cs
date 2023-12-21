@@ -46,7 +46,7 @@ public class CameraScript : MonoBehaviour
             float clampedX = Mathf.Clamp(PlayerMovement.Instance.transform.position.x, boundary.y + offset.y, boundary.x + offset.x);
             targetPosition = new Vector3(clampedX, transform.position.y, transform.position.z);
         }
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothSpeed*Time.deltaTime);
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothSpeed);
     }
 
     public void Shake(float strenght, float duration)
@@ -71,6 +71,7 @@ public class CameraScript : MonoBehaviour
         }
         transform.localPosition = originalPosition;
     }
+
     public void NewCameraBoundary(Vector2 newBoundary)
     {
         boundary = newBoundary;
