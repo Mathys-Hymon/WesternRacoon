@@ -25,7 +25,6 @@ public class Volume : MonoBehaviour
         {
             mainVolume = PlayerPrefs.GetFloat("MainVolume");
         }
-        
         mainVolumeSlider.value = mainVolume * 100;
         
         if (PlayerPrefs.HasKey("SFXVolume"))

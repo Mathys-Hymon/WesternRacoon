@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] Sprite fullBullet;
     [SerializeField] Sprite emptyBullet;
     [SerializeField] List<Image> bullets = new List<Image>();
-    [SerializeField] GameObject[] objectsToKeep;
     
     int freezeCount = 0;
     public int money;
@@ -25,11 +24,6 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-        }
-
-        foreach (var item in objectsToKeep)
-        {
-            DontDestroyOnLoad(item);
         }
 
         for (int i = 0; i < bullets.Count; i++)

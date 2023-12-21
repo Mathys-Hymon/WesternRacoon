@@ -11,11 +11,11 @@ using System.IO;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject optionMenu;
+    [SerializeField] int sceneToLoad;
+    public Button closeOption, newGameButton, continueButton, optionButton, quitButton;
     
-    public Button closeOption;
-    public Button newGameButton;
-    public Button continueButton;
-
+    private bool inOption;
+    
     private void Start()
     {
         Time.timeScale = 1f;
@@ -23,21 +23,37 @@ public class MainMenu : MonoBehaviour
         newGameButton.Select();
         optionMenu.SetActive(false);
         
-        if (!File.Exists(Application.persistentDataPath + "/data.save"))
-        {
-            continueButton.interactable = false;
-        }
+       
     }
 
     private void Update()
     {
+        if (!File.Exists(Application.persistentDataPath + "/data.save"))
+        {
+            continueButton.interactable = false;
+            continueButton.enabled = false;
+        }
+        
+        if (inOption)
+        {
+            newGameButton.interactable = false;
+            continueButton.interactable = false;
+            optionButton.interactable = false;
+            quitButton.interactable = false;
+        }
+        else
+        {
+            newGameButton.interactable = true;
+            continueButton.interactable = true;
+            optionButton.interactable = true;
+            quitButton.interactable = true;
+        }
         //joystickB --> closeOption
     }
 
     public void Continue()
     {
-        //SaveSystem.instance.Load();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SaveSystem.Instance.saveInfo.activeScene);
     }
 
     public void NewGame()
@@ -53,12 +69,14 @@ public class MainMenu : MonoBehaviour
     
     public void CallOptionsPanel()
     {
+        inOption = true;
         optionMenu.SetActive(true);
         closeOption.Select();
     }
 
     public void CloseOptionsPanel()
     {
+        inOption = false;
         optionMenu.SetActive(false);
         newGameButton.Select();
     }
@@ -70,12 +88,12 @@ public class MainMenu : MonoBehaviour
         // check if file exists
         if (!File.Exists(json))
         {
-            SceneManager.LoadScene("ClaireDebug");
+            SceneManager.LoadScene(sceneToLoad);
         }
         else
         {
             File.Delete(json);
-            SceneManager.LoadScene("ClaireDebug");
+            SceneManager.LoadScene(sceneToLoad);
         }
     }
 }
