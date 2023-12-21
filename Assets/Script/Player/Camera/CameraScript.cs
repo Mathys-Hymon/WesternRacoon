@@ -26,7 +26,6 @@ public class CameraScript : MonoBehaviour
             {
                 if (otherRooms[i].Room() == startRoom)
                 {
-                    print("newBoundary");
                     boundary = otherRooms[i].GetBoundary();
                     break;
                 }
