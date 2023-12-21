@@ -24,8 +24,9 @@ public class CameraScript : MonoBehaviour
             SwitchRoomScript[] otherRooms = GameObject.FindObjectsOfType<SwitchRoomScript>();
             for (int i = 0; i < otherRooms.Length; i++)
             {
-                if (otherRooms[i].Room() == startRoom-1)
+                if (otherRooms[i].Room() == startRoom)
                 {
+                    print("newBoundary");
                     boundary = otherRooms[i].GetBoundary();
                     break;
                 }
