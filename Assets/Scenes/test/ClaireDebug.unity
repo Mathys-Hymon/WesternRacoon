@@ -843,6 +843,11 @@ Transform:
   - {fileID: 1903563524}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &97050195 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5367652346137516990, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
+  m_PrefabInstance: {fileID: 1808771147}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &127378334 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 152488972051768237, guid: 24955e93ecc97d94aac3d463ca8d91e9, type: 3}
@@ -2701,7 +2706,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &670731445
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2967,7 +2972,13 @@ MonoBehaviour:
   - {fileID: 333751383}
   - {fileID: 666504840}
   - {fileID: 1629287306}
-  objectsToKeep: []
+  objectsToKeep:
+  - {fileID: 97050195}
+  - {fileID: 146063799}
+  - {fileID: 1965098988}
+  - {fileID: 13480991}
+  - {fileID: 962848668}
+  - {fileID: 778078886}
   money: 0
 --- !u!114 &778078889
 MonoBehaviour:
