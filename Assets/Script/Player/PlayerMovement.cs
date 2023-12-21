@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -51,9 +52,7 @@ public class PlayerMovement : MonoBehaviour
     private CheckPointScript checkpoint;
     private SoundPlayer _audioPlayer;
 
-    //For wind
-    public bool inWindZone = false;
-    public GameObject windZone;
+
 
     public void SetFreezedObject(GameObject newObject)
     {
@@ -251,12 +250,6 @@ public class PlayerMovement : MonoBehaviour
             }
         } 
         TurnCheck();
-
-        //For windArea influence on player
-        if(inWindZone)
-        {
-            rb.AddForce(windZone.GetComponent<WindArea>().direction * windZone.GetComponent<WindArea>().strength);
-        }
     }
 
     private void IsGrounded()
@@ -471,23 +464,5 @@ public class PlayerMovement : MonoBehaviour
             _audioPlayer.PlayAudio(SoundFX.Shoot);
         }
         
-    }
-
-    //For collision with wind trigger area
-    void OnTriggerEnter2D(Collider2D coll)
-    {
-        if(coll.gameObject.tag == "wind")
-        {
-            Debug.Log("It's windy out there!");
-            windZone = coll.gameObject;
-            inWindZone = true;
-        }
-    }
-    void OnTriggerExit2D(Collider2D coll)
-    {
-        if (coll.gameObject.tag == "wind")
-        {
-            inWindZone = false;
-        }
     }
 }

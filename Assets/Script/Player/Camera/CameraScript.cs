@@ -55,7 +55,6 @@ public class CameraScript : MonoBehaviour
 
     public IEnumerator CoroutineShake(float strenght, float duration)
     {
-        print("cameraShake");
         Vector3 originalPosition = transform.localPosition;
         float elapsed = 0.0f;
         while (elapsed < duration)
