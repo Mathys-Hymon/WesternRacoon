@@ -6,7 +6,7 @@ public class SoundPlayer : MonoBehaviour
 {
     private AudioSource _audioSource;
 
-    [SerializeField] private AudioClip jumpSfx, walkSfx, rollSfx, shootSfx, deathSfx;
+    [SerializeField] private AudioClip jumpSfx, doubleJumpSfx, walkSfx, rollSfx, shootSfx, deathSfx;
     //private float volume;
 
     private void Start()
@@ -21,12 +21,15 @@ public class SoundPlayer : MonoBehaviour
             case SoundFX.Jump:
                 _audioSource.PlayOneShot(jumpSfx);
                 break;
+            case SoundFX.DoubleJump :
+                _audioSource.PlayOneShot(doubleJumpSfx);
+                break;
             // case SoundFX.Walk:
             //     _audioSource.PlayOneShot(walkSfx);
             //     break;
-            // case SoundFX.Roll:
-            //     _audioSource.PlayOneShot(rollSfx);
-                //break;
+             case SoundFX.Roll:
+                 _audioSource.PlayOneShot(rollSfx);
+                break;
             case SoundFX.Shoot:
                 _audioSource.PlayOneShot(shootSfx);
                 break;
@@ -41,8 +44,9 @@ public class SoundPlayer : MonoBehaviour
 public enum SoundFX
 {
     Jump,
+    DoubleJump,
     // Walk,
-    // Roll,
+    Roll,
     Shoot,
     Death
 }

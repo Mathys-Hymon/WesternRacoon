@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Invoke("LoadScene", 0.1f);
+        Invoke("LoadScene", 0.2f);
     }
 
     private void Update()

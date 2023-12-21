@@ -18,6 +18,8 @@ public class MainMenu : MonoBehaviour
     private bool inOption;
     private void Start()
     {
+        Time.timeScale = 1f;
+        
         newGameButton.Select();
         optionMenu.SetActive(false);
         
