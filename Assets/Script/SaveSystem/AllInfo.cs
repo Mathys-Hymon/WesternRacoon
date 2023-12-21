@@ -7,9 +7,9 @@ using UnityEngine;
 public class AllInfo
 {
     public float x, y, z;
+    public float cameraPosX, cameraPosY;
     public int money;
     public bool chest;
-    //porte
 }
 
 

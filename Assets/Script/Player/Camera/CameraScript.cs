@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using System.IO;
+using Random = UnityEngine.Random;
 
 public class CameraScript : MonoBehaviour
 {
@@ -12,19 +15,22 @@ public class CameraScript : MonoBehaviour
     private Vector2 offset;
     private Vector2 boundary;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
-        Instance = this;
         offset.x = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height / 2, 0)).x;
         offset.y = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2, 0)).x;
 
-        if(boundary == new Vector2(0,0))
+        if (!File.Exists(Application.persistentDataPath + "/data.save") && startRoom != 0)
         {
             SwitchRoomScript[] otherRooms = GameObject.FindObjectsOfType<SwitchRoomScript>();
             for (int i = 0; i < otherRooms.Length; i++)
             {
-                if (otherRooms[i].Room() == startRoom-1)
+                if (otherRooms[i].Room() == startRoom - 1)
                 {
                     boundary = otherRooms[i].GetBoundary();
                     break;
@@ -46,7 +52,7 @@ public class CameraScript : MonoBehaviour
             float clampedX = Mathf.Clamp(PlayerMovement.Instance.transform.position.x, boundary.y + offset.y, boundary.x + offset.x);
             targetPosition = new Vector3(clampedX, transform.position.y, transform.position.z);
         }
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothSpeed*Time.deltaTime);
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothSpeed);
     }
 
     public void Shake(float strenght, float duration)
@@ -56,7 +62,6 @@ public class CameraScript : MonoBehaviour
 
     public IEnumerator CoroutineShake(float strenght, float duration)
     {
-        print("cameraShake");
         Vector3 originalPosition = transform.localPosition;
         float elapsed = 0.0f;
         while (elapsed < duration)
@@ -71,8 +76,19 @@ public class CameraScript : MonoBehaviour
         }
         transform.localPosition = originalPosition;
     }
+
     public void NewCameraBoundary(Vector2 newBoundary)
     {
         boundary = newBoundary;
+    }
+
+    public Vector2 GetBoundaries()
+    {
+        return boundary;
+    }
+
+    private void CheckBoudaries()
+    {
+        
     }
 }

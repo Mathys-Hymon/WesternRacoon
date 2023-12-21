@@ -190,7 +190,17 @@ public class MovingPlateformScript : FreezeMasterScript
     {
         if (target != null)
         {
-            target.transform.position = transform.position + offset;
+            if(target.GetComponent<FreezeMasterScript>() != null)
+            {
+                if(!target.GetComponent<FreezeMasterScript>().isFreezed())
+                {
+                    target.transform.position = transform.position + offset;
+                }
+            }
+            else
+            {
+                target.transform.position = transform.position + offset;
+            }
         }
 
     }
