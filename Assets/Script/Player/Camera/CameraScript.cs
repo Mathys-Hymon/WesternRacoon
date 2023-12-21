@@ -4,12 +4,13 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour
 {
     [SerializeField] private float smoothSpeed;
-    [SerializeField] private Vector2 boundary;
+    [SerializeField] private int startRoom;
 
 
     public static CameraScript Instance;
     private Vector3 velocity = Vector3.zero;
     private Vector2 offset;
+    private Vector2 boundary;
 
 
     private void Start()
@@ -23,7 +24,7 @@ public class CameraScript : MonoBehaviour
             SwitchRoomScript[] otherRooms = GameObject.FindObjectsOfType<SwitchRoomScript>();
             for (int i = 0; i < otherRooms.Length; i++)
             {
-                if (otherRooms[i].Room() == 0)
+                if (otherRooms[i].Room() == startRoom-1)
                 {
                     boundary = otherRooms[i].GetBoundary();
                     break;
