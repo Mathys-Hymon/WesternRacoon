@@ -225,7 +225,7 @@ public class EnemyScript : FreezeMasterScript
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject == PlayerMovement.Instance.gameObject)
+        if (other.gameObject.tag == "Player")
         {
             isInRange = true;
         }
@@ -233,7 +233,7 @@ public class EnemyScript : FreezeMasterScript
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (PlayerMovement.Instance.gameObject != null && other.gameObject == PlayerMovement.Instance.gameObject)
+        if (other.gameObject.tag == "Player")
         {
             isInRange = false;
         }
