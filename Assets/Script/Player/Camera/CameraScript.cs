@@ -18,13 +18,14 @@ public class CameraScript : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
     }
 
     private void Start()
     {
         offset.x = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height / 2, 0)).x;
         offset.y = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2, 0)).x;
-
+        
         if (startRoom != 0)
         {
             SwitchRoomScript[] otherRooms = GameObject.FindObjectsOfType<SwitchRoomScript>();
@@ -86,4 +87,5 @@ public class CameraScript : MonoBehaviour
     {
         return boundary;
     }
+    
 }
