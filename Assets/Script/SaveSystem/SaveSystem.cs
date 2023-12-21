@@ -29,7 +29,6 @@ public class SaveSystem : MonoBehaviour
             Chest1.GetComponent<ChestOpen>().isOpened = saveInfo.chest;
             
             CameraScript.Instance.NewCameraBoundary(new Vector2(saveInfo.cameraPosX, saveInfo.cameraPosY));
-            Debug.Log(CameraScript.Instance.GetBoundaries());
             CameraScript.Instance.transform.position = new Vector3(saveInfo.x, CameraScript.Instance.transform.position.y, saveInfo.z);
         }
     }
