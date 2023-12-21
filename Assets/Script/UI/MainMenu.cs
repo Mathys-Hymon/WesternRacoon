@@ -12,10 +12,10 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject optionMenu;
     
-    public Button closeOption;
-    public Button newGameButton;
-    public Button continueButton;
+    public Button closeOption, newGameButton, continueButton, optionButton, quitButton;
+    
 
+    private bool inOption;
     private void Start()
     {
         newGameButton.Select();
@@ -25,10 +25,26 @@ public class MainMenu : MonoBehaviour
         {
             continueButton.interactable = false;
         }
+
+        
     }
 
     private void Update()
     {
+        if (inOption)
+        {
+            newGameButton.interactable = false;
+            continueButton.interactable = false;
+            optionButton.interactable = false;
+            quitButton.interactable = false;
+        }
+        else
+        {
+            newGameButton.interactable = true;
+            continueButton.interactable = true;
+            optionButton.interactable = true;
+            quitButton.interactable = true;
+        }
         //joystickB --> closeOption
     }
 
@@ -51,12 +67,14 @@ public class MainMenu : MonoBehaviour
     
     public void CallOptionsPanel()
     {
+        inOption = true;
         optionMenu.SetActive(true);
         closeOption.Select();
     }
 
     public void CloseOptionsPanel()
     {
+        inOption = false;
         optionMenu.SetActive(false);
         newGameButton.Select();
     }
