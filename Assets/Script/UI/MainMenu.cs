@@ -14,8 +14,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] int sceneToLoad;
     public Button closeOption, newGameButton, continueButton, optionButton, quitButton;
     
-
     private bool inOption;
+    
     private void Start()
     {
         Time.timeScale = 1f;
@@ -27,12 +27,15 @@ public class MainMenu : MonoBehaviour
         {
             continueButton.interactable = false;
         }
-
-        
     }
 
     private void Update()
     {
+        if (!File.Exists(Application.persistentDataPath + "/data.save"))
+        {
+            continueButton.interactable = false;
+        }
+        
         if (inOption)
         {
             newGameButton.interactable = false;
@@ -52,8 +55,7 @@ public class MainMenu : MonoBehaviour
 
     public void Continue()
     {
-        SaveSystem.Instance.Load();
-        //SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SaveSystem.Instance.saveInfo.activeScene);
     }
 
     public void NewGame()
