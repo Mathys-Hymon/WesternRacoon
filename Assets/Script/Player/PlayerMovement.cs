@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private bool grounded;
     private bool roll;
     private bool isGamepad;
+    private bool dead;
 
     private int jumpNumber;
     private int actualRoom = 1;
@@ -339,23 +340,35 @@ public class PlayerMovement : MonoBehaviour
         if(collision.gameObject.layer == 8)
         {
             Die();
+            
         }
     }
 
     public void Die()
     {
-        _audioPlayer.PlayAudio(SoundFX.Death);
-        diedParticle.Play();
-        Invoke("Respawn", 0.1f);
+        if(!dead)
+        {
+            dead = true;
+            _audioPlayer.PlayAudio(SoundFX.Death);
+            diedParticle.Play();
+            CameraScript.Instance.Shake(1f, 0.4f);
+            Respawn(transform.position);
+        }
     }
 
-    private void Respawn()
+    private void Respawn(Vector3 oldPosition)
     {
         transform.position = checkpoint.RespawnPosition();
+        diedParticle.transform.position = oldPosition;
         freezedObject.Clear();
+        dead = false;
+        Invoke("ResetParticle",1f);
     }
     
-
+    private void ResetParticle()
+    {
+        diedParticle.transform.position = transform.position;
+    }
 
 
     private void Animation()

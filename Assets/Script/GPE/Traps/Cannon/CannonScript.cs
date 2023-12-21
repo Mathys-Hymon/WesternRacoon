@@ -34,7 +34,7 @@ public class CannonScript : MonoBehaviour
     }
     private void ShootBullet()
     {
-        sr.color = Color.clear;
+        sr.color = Color.white;
         GameObject bullet = Instantiate(bulletPrefab, transform.position + (transform.right * 2), transform.rotation);
         bullet.GetComponent<CannonBulletScript>().SetBulletSpeed(bulletSpeed);
         Invoke("ShootBullet", 10f / shootFrequency);

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CameraScript : MonoBehaviour
@@ -16,6 +17,19 @@ public class CameraScript : MonoBehaviour
         Instance = this;
         offset.x = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height / 2, 0)).x;
         offset.y = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2, 0)).x;
+
+        if(boundary == new Vector2(0,0))
+        {
+            SwitchRoomScript[] otherRooms = GameObject.FindObjectsOfType<SwitchRoomScript>();
+            for (int i = 0; i < otherRooms.Length; i++)
+            {
+                if (otherRooms[i].Room() == 0)
+                {
+                    boundary = otherRooms[i].GetBoundary();
+                    break;
+                }
+            }
+        }
     }
     private void Update()
     {
@@ -34,6 +48,28 @@ public class CameraScript : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothSpeed*Time.deltaTime);
     }
 
+    public void Shake(float strenght, float duration)
+    {
+        StartCoroutine(CoroutineShake(strenght/20f, duration));
+    }
+
+    public IEnumerator CoroutineShake(float strenght, float duration)
+    {
+        print("cameraShake");
+        Vector3 originalPosition = transform.localPosition;
+        float elapsed = 0.0f;
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * strenght;
+            float y = Random.Range(-1f, 1f) * strenght;
+
+            transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y + y, originalPosition.z);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.localPosition = originalPosition;
+    }
     public void NewCameraBoundary(Vector2 newBoundary)
     {
         boundary = newBoundary;
