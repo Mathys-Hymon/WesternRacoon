@@ -2774,6 +2774,7 @@ MonoBehaviour:
   - {fileID: 333751383}
   - {fileID: 666504840}
   - {fileID: 1629287306}
+  objectsToKeep: []
   money: 0
 --- !u!114 &778078889
 MonoBehaviour:
@@ -6015,6 +6016,10 @@ PrefabInstance:
       propertyPath: diedParticle
       value: 
       objectReference: {fileID: 3099459}
+    - target: {fileID: 1614156765902360851, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
+      propertyPath: groundFriction
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2495024997009111169, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.81056666
