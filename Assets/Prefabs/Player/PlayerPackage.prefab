@@ -148,6 +148,7 @@ MonoBehaviour:
   rollSfx: {fileID: 8300000, guid: 0062647ae4a6a164ba290f35b9a6c081, type: 3}
   shootSfx: {fileID: 8300000, guid: 51bb5535278fa014e9873b2b341d704a, type: 3}
   deathSfx: {fileID: 8300000, guid: 3dc5f1e2892fbb847a09756d89c6dff1, type: 3}
+  timeFreezeSfx: {fileID: 8300000, guid: 990ebb5287e7bf649bf354e7e0f18957, type: 3}
 --- !u!1 &3305133647993923695
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +166,6 @@ GameObject:
   - component: {fileID: 2083458069802310440}
   - component: {fileID: 8211064800730227996}
   - component: {fileID: 3485270961986345737}
-  - component: {fileID: 4459587742014904831}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -469,25 +469,6 @@ SortingGroup:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_SortAtRoot: 0
---- !u!114 &4459587742014904831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3305133647993923695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52b1cb6242cd8fb42b080880a6df9a1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioSource: {fileID: 0}
-  jumpSfx: {fileID: 8300000, guid: 8f0974b38e27c894a9cf37152df796be, type: 3}
-  doubleJumpSfx: {fileID: 8300000, guid: 90b7bd644c878be42b07b3195507aa5d, type: 3}
-  walkSfx: {fileID: 0}
-  rollSfx: {fileID: 8300000, guid: 0062647ae4a6a164ba290f35b9a6c081, type: 3}
-  shootSfx: {fileID: 8300000, guid: 51bb5535278fa014e9873b2b341d704a, type: 3}
-  deathSfx: {fileID: 8300000, guid: 3dc5f1e2892fbb847a09756d89c6dff1, type: 3}
 --- !u!1 &4284346273338822788
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,8 +619,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2358f9d33e10c714ba360b77923ff6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothSpeed: 100
-  startRoom: 0
+  smoothSpeed: 0.5
+  startRoom: 1
 --- !u!1 &4610899084756055938
 GameObject:
   m_ObjectHideFlags: 0

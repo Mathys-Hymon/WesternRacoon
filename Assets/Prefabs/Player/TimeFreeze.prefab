@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7021267760839963835}
   - component: {fileID: 8662883680061537393}
   - component: {fileID: 5583880821209556466}
-  - component: {fileID: 8750379337979715228}
+  - component: {fileID: 6432596699789583784}
   m_Layer: 0
   m_Name: TimeFreeze
   m_TagString: Untagged
@@ -291,7 +291,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a8bfe483ace039e48976cbc873bfe4ef, type: 3}
   - {fileID: 21300000, guid: 5f71c8a321ca6bc4790ed5009f411a16, type: 3}
   - {fileID: 21300000, guid: 2677769466e33944dbf8cd0c40467b67, type: 3}
---- !u!82 &8750379337979715228
+--- !u!82 &6432596699789583784
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -303,7 +303,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 990ebb5287e7bf649bf354e7e0f18957, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
