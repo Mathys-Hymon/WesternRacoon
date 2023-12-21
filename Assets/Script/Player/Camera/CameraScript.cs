@@ -18,7 +18,6 @@ public class CameraScript : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        DontDestroyOnLoad(transform.gameObject);
     }
 
     private void Start()
