@@ -182,8 +182,6 @@ MonoBehaviour:
   floorLayer:
     serializedVersion: 2
     m_Bits: 8
-  deadZoneXOffset: 0.1
-  deadZoneMinusXOffset: 0.1
   diedParticle: {fileID: 4881247095658623612}
 --- !u!114 &371311576083862503
 MonoBehaviour:
@@ -588,8 +586,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2358f9d33e10c714ba360b77923ff6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothSpeed: 100
-  boundary: {x: 0, y: 0}
+  smoothSpeed: 0.5
+  startRoom: 0
 --- !u!1 &4610899084756055938
 GameObject:
   m_ObjectHideFlags: 0
@@ -5508,7 +5506,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7176849566693614043}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.29368877, w: 0.95590115}
+  m_LocalRotation: {x: -0, y: -0, z: 0.29368868, w: 0.95590115}
   m_LocalPosition: {x: 0.1841, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10584,11 +10582,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9468194
+      value: 0.9468193
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.3217656
+      value: 0.3217657
       objectReference: {fileID: 0}
     - target: {fileID: 386791141387813222, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_Layer
@@ -10608,11 +10606,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8105668
+      value: 0.8105667
       objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5856463
+      value: -0.58564633
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

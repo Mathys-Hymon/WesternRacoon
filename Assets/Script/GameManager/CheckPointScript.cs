@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class CheckPointScript : MonoBehaviour
 {
     [SerializeField] private GameObject respawnPosition;
+    [SerializeField] private Light2D checkpointLight;
+
+    private bool actualCheckpoint;
 
     private void Awake()
     {
@@ -13,7 +17,16 @@ public class CheckPointScript : MonoBehaviour
         if(collision.gameObject == PlayerMovement.Instance.gameObject)
         {
             PlayerMovement.Instance.SetNewCheckPoint(this);
+            actualCheckpoint = true;
             SaveSystem.Instance.Save();
+        }
+    }
+
+    private void Update()
+    {
+        if(actualCheckpoint)
+        {
+
         }
     }
 
