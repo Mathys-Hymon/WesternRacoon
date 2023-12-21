@@ -3495,9 +3495,10 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
+    cameraPosX: 0
+    cameraPosY: 0
     money: 0
     chest: 0
-    cameraPos: {x: 0, y: 0}
 --- !u!4 &962848670
 Transform:
   m_ObjectHideFlags: 0
@@ -6404,12 +6405,20 @@ PrefabInstance:
       value: PlayerPackage (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5854353366911748740, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
+      propertyPath: startRoom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5854353366911748740, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: boundary.x
       value: -39.06
       objectReference: {fileID: 0}
     - target: {fileID: 5854353366911748740, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: boundary.y
       value: -13.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5854353366911748740, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
+      propertyPath: smoothSpeed
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6198027461885504052, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: m_Enabled
