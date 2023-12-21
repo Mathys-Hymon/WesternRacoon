@@ -1,13 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChestOpen : MonoBehaviour
 {
-    public GameObject coinPrefab;
-    public bool isOpened = false;
-    Animator animator;
+    [Header("CoinRef")]
+    [SerializeField] private GameObject coinPrefab;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource audioSRC;
+
+    private bool isOpened = false;
+    private Animator animator;
+
+    public void SetisOpen(bool newOpen)
+    {
+        isOpened = newOpen;
+    }
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -16,6 +23,7 @@ public class ChestOpen : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player") && !isOpened)
         {
+            audioSRC.Play();
             animator.SetBool("Opening", true);
             SpawnCoin();
             isOpened = true;
