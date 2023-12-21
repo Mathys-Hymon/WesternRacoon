@@ -5,8 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance;
-    
-    [SerializeField] private SoundPlayer _audioPlayer;
+    public bool isFacingRight = true;
 
     [Header("Movement\n")]
     [SerializeField] private float _speed = 15f;
@@ -34,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
     private bool roll;
     private bool isGamepad;
     private bool dead;
-    private bool isFacingRight = true;
 
     private int jumpNumber;
     private int actualRoom = 1;
@@ -45,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     private List<GameObject> freezedObject = new List<GameObject>();
     private Animator animator;
     private CheckPointScript checkpoint;
+    private SoundPlayer _audioPlayer;
 
     public void SetFreezedObject(GameObject newObject)
     {
@@ -114,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
         cc2d = GetComponent<CircleCollider2D>();
+        _audioPlayer = GetComponent<SoundPlayer>();
     }
 
     void Update()
@@ -125,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         {
             lastTimeGrounded = Time.time;
 
-            if(controlesScript.player.roll.triggered && !roll)
+            if(controlesScript.player.roll.triggered && !roll && !dead)
             {
                 roll = true;
                 Invoke("StopRoll", 0.3f);
@@ -141,11 +141,11 @@ public class PlayerMovement : MonoBehaviour
                 cc2d.offset = new Vector2(0,Mathf.Lerp(-0.1f, -0.37f, 1f * Time.deltaTime));
             }
         }
-        if (controlesScript.player.jump.triggered)
+        if (controlesScript.player.jump.triggered && !dead)
         {
             lastTimeJumpPressed = Time.time;
         }
-        if (controlesScript.player.jump.triggered && (lastTimeJumpPressed - lastTimeGrounded < coyoteTime || jumpNumber < 2))
+        if (controlesScript.player.jump.triggered && (lastTimeJumpPressed - lastTimeGrounded < coyoteTime || jumpNumber < 2) && !dead)
         {
             if(lastTimeJumpPressed - lastTimeGrounded > coyoteTime)
             {
@@ -168,8 +168,14 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
-
-        horizontalMovement = controlesScript.player.move.ReadValue<float>();
+        if(!dead)
+        {
+            horizontalMovement = controlesScript.player.move.ReadValue<float>();
+        }
+        else
+        {
+            horizontalMovement = 0f;
+        }
 
         if (horizontalMovement != 0)
         {
@@ -244,6 +250,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void IsGrounded()
     {
+        print(grounded);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, floorLayer);
         
         //print(hit.collider.gameObject.name);
@@ -339,8 +346,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("objet freezed" + freezedObject.Count);
-        if (!dead)
+        if(!dead)
         {
             dead = true;
             _audioPlayer.PlayAudio(SoundFX.Death);
@@ -352,21 +358,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Respawn(Vector3 oldPosition)
     {
+        transform.position = checkpoint.RespawnPosition();
+        diedParticle.transform.position = oldPosition;
         for (int i = 0; i < freezedObject.Count; i++)
         {
             freezedObject[i].GetComponent<FreezeMasterScript>().ResetTimer();
         }
-        transform.position = checkpoint.RespawnPosition();
-        diedParticle.transform.position = oldPosition;
         freezedObject.Clear();
-        Debug.Log("objet freezed" + freezedObject.Count);
-        dead = false;
         Invoke("ResetParticle",1f);
     }
     
     private void ResetParticle()
     {
         diedParticle.transform.position = transform.position;
+        dead = false;
     }
 
 
@@ -446,6 +451,11 @@ public class PlayerMovement : MonoBehaviour
             _audioPlayer.PlayAudio(SoundFX.DoubleJump);
         }
         
+        // if ((horizontalMovement > 0 || horizontalMovement < 0) && grounded)
+        // {
+        //     _audioPlayer.PlayAudio(SoundFX.Walk);
+        // }
+        //
         if (controlesScript.player.roll.triggered && grounded)
         {
             _audioPlayer.PlayAudio(SoundFX.Roll);
