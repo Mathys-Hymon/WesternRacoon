@@ -19,10 +19,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float airControl = 0.8f;
     [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private LayerMask floorLayer;
-
-    [Header("Camera Stuff\n")]
-    [SerializeField] private float deadZoneXOffset;
-    [SerializeField] private float deadZoneMinusXOffset;
     
     [Header("Die\n")]
     [SerializeField] private ParticleSystem diedParticle;
@@ -31,23 +27,19 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMovement;
     private float lastTimeGrounded;
     private float lastTimeJumpPressed;
-    private float _fallSpeedYThresholdChange;
     private float horizontalVelocity;
 
     private bool grounded;
-    private bool invincibilityFrame;
     private bool roll;
     private bool isGamepad;
+    private bool dead;
 
     private int jumpNumber;
+    private int actualRoom = 1;
 
-    private GameObject lastCheckpoint;
     private Rigidbody2D rb;
     private CircleCollider2D cc2d;
     private Controles controlesScript;
-    private GameObject _cameraFollow;
-    private PlayerInput playerinput;
-    private CameraFollowPlayer _cameraFollowObject;
     private List<GameObject> freezedObject = new List<GameObject>();
     private Animator animator;
     private CheckPointScript checkpoint;
@@ -75,9 +67,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Awake()
     {
+        Instance = this;
+ 
         controlesScript = new Controles();
-        _cameraFollow = GameObject.Find("CameraFollowPlayer");
-        playerinput = GetComponent<PlayerInput>();
         animator = GetComponent<Animator>();
     }
 
@@ -94,6 +86,11 @@ public class PlayerMovement : MonoBehaviour
     public void OnDeviceChange(PlayerInput pi)
     {
         isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
+    }
+
+    public int ActualRoom()
+    {
+        return actualRoom;
     }
 
     public void SetNewCheckPoint(CheckPointScript newCheckpoint)
@@ -113,21 +110,16 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
-        //GetComponent<Volume>().OnVolumeSlide();
-        
-        Instance = this;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
         cc2d = GetComponent<CircleCollider2D>();
         _audioPlayer = GetComponent<SoundPlayer>();
-        _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowPlayer>();
-        _fallSpeedYThresholdChange = CameraManager.instance._fallspeedYThresholdChange;
     }
 
     void Update()
     {
         Animation();
-        //Sound();
+        Sound();
         IsGrounded();
         if(grounded == true)
         {
@@ -200,22 +192,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.gravityScale = 3f;
         }
-        
 
-        //if we are falling past a certain speed threshold
-        if(rb.velocity.y < _fallSpeedYThresholdChange && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
-        {
-            CameraManager.instance.LerpYDamping(true);
-        }
-
-        //if we are standing still or moving up
-        if(rb.velocity.y >= 0f && !CameraManager.instance.isLerpingYDamping && CameraManager.instance.LerpedFromPlayerFalling)
-        {
-            //reset so it can be called again
-            CameraManager.instance.LerpedFromPlayerFalling = false;
-            CameraManager.instance.LerpYDamping(false);
-        }
-        
         if (controlesScript.player.unfreeze.triggered)
         {
             for (int i = 0; i < freezedObject.Count; i++)
@@ -331,20 +308,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Turn()
     {
-        CancelInvoke("TurnCinemachine");
         if (isFacingRight)
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = false;
-            Invoke("TurnCinemachine", 0.2f);
         }
         else
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = true;
-            Invoke("TurnCinemachine", 0.2f);
         }
     }
 
@@ -352,34 +326,41 @@ public class PlayerMovement : MonoBehaviour
     {
         return grounded;
     }
-    
-    private void TurnCinemachine()
-    {
-        _cameraFollowObject.CallTurn();
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.layer == 8)
         {
             Die();
+            
         }
     }
 
     public void Die()
     {
-        _audioPlayer.PlayAudio(SoundFX.Death);
-        diedParticle.Play();
-        Invoke("Respawn", 0.1f);
+        if(!dead)
+        {
+            dead = true;
+            _audioPlayer.PlayAudio(SoundFX.Death);
+            diedParticle.Play();
+            CameraScript.Instance.Shake(1f, 0.4f);
+            Respawn(transform.position);
+        }
     }
 
-    private void Respawn()
+    private void Respawn(Vector3 oldPosition)
     {
         transform.position = checkpoint.RespawnPosition();
+        diedParticle.transform.position = oldPosition;
         freezedObject.Clear();
+        dead = false;
+        Invoke("ResetParticle",1f);
     }
     
-
+    private void ResetParticle()
+    {
+        diedParticle.transform.position = transform.position;
+    }
 
 
     private void Animation()
@@ -448,9 +429,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Sound()
     {
-        if (controlesScript.player.jump.triggered)
+        if (controlesScript.player.jump.triggered && grounded)
         {
             _audioPlayer.PlayAudio(SoundFX.Jump);
+        }
+
+        if (controlesScript.player.jump.triggered && !grounded)
+        {
+            _audioPlayer.PlayAudio(SoundFX.DoubleJump);
         }
         
         // if ((horizontalMovement > 0 || horizontalMovement < 0) && grounded)
@@ -458,10 +444,10 @@ public class PlayerMovement : MonoBehaviour
         //     _audioPlayer.PlayAudio(SoundFX.Walk);
         // }
         //
-        // if (roll)
-        // {
-        //     _audioPlayer.PlayAudio(SoundFX.Roll);
-        // }
+        if (controlesScript.player.roll.triggered && grounded)
+        {
+            _audioPlayer.PlayAudio(SoundFX.Roll);
+        }
     
         if (controlesScript.player.shoot.triggered)
         {
@@ -469,6 +455,4 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
-
-
 }

@@ -8,7 +8,6 @@ public class CannonScript : MonoBehaviour
     [SerializeField] private float shootFrequency;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private bool startShooting;
-    [SerializeField] private float bulletSpawnOffset = 1f;
 
     [Header("BULLET REFERENCE")]
     [SerializeField] public GameObject bulletPrefab;
@@ -35,8 +34,8 @@ public class CannonScript : MonoBehaviour
     }
     private void ShootBullet()
     {
-        sr.color = Color.clear;
-        GameObject bullet = Instantiate(bulletPrefab, transform.position + (transform.right * bulletSpawnOffset), transform.rotation);
+        sr.color = Color.white;
+        GameObject bullet = Instantiate(bulletPrefab, transform.position + (transform.right * 2), transform.rotation);
         bullet.GetComponent<CannonBulletScript>().SetBulletSpeed(bulletSpeed);
         Invoke("ShootBullet", 10f / shootFrequency);
     }
