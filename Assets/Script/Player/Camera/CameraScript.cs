@@ -19,7 +19,7 @@ public class CameraScript : MonoBehaviour
         offset.x = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height / 2, 0)).x;
         offset.y = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2, 0)).x;
 
-        if(boundary == new Vector2(0,0) && !File.Exists(Application.persistentDataPath + "/data.save"))
+        if(!File.Exists(Application.persistentDataPath + "/data.save"))
         {
             SwitchRoomScript[] otherRooms = GameObject.FindObjectsOfType<SwitchRoomScript>();
             for (int i = 0; i < otherRooms.Length; i++)

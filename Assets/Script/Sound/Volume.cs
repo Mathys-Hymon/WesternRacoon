@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Volume : MonoBehaviour
 {
+    // [Header("Master")]
+    // [SerializeField] private float masterVolume;
+    // [SerializeField] private Slider masterSlider;
+    
     [Header("MainMusic")]
     [SerializeField] private float mainVolume;
     [SerializeField] private Slider mainVolumeSlider;
@@ -15,9 +19,6 @@ public class Volume : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private AudioSource sfxMusic;
     
-    [SerializeField] private float masterVolume;
-    
-
     private void Awake()
     {
         if (PlayerPrefs.HasKey("MainVolume"))
@@ -33,6 +34,15 @@ public class Volume : MonoBehaviour
         }
         
         sfxSlider.value = sfxVolume * 100;
+        
+        // if (PlayerPrefs.HasKey("MasterVolume"))
+        // {
+        //     masterVolume = PlayerPrefs.GetFloat("MasterVolume");
+        // }
+        //
+        // masterSlider.value = masterVolume * 100;
+        //
+        //
         OnVolumeSlide();
     }
 
@@ -45,5 +55,11 @@ public class Volume : MonoBehaviour
         sfxVolume = sfxSlider.value / 100;
         sfxMusic.volume = sfxVolume;
         PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
+
+        // masterVolume = masterSlider.value / 100;
+        // sfxMusic.volume = masterVolume;
+        // mainMusic.volume = masterVolume;
+        // PlayerPrefs.SetFloat("MasterVolume", masterVolume);
+        
     }
 }
