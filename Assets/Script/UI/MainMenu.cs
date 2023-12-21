@@ -52,8 +52,8 @@ public class MainMenu : MonoBehaviour
 
     public void Continue()
     {
-        //SaveSystem.instance.Load();
-        SceneManager.LoadScene(1);
+        SaveSystem.Instance.Load();
+        //SceneManager.LoadScene(1);
     }
 
     public void NewGame()
