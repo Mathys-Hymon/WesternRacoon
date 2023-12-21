@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class SoundPlayer : MonoBehaviour
 {
-    private AudioSource _audioSource;
-
-    [SerializeField] private AudioClip jumpSfx, doubleJumpSfx, walkSfx, rollSfx, shootSfx, deathSfx;
-    //private float volume;
-
-    private void Start()
-    {
-        _audioSource = GetComponent<AudioSource>();
-    }
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] private AudioClip jumpSfx, doubleJumpSfx, walkSfx, rollSfx, shootSfx, deathSfx, timeFreezeSfx;
 
     public void PlayAudio(SoundFX sound)
     {
@@ -24,9 +17,6 @@ public class SoundPlayer : MonoBehaviour
             case SoundFX.DoubleJump :
                 _audioSource.PlayOneShot(doubleJumpSfx);
                 break;
-            // case SoundFX.Walk:
-            //     _audioSource.PlayOneShot(walkSfx);
-            //     break;
              case SoundFX.Roll:
                  _audioSource.PlayOneShot(rollSfx);
                 break;
@@ -35,6 +25,9 @@ public class SoundPlayer : MonoBehaviour
                 break;
             case SoundFX.Death:
                 _audioSource.PlayOneShot(deathSfx);
+                break;
+            case SoundFX.TimeFreeze:
+                _audioSource.PlayOneShot(timeFreezeSfx);
                 break;
         }
     }
@@ -45,9 +38,9 @@ public enum SoundFX
 {
     Jump,
     DoubleJump,
-    // Walk,
     Roll,
     Shoot,
-    Death
+    Death,
+    TimeFreeze
 }
 
