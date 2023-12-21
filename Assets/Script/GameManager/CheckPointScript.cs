@@ -6,10 +6,9 @@ public class CheckPointScript : MonoBehaviour
     [SerializeField] private GameObject respawnPosition;
     [SerializeField] private Light2D checkpointLight;
 
-    private bool actualCheckpoint;
-
     private void Awake()
     {
+        checkpointLight.intensity = 0;
         respawnPosition.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -17,16 +16,8 @@ public class CheckPointScript : MonoBehaviour
         if(collision.gameObject == PlayerMovement.Instance.gameObject)
         {
             PlayerMovement.Instance.SetNewCheckPoint(this);
-            actualCheckpoint = true;
             SaveSystem.Instance.Save();
-        }
-    }
-
-    private void Update()
-    {
-        if(actualCheckpoint)
-        {
-
+            checkpointLight.intensity = 3f;
         }
     }
 
