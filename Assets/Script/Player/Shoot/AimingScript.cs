@@ -46,8 +46,8 @@ public class AimingScript : MonoBehaviour
                 crosshairRef.GetComponent<SpriteRenderer>().enabled = true;
             }
 
-                crosshairRef.transform.position = new Vector3(transform.position.x + (4 * mouseMultiplyer.x), transform.position.y + (4 * mouseMultiplyer.y), 0);
-                ArmTarget.transform.position = new Vector3(transform.position.x+mouseMultiplyer.x, transform.position.y + mouseMultiplyer.y, 0);
+            crosshairRef.transform.position = new Vector3(transform.position.x + (4 * mouseMultiplyer.x), transform.position.y + (4 * mouseMultiplyer.y), 0);
+            ArmTarget.transform.position = new Vector3(transform.position.x+mouseMultiplyer.x, transform.position.y + mouseMultiplyer.y, 0);
 
             if (controlesScript.player.shoot.triggered)
             {
@@ -65,8 +65,6 @@ public class AimingScript : MonoBehaviour
 
                     Instantiate(bulletRef, transform.position, Quaternion.Euler(0, 0, angle));
                 }
-                //GameObject emptyMun = Instantiate(cartridgeRef, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 350)));
-                //emptyMun.GetComponent<Rigidbody2D>().velocity = new Vector3(-3 * mouseMultiplyer.x, 4, 0);
             }
         }
         else

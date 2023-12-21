@@ -562,7 +562,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -658,9 +658,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b1cb6242cd8fb42b080880a6df9a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSfx: {fileID: 8300000, guid: 511a17bccb7af6148a00f6ce3bb04436, type: 3}
+  jumpSfx: {fileID: 8300000, guid: 8f0974b38e27c894a9cf37152df796be, type: 3}
+  doubleJumpSfx: {fileID: 8300000, guid: 90b7bd644c878be42b07b3195507aa5d, type: 3}
   walkSfx: {fileID: 0}
-  rollSfx: {fileID: 0}
+  rollSfx: {fileID: 8300000, guid: 0062647ae4a6a164ba290f35b9a6c081, type: 3}
   shootSfx: {fileID: 8300000, guid: 51bb5535278fa014e9873b2b341d704a, type: 3}
   deathSfx: {fileID: 8300000, guid: 3dc5f1e2892fbb847a09756d89c6dff1, type: 3}
 --- !u!1 &3406182885603333597
@@ -756,7 +757,7 @@ Transform:
   m_GameObject: {fileID: 4284346273338822788}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.3351882, y: -6.9709973, z: -9.929868}
+  m_LocalPosition: {x: 3.3351882, y: 2.0290024, z: -9.929868}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
