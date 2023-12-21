@@ -178,11 +178,8 @@ public class MovingPlateformScript : FreezeMasterScript
     }
     void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject == PlayerMovement.Instance.gameObject)
-        {
-            target = collision.gameObject;
-            offset = target.transform.position - transform.position;
-        }
+        target = collision.gameObject;
+        offset = target.transform.position - transform.position;
     }
     void OnTriggerExit2D(Collider2D collision)
     {

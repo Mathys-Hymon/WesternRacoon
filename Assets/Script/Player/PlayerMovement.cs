@@ -360,10 +360,6 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = checkpoint.RespawnPosition();
         diedParticle.transform.position = oldPosition;
-        for (int i = 0; i < freezedObject.Count; i++)
-        {
-            freezedObject[i].GetComponent<FreezeMasterScript>().ResetTimer();
-        }
         freezedObject.Clear();
         Invoke("ResetParticle",1f);
     }
