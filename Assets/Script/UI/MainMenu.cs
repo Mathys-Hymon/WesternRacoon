@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject optionMenu;
     [SerializeField] int sceneToLoad;
+    [SerializeField] int newGameScene;
     public Button closeOption, newGameButton, continueButton, optionButton, quitButton;
     
     private bool inOption;
@@ -92,12 +93,12 @@ public class MainMenu : MonoBehaviour
         // check if file exists
         if (!File.Exists(json))
         {
-            SceneManager.LoadScene(sceneToLoad);
+            SceneManager.LoadScene(newGameScene);
         }
         else
         {
             File.Delete(json);
-            SceneManager.LoadScene(sceneToLoad);
+            SceneManager.LoadScene(newGameScene);
         }
     }
     public void Change()

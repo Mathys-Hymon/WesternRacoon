@@ -110,6 +110,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(Application.persistentDataPath + "/data.save");
+
         Time.timeScale = 1;
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
