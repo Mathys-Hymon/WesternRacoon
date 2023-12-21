@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class WindArea : MonoBehaviour
 {
-    public float strength;
-    public Vector2 direction;
+    [SerializeField] private float strength;
+    [SerializeField] private float XDirection;
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject == PlayerMovement.Instance.gameObject)
+        {
+            PlayerMovement.Instance.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(XDirection, 0) *  strength);
+        }
+    }
 }
