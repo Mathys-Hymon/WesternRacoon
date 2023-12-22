@@ -13,6 +13,8 @@ public class PistonScript : FreezeMasterScript
     [Header("put the X value if you check isHorizontal, else put the Y value\n")]
     [SerializeField] private bool isHorizontal;
     [SerializeField] private float targetDownPosition;
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource audioSRC;
 
 
     private float initialPositionY;
@@ -66,11 +68,21 @@ public class PistonScript : FreezeMasterScript
     {
         if (!moveUp)
         {
+            if(!freezed)
+            {
+                audioSRC.pitch = Random.Range(0.6f, 0.9f);
+                audioSRC.Play();
+            }
             moveUp = true;
             y = targetDownPosition;
         }
         else
         {
+            if (!freezed)
+            {
+                audioSRC.pitch = Random.Range(1f, 1.15f);
+                audioSRC.Play();
+            }
             moveUp = false;
             y = initialPositionY;
         }

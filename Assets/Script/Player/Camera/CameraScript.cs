@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using System.IO;
 using Random = UnityEngine.Random;
+using UnityEngine.InputSystem;
 
 public class CameraScript : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class CameraScript : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private Vector2 offset;
     private Vector2 boundary;
+    private Gamepad pad;
 
     private void Awake()
     {
@@ -54,9 +56,28 @@ public class CameraScript : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothSpeed);
     }
 
-    public void Shake(float strenght, float duration)
+    public void Shake(float strenght, float duration, float rumbleShake)
     {
-        StartCoroutine(CoroutineShake(strenght/20f, duration));
+        pad = Gamepad.current;
+
+        if(pad !=  null)
+        {
+            pad.SetMotorSpeeds(rumbleShake, rumbleShake / 2);
+            StartCoroutine(StopRumble(duration, pad));
+        }
+        StartCoroutine(StopRumble(duration, pad));
+    }
+
+    private IEnumerator StopRumble(float duration, Gamepad pad)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        pad.SetMotorSpeeds(0f, 0f);
     }
 
     public IEnumerator CoroutineShake(float strenght, float duration)

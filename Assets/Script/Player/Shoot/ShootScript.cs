@@ -7,6 +7,8 @@ public class ShootScript : MonoBehaviour
     [SerializeField] private GameObject timer;
     [SerializeField] float speed;
     [SerializeField] float freezeDuration;
+
+    private SoundPlayer _audioPlayer;
     void Update()
     {
         transform.position += transform.up * speed * Time.deltaTime;

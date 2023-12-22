@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance;
-    public bool isFacingRight = true;
+    
+    [SerializeField] private SoundPlayer _audioPlayer;
 
     [Header("Movement\n")]
     [SerializeField] private float _speed = 15f;
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private bool roll;
     private bool isGamepad;
     private bool dead;
+    private bool isFacingRight = true;
 
     private int jumpNumber;
     private int actualRoom = 1;
@@ -43,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
     private List<GameObject> freezedObject = new List<GameObject>();
     private Animator animator;
     private CheckPointScript checkpoint;
-    private SoundPlayer _audioPlayer;
 
     public void SetFreezedObject(GameObject newObject)
     {
@@ -113,7 +114,6 @@ public class PlayerMovement : MonoBehaviour
         walkParticle.Stop();
         rb = GetComponent<Rigidbody2D>();
         cc2d = GetComponent<CircleCollider2D>();
-        _audioPlayer = GetComponent<SoundPlayer>();
     }
 
     void Update()
@@ -250,7 +250,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void IsGrounded()
     {
-        print(grounded);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, floorLayer);
         
         //print(hit.collider.gameObject.name);
@@ -351,7 +350,7 @@ public class PlayerMovement : MonoBehaviour
             dead = true;
             _audioPlayer.PlayAudio(SoundFX.Death);
             diedParticle.Play();
-            CameraScript.Instance.Shake(1f, 0.4f);
+            CameraScript.Instance.Shake(1f, 0.4f, 0.5f);
             Respawn(transform.position);
         }
     }
@@ -447,11 +446,6 @@ public class PlayerMovement : MonoBehaviour
             _audioPlayer.PlayAudio(SoundFX.DoubleJump);
         }
         
-        // if ((horizontalMovement > 0 || horizontalMovement < 0) && grounded)
-        // {
-        //     _audioPlayer.PlayAudio(SoundFX.Walk);
-        // }
-        //
         if (controlesScript.player.roll.triggered && grounded)
         {
             _audioPlayer.PlayAudio(SoundFX.Roll);

@@ -22,8 +22,6 @@ public class MainMenu : MonoBehaviour
         
         newGameButton.Select();
         optionMenu.SetActive(false);
-        
-       
     }
 
     private void Update()
@@ -48,7 +46,13 @@ public class MainMenu : MonoBehaviour
             optionButton.interactable = true;
             quitButton.interactable = true;
         }
-        //joystickB --> closeOption
+
+        if (Input.GetKey(KeyCode.Joystick1Button1) && optionMenu.activeSelf == true)
+        {
+            optionMenu.SetActive(false);
+            inOption = false;
+            newGameButton.Select();
+        }
     }
 
     public void Continue()
@@ -95,5 +99,9 @@ public class MainMenu : MonoBehaviour
             File.Delete(json);
             SceneManager.LoadScene(sceneToLoad);
         }
+    }
+    public void Change()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
     }
 }
