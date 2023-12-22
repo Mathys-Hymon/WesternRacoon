@@ -707,7 +707,11 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -458094405
   m_SortingLayer: 2
+<<<<<<<< HEAD:Assets/Scenes/LVL2SECURITYFINAL.unity
   m_SortingOrder: 5
+========
+  m_SortingOrder: 2
+>>>>>>>> origin/LD_Sibelle_B:Assets/Scenes/Level2_Rémy.unity
   m_Sprite: {fileID: 21300000, guid: c6681faeb5b83b54b8e60e1fe0798cc2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -996,6 +1000,98 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+<<<<<<<< HEAD:Assets/Scenes/LVL2SECURITYFINAL.unity
+========
+--- !u!1001 &37827979
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 213112692241157879, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 876566987408709556, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475271206599463709, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 139.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475271206599463709, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35126162
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475271206599463709, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.112889215
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475271206599463709, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475271206599463709, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475271206599463709, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475271206599463709, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475271206599463709, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475271206599463709, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475271206599463709, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263726534980045105, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_Name
+      value: CheckpointPREFAB
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263726534980045105, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232815827990751474, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3671928765637363484, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3671928765637363484, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_ShadowIntensityEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6066918848586419775, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_Size.y
+      value: 6.3354034
+      objectReference: {fileID: 0}
+    - target: {fileID: 6066918848586419775, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.7787809
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 93e453dd20bcfb74fbed9b72200491d1, type: 3}
+>>>>>>>> origin/LD_Sibelle_B:Assets/Scenes/Level2_Rémy.unity
 --- !u!1 &41594142
 GameObject:
   m_ObjectHideFlags: 0
@@ -26094,6 +26190,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+<<<<<<<< HEAD:Assets/Scenes/LVL2SECURITYFINAL.unity
     - target: {fileID: 5457303016782630629, guid: 4b7d49f0796008147bc1f6ee2281c859, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -26102,6 +26199,8 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -458094405
       objectReference: {fileID: 0}
+========
+>>>>>>>> origin/LD_Sibelle_B:Assets/Scenes/Level2_Rémy.unity
     - target: {fileID: 5508767974876249691, guid: 4b7d49f0796008147bc1f6ee2281c859, type: 3}
       propertyPath: m_Name
       value: HOTPIPE (13)
@@ -30585,6 +30684,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+<<<<<<<< HEAD:Assets/Scenes/LVL2SECURITYFINAL.unity
     - target: {fileID: 5457303016782630629, guid: 4b7d49f0796008147bc1f6ee2281c859, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -30593,6 +30693,8 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -458094405
       objectReference: {fileID: 0}
+========
+>>>>>>>> origin/LD_Sibelle_B:Assets/Scenes/Level2_Rémy.unity
     - target: {fileID: 5508767974876249691, guid: 4b7d49f0796008147bc1f6ee2281c859, type: 3}
       propertyPath: m_Name
       value: HOTPIPE (3)
@@ -33708,18 +33810,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 94ae54b6a4bfabe44a95c059d734bbe2, type: 3}
     - target: {fileID: 5457303016782630629, guid: 4b7d49f0796008147bc1f6ee2281c859, type: 3}
+<<<<<<<< HEAD:Assets/Scenes/LVL2SECURITYFINAL.unity
       propertyPath: m_SortingLayer
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5457303016782630629, guid: 4b7d49f0796008147bc1f6ee2281c859, type: 3}
+========
+>>>>>>>> origin/LD_Sibelle_B:Assets/Scenes/Level2_Rémy.unity
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5457303016782630629, guid: 4b7d49f0796008147bc1f6ee2281c859, type: 3}
+<<<<<<<< HEAD:Assets/Scenes/LVL2SECURITYFINAL.unity
       propertyPath: m_SortingLayerID
       value: -458094405
       objectReference: {fileID: 0}
     - target: {fileID: 5457303016782630629, guid: 4b7d49f0796008147bc1f6ee2281c859, type: 3}
+========
+>>>>>>>> origin/LD_Sibelle_B:Assets/Scenes/Level2_Rémy.unity
       propertyPath: m_MaskInteraction
       value: 2
       objectReference: {fileID: 0}
@@ -47830,6 +47938,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+<<<<<<<< HEAD:Assets/Scenes/LVL2SECURITYFINAL.unity
     - target: {fileID: 5457303016782630629, guid: 4b7d49f0796008147bc1f6ee2281c859, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -47838,6 +47947,8 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -458094405
       objectReference: {fileID: 0}
+========
+>>>>>>>> origin/LD_Sibelle_B:Assets/Scenes/Level2_Rémy.unity
     - target: {fileID: 5508767974876249691, guid: 4b7d49f0796008147bc1f6ee2281c859, type: 3}
       propertyPath: m_Name
       value: HOTPIPE (21)
@@ -51709,4 +51820,7 @@ SceneRoots:
   - {fileID: 237169945}
   - {fileID: 1556730308}
   - {fileID: 1234429823}
+<<<<<<<< HEAD:Assets/Scenes/LVL2SECURITYFINAL.unity
   - {fileID: 930502587}
+========
+>>>>>>>> origin/LD_Sibelle_B:Assets/Scenes/Level2_Rémy.unity
