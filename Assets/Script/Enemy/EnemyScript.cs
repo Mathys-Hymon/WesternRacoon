@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
 
 public class EnemyScript : FreezeMasterScript
 {
