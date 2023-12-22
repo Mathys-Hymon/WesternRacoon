@@ -6,16 +6,20 @@ public class VideoController : MonoBehaviour
 {
     public VideoClip[] videoClips;
     public int nextSceneIndex;
-    [Range(0f,1f)]public float playerVolume=1f;
+    [Range(0f,1f)]public float playerVolume;
     private int currentClipIndex = 0;
     private VideoPlayer videoPlayer1;
 
     void Start()
     {
         videoPlayer1 = gameObject.AddComponent<VideoPlayer>();
+        
+        if (PlayerPrefs.HasKey("MainVolume"))
+        {
+            playerVolume = PlayerPrefs.GetFloat("MainVolume");
+        }
 
         InitializeVideoPlayer(videoPlayer1);
-
         PlayNextClip();
     }
 
