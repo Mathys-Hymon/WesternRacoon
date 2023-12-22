@@ -48,7 +48,7 @@ public class SaveSystem : MonoBehaviour
         saveInfo.money = coins;
         
         GameObject Chest1 = GameObject.Find("Chest01");
-        bool chestOpen01 = Chest1.GetComponent<ChestOpen>().isOpened;
+        bool chestOpen01 = Chest1.GetComponent<ChestOpen>().GetOpen();
         saveInfo.chest = chestOpen01;
         
         int actualScene =  SceneManager.GetActiveScene().buildIndex;

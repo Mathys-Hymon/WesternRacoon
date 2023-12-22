@@ -11,6 +11,10 @@ public class ChestOpen : MonoBehaviour
     private bool isOpened = false;
     private Animator animator;
 
+    public bool GetOpen()
+    {
+        return isOpened;
+    }
     public void SetisOpen(bool newOpen)
     {
         isOpened = newOpen;

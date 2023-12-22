@@ -351,7 +351,7 @@ public class PlayerMovement : MonoBehaviour
             dead = true;
             _audioPlayer.PlayAudio(SoundFX.Death);
             diedParticle.Play();
-            CameraScript.Instance.Shake(1f, 0.4f);
+            CameraScript.Instance.Shake(1f, 0.4f, 0.5f);
             Respawn(transform.position);
         }
     }
