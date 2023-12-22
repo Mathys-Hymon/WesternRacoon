@@ -14,6 +14,8 @@ public class MovingPlateformScript : FreezeMasterScript
     [Header("put the X value if you check isHorizontal, else put the Y value\n")]
     [SerializeField] private bool isHorizontal;
     [SerializeField] private float targetPosition;
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource audioSRC;
 
     private float initialPositionY;
     private float y;
@@ -59,6 +61,7 @@ public class MovingPlateformScript : FreezeMasterScript
             goPointB = false;
             y = initialPositionY;
         }
+        audioSRC.Play();
         Invoke("FlipFlopPosition", waitTime);
     }
 
