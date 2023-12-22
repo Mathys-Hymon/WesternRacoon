@@ -61,7 +61,10 @@ public class MovingPlateformScript : FreezeMasterScript
             goPointB = false;
             y = initialPositionY;
         }
-        audioSRC.Play();
+        if(audioSRC != null)
+        {
+            audioSRC.Play();
+        }
         Invoke("FlipFlopPosition", waitTime);
     }
 
