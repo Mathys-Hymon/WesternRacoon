@@ -55,7 +55,7 @@ public class CameraScript : MonoBehaviour
             pad.SetMotorSpeeds(rumbleShake, rumbleShake / 2);
             StartCoroutine(StopRumble(duration, pad));
         }
-        StartCoroutine(StopRumble(duration, pad));
+        StartCoroutine(CoroutineShake(strenght,duration));
     }
 
     private IEnumerator StopRumble(float duration, Gamepad pad)
