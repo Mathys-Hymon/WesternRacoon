@@ -250,11 +250,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void IsGrounded()
     {
+        
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, floorLayer);
         
         //print(hit.collider.gameObject.name);
         if (hit.collider != null)
         {
+            
             jumpNumber = 0;
             grounded = true;
         }
@@ -382,11 +384,15 @@ public class PlayerMovement : MonoBehaviour
     private void Animation()
     {
         //Jumping animations
-        if (controlesScript.player.jump.triggered)
+        //if (controlesScript.player.jump.triggered)
+        //{
+            
+        //}
+        if(rb.velocity.y > 0.2f)
         {
             animator.SetBool("isJumping", true);
         }
-        
+
         if (controlesScript.player.jump.triggered && !grounded)
         {
             animator.SetBool("isJumping", false);
@@ -418,10 +424,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded)
         {
+            animator.SetBool("isJumping", false);
             animator.SetBool("Falling", false);
-            
             animator.ResetTrigger("DoubleJumping");
         }
+
 
         //Falling animation
         if (rb.velocity.y < 0.2f && !grounded)
