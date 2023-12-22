@@ -21,6 +21,16 @@ public class SaveSystem : MonoBehaviour
         {
             string json = File.ReadAllText(Application.persistentDataPath + "/data.save");
             saveInfo = JsonUtility.FromJson<AllInfo>(json);
+
+            if (saveInfo.activeScene != SceneManager.GetActiveScene().buildIndex)
+            {
+                CameraScript.Instance.CheckRoom(1);
+            }
+            else
+            {
+                CameraScript.Instance.CheckRoom(0);
+            }
+            
  
             PlayerMovement.Instance.transform.position = new Vector3(saveInfo.x, saveInfo.y, saveInfo.z);
             GameManager.Instance.money = saveInfo.money;

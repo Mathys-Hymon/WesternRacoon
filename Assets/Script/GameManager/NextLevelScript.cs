@@ -20,6 +20,7 @@ public class NextLevelScript : MonoBehaviour
     {
         if(collision.gameObject.layer == 6)
         {
+            CameraScript.Instance.CheckRoom(1);
             player.GetComponent<AimingScript>().CrosshairState(false);
             animator.SetBool("FadeIn", true);
             StartCoroutine(LoadNextLevel());
