@@ -97,7 +97,7 @@ Transform:
   m_GameObject: {fileID: 1445187976734261503}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.096, y: 6.239, z: 0}
+  m_LocalPosition: {x: 17.096, y: 6.239, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -180,7 +180,6 @@ MonoBehaviour:
     m_Bits: 24
   delay: 100
   speed: 10
-  audioSRC: {fileID: 2169054230484117545}
 --- !u!58 &6324040180207193745
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -309,7 +308,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 403406171
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_SortAtRoot: 0
 --- !u!1 &6467434767674164177
 GameObject:

@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
         
         if (PlayerMovement.Instance.GetFreezedObject().Count > freezeCount)
         {
-            Debug.Log(freezeCount);
             bullets[PlayerMovement.Instance.GetFreezedObject().Count - 1].sprite = emptyBullet;
             freezeCount ++;
         }

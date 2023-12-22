@@ -404,7 +404,7 @@ MonoBehaviour:
   _audioPlayer: {fileID: 116307027695697806}
   _speed: 10
   walkParticle: {fileID: 7115240822108328029}
-  groundFriction: 3
+  groundFriction: 5
   airFriction: 0.5
   dashForce: 2
   jumpForce: 12.1
@@ -551,7 +551,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 403406171
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_SortAtRoot: 0
 --- !u!1 &4284346273338822788
 GameObject:
@@ -5625,7 +5625,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7176849566693614043}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.2936897, w: 0.9559009}
+  m_LocalRotation: {x: -0, y: -0, z: 0.29368868, w: 0.95590115}
   m_LocalPosition: {x: 0.1841, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10701,11 +10701,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9468199
+      value: 0.9468193
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.3217639
+      value: 0.3217657
       objectReference: {fileID: 0}
     - target: {fileID: 386791141387813222, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_Layer
@@ -10725,11 +10725,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.81056726
+      value: 0.8105667
       objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: 9bb5f9c22d1d4524f9961c55b87aee30, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5856457
+      value: -0.58564633
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
