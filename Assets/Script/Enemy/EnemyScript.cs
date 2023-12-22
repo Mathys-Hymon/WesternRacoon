@@ -32,7 +32,7 @@ public class EnemyScript : FreezeMasterScript
 
     private void EnableArm()
     {
-        for(int i = 0; i < ArmSR.Length; i++)
+        for (int i = 0; i < ArmSR.Length; i++)
         {
             ArmSR[i].SetActive(true);
         }
@@ -66,9 +66,9 @@ public class EnemyScript : FreezeMasterScript
                 }
             }
 
-            if(isInRange)
+            if (isInRange)
             {
-                if (floorY >= PlayerMovement.Instance.GetFloorY() - 0.3f && floorY <= PlayerMovement.Instance.GetFloorY() + 0.3f && !rushPlayer)
+                if (floorY >= PlayerMovement.Instance.GetFloorY() - 0.2f && floorY <= PlayerMovement.Instance.GetFloorY() + 0.2 && !rushPlayer)
                 {
                     for (int i = 1; i < (int)Vector2.Distance(transform.position, PlayerMovement.Instance.transform.position) + 1; i++)
                     {
@@ -99,16 +99,15 @@ public class EnemyScript : FreezeMasterScript
                             }
                         }
                     }
-                    if(canReach)
+                    if (canReach)
                     {
-                    float distance = Vector3.Distance(transform.position, PlayerMovement.Instance.transform.position);
-                        if (CheckWall(distance))
+                        float distance = Vector3.Distance(transform.position, PlayerMovement.Instance.transform.position);
+                        if (CheckWall(distance) == true)
                         {
                             rushPlayer = canReach;
                         }
                         else
                         {
-
                             rushPlayer = false;
                         }
                     }
@@ -128,7 +127,7 @@ public class EnemyScript : FreezeMasterScript
                     {
                         Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
                         transform.rotation = Quaternion.Euler(rotator);
-                        targetArmPos.transform.position = transform.position + new Vector3(Mathf.Clamp((PlayerMovement.Instance.transform.position.x - transform.position.x)/10,-0.5f,0.5f), (PlayerMovement.Instance.transform.position.y - transform.position.y)/10, 0);
+                        targetArmPos.transform.position = transform.position + new Vector3(Mathf.Clamp((PlayerMovement.Instance.transform.position.x - transform.position.x) / 10, -0.5f, 0.5f), (PlayerMovement.Instance.transform.position.y - transform.position.y) / 10, 0);
                         lookRight = false;
                     }
                     else if (transform.position.x - PlayerMovement.Instance.transform.position.x > 0 && !rushPlayer && touchPlayer.collider == null)
@@ -144,7 +143,7 @@ public class EnemyScript : FreezeMasterScript
                         canShoot = false;
                         Shoot();
                     }
-                    else if(touchPlayer.collider != null)
+                    else if (touchPlayer.collider != null)
                     {
                         if (lookRight)
                         {
@@ -160,7 +159,7 @@ public class EnemyScript : FreezeMasterScript
             }
             else
             {
-                if(lookRight)
+                if (lookRight)
                 {
                     targetArmPos.transform.localPosition = new Vector3(0.06f, -0.86f, 0);
                 }
@@ -168,7 +167,7 @@ public class EnemyScript : FreezeMasterScript
                 {
                     targetArmPos.transform.localPosition = new Vector3(0.06f, -0.86f, 0);
                 }
-                
+
             }
         }
         else if (freezed)
@@ -180,22 +179,22 @@ public class EnemyScript : FreezeMasterScript
     public void Shoot()
     {
         directiontoTarget = PlayerMovement.Instance.transform.position - transform.position;
-        float angle = -90+Mathf.Atan2(directiontoTarget.y, directiontoTarget.x) * Mathf.Rad2Deg;
-        Instantiate(bulletRef, targetArmPos.transform.position, Quaternion.Euler(0,0,angle));
-        
-        Invoke("ResetShoot",delay);
-        
+        float angle = -90 + Mathf.Atan2(directiontoTarget.y, directiontoTarget.x) * Mathf.Rad2Deg;
+        Instantiate(bulletRef, targetArmPos.transform.position, Quaternion.Euler(0, 0, angle));
+
+        Invoke("ResetShoot", delay);
+
     }
 
     private void ResetShoot()
     {
         canShoot = true;
     }
-    
+
     private bool CheckWall(float Distance)
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y-0.2f, transform.position.z), transform.right, Distance, obstacle);
-        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z), transform.right*Distance);
+        RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), transform.right, Distance, obstacle);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), transform.right * Distance);
 
         if (hit.collider == null)
         {
@@ -209,15 +208,14 @@ public class EnemyScript : FreezeMasterScript
     }
     private bool IsGrounded(float offsetX)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(offsetX,-0.5f,0), Vector2.down, 1.5f, obstacle);
-        Debug.DrawRay(transform.position + new Vector3(offsetX,-0.5f,0), Vector2.down*1.5f);
-        if(offsetX == 0)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(offsetX, 0, 0), Vector2.down, 1.5f, obstacle);
+        Debug.DrawRay(transform.position + new Vector3(offsetX, 0, 0), Vector2.down);
+        if (offsetX == 0)
         {
             floorY = hit.collider.transform.position.y;
         }
-        if(hit.collider == null )
+        if (hit.collider == null)
         {
-            print("not grounded");
             return false;
         }
         else
@@ -260,7 +258,7 @@ public class EnemyScript : FreezeMasterScript
     {
         if (!freezed)
         {
-            if(collision.gameObject == PlayerMovement.Instance.gameObject)
+            if (collision.gameObject == PlayerMovement.Instance.gameObject)
             {
                 PlayerMovement.Instance.Die();
             }
