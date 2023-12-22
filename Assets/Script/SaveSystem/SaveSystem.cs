@@ -22,13 +22,11 @@ public class SaveSystem : MonoBehaviour
             string json = File.ReadAllText(Application.persistentDataPath + "/data.save");
             saveInfo = JsonUtility.FromJson<AllInfo>(json);
  
-            PlayerMovement.Instance.transform.position = new Vector3(saveInfo.x, saveInfo.y, PlayerMovement.Instance.transform.position.z);
+            PlayerMovement.Instance.transform.position = new Vector3(saveInfo.x, saveInfo.y, saveInfo.z);
             GameManager.Instance.money = saveInfo.money;
             
             CameraScript.Instance.NewCameraBoundary(new Vector2(saveInfo.cameraPosX, saveInfo.cameraPosY));
             CameraScript.Instance.transform.position = new Vector3(saveInfo.x, CameraScript.Instance.transform.position.y, saveInfo.z);
-            
-            CameraScript.Instance.CheckRoom(0);
         }
     }
 
@@ -37,6 +35,7 @@ public class SaveSystem : MonoBehaviour
         Vector3 position = PlayerMovement.Instance.GetCheckpoint();
         saveInfo.x = position.x;
         saveInfo.y = position.y;
+        saveInfo.z = position.z;
         
         Vector2 cameraPosition = CameraScript.Instance.GetBoundaries();
         saveInfo.cameraPosX = cameraPosition.x;

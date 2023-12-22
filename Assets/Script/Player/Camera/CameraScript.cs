@@ -26,8 +26,18 @@ public class CameraScript : MonoBehaviour
     {
         offset.x = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height / 2, 0)).x;
         offset.y = transform.position.x - Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2, 0)).x;
-        
-        CheckRoom(startRoom);
+        if (startRoom != 0)
+        {
+            SwitchRoomScript[] otherRooms = GameObject.FindObjectsOfType<SwitchRoomScript>();
+            for (int i = 0; i < otherRooms.Length; i++)
+            {
+                if (otherRooms[i].Room() == startRoom - 1)
+                {
+                    boundary = otherRooms[i].GetBoundary();
+                    break;
+                }
+            }
+        }
     }
     private void Update()
     {
@@ -95,23 +105,5 @@ public class CameraScript : MonoBehaviour
     public Vector2 GetBoundaries()
     {
         return boundary;
-    }
-
-    public void CheckRoom(int newStartRoom)
-    {
-        print(newStartRoom);
-        startRoom = newStartRoom;
-        if (startRoom != 0)
-        {
-            SwitchRoomScript[] otherRooms = GameObject.FindObjectsOfType<SwitchRoomScript>();
-            for (int i = 0; i < otherRooms.Length; i++)
-            {
-                if (otherRooms[i].Room() == startRoom - 1)
-                {
-                    boundary = otherRooms[i].GetBoundary();
-                    break;
-                }
-            }
-        }
     }
 }
