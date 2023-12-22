@@ -73,6 +73,7 @@ public class SteamMachineScript : MonoBehaviour
     {
         if (pushCreate && !particlesEnable)
         {
+
             particlesEnable = true;
             steamParticle.Play();
         }
@@ -81,6 +82,7 @@ public class SteamMachineScript : MonoBehaviour
             particlesEnable = false;
             steamParticle.Stop();
         }
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -127,6 +129,7 @@ public class SteamMachineScript : MonoBehaviour
         {
             if (pushCreate && collision.gameObject.GetComponent<BoxScript>() != null && collision.gameObject.GetComponent<Rigidbody2D>() != null)
             {
+
                 float distance = Vector3.Distance((transform.position + transform.up), collision.gameObject.transform.position);
                 RaycastHit2D touchPlayer = Physics2D.Raycast(transform.position + transform.up, ((transform.position + transform.up) - collision.gameObject.transform.position) * (-1), distance, obstacle);
                 Debug.DrawRay(transform.position + transform.up, (transform.position - collision.gameObject.transform.position) * (-1));
