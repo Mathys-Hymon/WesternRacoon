@@ -359,7 +359,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Respawn(Vector3 oldPosition)
     {
-        transform.position = checkpoint.RespawnPosition();
+        transform.position = new Vector3(checkpoint.RespawnPosition().x, checkpoint.RespawnPosition().y, transform.position.z);
         diedParticle.transform.position = oldPosition;
         for (int i = 0; i < freezedObject.Count; i++)
         {
