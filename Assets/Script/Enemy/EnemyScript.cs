@@ -8,8 +8,8 @@ public class EnemyScript : FreezeMasterScript
     [SerializeField] private LayerMask obstacle;
     [SerializeField] private float delay;
     [SerializeField] private float speed;
-    [Header("Sound Effects")]
-    [SerializeField] private AudioSource audioSRC;
+    //[Header("Sound Effects")]
+    //[SerializeField] private AudioSource audioSRC;
 
     private Vector2 directiontoTarget;
     private Animator anim;
