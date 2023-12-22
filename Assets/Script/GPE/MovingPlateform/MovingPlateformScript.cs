@@ -29,7 +29,7 @@ public class MovingPlateformScript : FreezeMasterScript
     void Start()
     {
         target = null;
-        if(cogRef != null)
+        if (cogRef != null)
         {
             cogOffset = cogRef.transform.position - transform.position;
         }
@@ -43,7 +43,7 @@ public class MovingPlateformScript : FreezeMasterScript
         }
         initialPositionY = y;
 
-        if(buttons.Length == 0)
+        if (buttons.Length == 0)
         {
             Invoke("FlipFlopPosition", waitTime);
         }
@@ -61,7 +61,10 @@ public class MovingPlateformScript : FreezeMasterScript
             goPointB = false;
             y = initialPositionY;
         }
-        audioSRC.Play();
+        if(audioSRC != null)
+        {
+            audioSRC.Play();
+        }
         Invoke("FlipFlopPosition", waitTime);
     }
 
@@ -89,9 +92,9 @@ public class MovingPlateformScript : FreezeMasterScript
         {
             if (!isHorizontal)
             {
-                if(transform.position.y == y)
+                if (transform.position.y == y)
                 {
-                    
+
                 }
                 else if ((transform.position.y - y) < -0.3f)
                 {
@@ -181,7 +184,7 @@ public class MovingPlateformScript : FreezeMasterScript
     }
     void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject == PlayerMovement.Instance.gameObject)
+        if (collision.gameObject == PlayerMovement.Instance.gameObject)
         {
             target = collision.gameObject;
             offset = target.transform.position - transform.position;
@@ -189,16 +192,19 @@ public class MovingPlateformScript : FreezeMasterScript
     }
     void OnTriggerExit2D(Collider2D collision)
     {
-        target = null;
+        if (collision.gameObject == PlayerMovement.Instance.gameObject)
+        {
+            target = null;
+        }
     }
 
     void LateUpdate()
     {
         if (target != null)
         {
-            if(target.GetComponent<FreezeMasterScript>() != null)
+            if (target.GetComponent<FreezeMasterScript>() != null)
             {
-                if(!target.GetComponent<FreezeMasterScript>().isFreezed())
+                if (!target.GetComponent<FreezeMasterScript>().isFreezed())
                 {
                     target.transform.position = transform.position + offset;
                 }
@@ -211,3 +217,4 @@ public class MovingPlateformScript : FreezeMasterScript
 
     }
 }
+
