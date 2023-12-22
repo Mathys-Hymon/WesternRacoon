@@ -33,11 +33,13 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         coinText.text = "" + money;
+        
+        Invoke("LoadScene", 0.2f);
     }
 
     private void Start()
     {
-        Invoke("LoadScene", 0.2f);
+        
     }
 
     private void Update()
