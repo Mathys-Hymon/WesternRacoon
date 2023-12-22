@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChestOpen : MonoBehaviour
@@ -23,9 +25,10 @@ public class ChestOpen : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.collider.CompareTag("Player") && !isOpened)
+        if (other.gameObject.CompareTag("Player") && !isOpened)
         {
             audioSRC.Play();
             animator.SetBool("Opening", true);
@@ -33,6 +36,8 @@ public class ChestOpen : MonoBehaviour
             isOpened = true;
         }
     }
+
+    
 
     private void SpawnCoin()
     {

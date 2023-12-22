@@ -5131,8 +5131,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.20410001, y: -0.12769997, z: 0}
-    m_Extent: {x: 2.6253, y: 0.8814, z: 0}
+    m_Center: {x: 0.20914996, y: -0.12940001, z: 0}
+    m_Extent: {x: 2.6335502, y: 0.87810004, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5963,7 +5963,7 @@ MonoBehaviour:
   mainMusic: {fileID: 736686375}
   sfxVolume: 0
   sfxSlider: {fileID: 1329680373}
-  sfxMusic: {fileID: 0}
+  sfxMusic: {fileID: 1919708037}
 --- !u!114 &964252394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8615,8 +8615,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.12185, y: -0.02790001, z: 0}
-    m_Extent: {x: 3.03445, y: 0.8608, z: 0}
+    m_Center: {x: 1.1134001, y: -0.035700023, z: 0}
+    m_Extent: {x: 3.0388002, y: 0.8606, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -10837,8 +10837,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.54125, y: -0.75385, z: 0}
-    m_Extent: {x: 4.6173496, y: 1.6637499, z: 0}
+    m_Center: {x: -0.54624987, y: -0.75850004, z: 0}
+    m_Extent: {x: 4.60675, y: 1.6715, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -11244,6 +11244,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
+--- !u!82 &1919708037 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3739799124692873976, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
+  m_PrefabInstance: {fileID: 1919708036}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1919956380
 GameObject:
   m_ObjectHideFlags: 0

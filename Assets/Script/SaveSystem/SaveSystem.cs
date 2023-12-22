@@ -28,11 +28,12 @@ public class SaveSystem : MonoBehaviour
             }
             else
             {
+                PlayerMovement.Instance.transform.position = new Vector3(saveInfo.x, saveInfo.y, saveInfo.z);
                 CameraScript.Instance.CheckRoom(0);
             }
             
  
-            PlayerMovement.Instance.transform.position = new Vector3(saveInfo.x, saveInfo.y, saveInfo.z);
+            
             GameManager.Instance.money = saveInfo.money;
             
             CameraScript.Instance.NewCameraBoundary(new Vector2(saveInfo.cameraPosX, saveInfo.cameraPosY));
