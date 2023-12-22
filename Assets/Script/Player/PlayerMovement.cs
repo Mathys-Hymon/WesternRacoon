@@ -207,8 +207,8 @@ public class PlayerMovement : MonoBehaviour
             }
             freezedObject.Clear();
         }
-
     }
+
     private void StopRoll()
     {
         roll = false;
