@@ -28,7 +28,7 @@ public class SaveSystem : MonoBehaviour
             }
             else
             {
-                PlayerMovement.Instance.transform.position = new Vector3(saveInfo.x, saveInfo.y, saveInfo.z);
+                PlayerMovement.Instance.transform.position = new Vector3(saveInfo.x, saveInfo.y, PlayerMovement.Instance.transform.position.z);
                 CameraScript.Instance.CheckRoom(0);
             }
             
