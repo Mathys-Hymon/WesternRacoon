@@ -14,8 +14,8 @@ public class CollectableItem : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             audioSRC.Play();
+            Destroy(gameObject, 0.3f);
             GameManager.Instance.SetCoin();
-            Destroy(gameObject, 0.1f);
         }
     }
 }
