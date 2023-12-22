@@ -12,6 +12,8 @@ public class CannonScript : MonoBehaviour
     [Header("BULLET REFERENCE")]
     [SerializeField] public GameObject bulletPrefab;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource audioSRC;
 
     private SpriteRenderer sr;
     void Start()
@@ -34,6 +36,8 @@ public class CannonScript : MonoBehaviour
     }
     private void ShootBullet()
     {
+        audioSRC.pitch = 1.0f;
+        audioSRC.Play();
         sr.color = Color.white;
         GameObject bullet = Instantiate(bulletPrefab, transform.position + (transform.right * 2), transform.rotation);
         bullet.GetComponent<CannonBulletScript>().SetBulletSpeed(bulletSpeed);
