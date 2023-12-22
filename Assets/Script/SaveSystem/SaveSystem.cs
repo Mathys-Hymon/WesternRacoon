@@ -26,7 +26,7 @@ public class SaveSystem : MonoBehaviour
             GameManager.Instance.money = saveInfo.money;
             
             GameObject Chest1 = GameObject.Find("Chest01");
-            Chest1.GetComponent<ChestOpen>().isOpened = saveInfo.chest;
+            Chest1.GetComponent<ChestOpen>().SetisOpen(saveInfo.chest);
             
             CameraScript.Instance.NewCameraBoundary(new Vector2(saveInfo.cameraPosX, saveInfo.cameraPosY));
             CameraScript.Instance.transform.position = new Vector3(saveInfo.x, CameraScript.Instance.transform.position.y, saveInfo.z);
@@ -48,7 +48,7 @@ public class SaveSystem : MonoBehaviour
         saveInfo.money = coins;
         
         GameObject Chest1 = GameObject.Find("Chest01");
-        bool chestOpen01 = Chest1.GetComponent<ChestOpen>().isOpened;
+        bool chestOpen01 = Chest1.GetComponent<ChestOpen>().GetOpen();
         saveInfo.chest = chestOpen01;
         
         int actualScene =  SceneManager.GetActiveScene().buildIndex;

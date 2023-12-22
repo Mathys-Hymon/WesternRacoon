@@ -252,7 +252,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void IsGrounded()
     {
-        print(grounded);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, floorLayer);
         
         //print(hit.collider.gameObject.name);
@@ -353,7 +352,7 @@ public class PlayerMovement : MonoBehaviour
             dead = true;
             _audioPlayer.PlayAudio(SoundFX.Death);
             diedParticle.Play();
-            CameraScript.Instance.Shake(1f, 0.4f);
+            CameraScript.Instance.Shake(1f, 0.4f, 0.5f);
             Respawn(transform.position);
         }
     }

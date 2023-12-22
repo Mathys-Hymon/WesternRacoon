@@ -10,13 +10,25 @@ public class SteamMachineScript : MonoBehaviour
     [Header("Only for automatic Steam")]
     [SerializeField] private float pauseTime;
     [SerializeField] private float steamTime;
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource audioSRC;
+    [SerializeField] private AudioClip steamLeak, steamPushing;
+
 
     private int IsValidInput;
     private bool pushCreate;
     private bool particlesEnable;
+    private bool diseableSound;
 
     private void Start()
     {
+        if(pauseTime == 0 &&  steamTime == 0)
+        {
+            audioSRC.loop = true;
+            audioSRC.clip = steamPushing;
+            audioSRC.Play();
+            diseableSound = true;
+        }
         if(buttons.Length == 0)
         {
             pushCreate = true;
@@ -34,6 +46,12 @@ public class SteamMachineScript : MonoBehaviour
         }
         else
         {
+            if (!diseableSound)
+            {
+                audioSRC.loop = true;
+                audioSRC.clip = steamPushing;
+                audioSRC.Play();
+            }
             pushCreate = true;
             orangeLightParticle.Stop();
             Invoke("AutomaticSteam", steamTime);
@@ -42,6 +60,12 @@ public class SteamMachineScript : MonoBehaviour
 
     private void BeforePushing()
     {
+        if (!diseableSound)
+        {
+            audioSRC.loop = false;
+            audioSRC.clip = steamLeak;
+            audioSRC.Play();
+        }
         orangeLightParticle.Play();
     }
 
@@ -82,6 +106,12 @@ public class SteamMachineScript : MonoBehaviour
 
             if (IsValidInput == buttons.Length && collision.gameObject.GetComponent<BoxScript>() != null && collision.gameObject.GetComponent<Rigidbody2D>() != null)
             {
+                if(!audioSRC.enabled && !diseableSound)
+                {
+                    audioSRC.loop = true;
+                    audioSRC.clip = steamPushing;
+                    audioSRC.Play();
+                }
                 pushCreate = true;
                 float distance = Vector3.Distance(transform.position, collision.gameObject.transform.position);
                 RaycastHit2D touchPlayer = Physics2D.Raycast((transform.position + transform.up), ((transform.position + transform.up) - collision.gameObject.transform.position) * (-1), distance, obstacle);
