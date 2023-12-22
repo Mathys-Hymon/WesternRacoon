@@ -350,9 +350,13 @@ public class PlayerMovement : MonoBehaviour
             dead = true;
             _audioPlayer.PlayAudio(SoundFX.Death);
             diedParticle.Play();
-            CameraScript.Instance.Shake(1f, 0.4f, 0.1f);
+            CameraScript.Instance.Shake(0.14f, 0.2f, 0.1f);
             Respawn(transform.position);
         }
+    }
+    public bool IsDead()
+    {
+        return dead;
     }
 
     private void Respawn(Vector3 oldPosition)
@@ -364,11 +368,12 @@ public class PlayerMovement : MonoBehaviour
             freezedObject[i].GetComponent<FreezeMasterScript>().ResetTimer();
         }
         freezedObject.Clear();
-        Invoke("ResetParticle",0.3f);
+        Invoke("ResetParticle",0.2f);
     }
     
     private void ResetParticle()
     {
+        transform.position = new Vector3(checkpoint.RespawnPosition().x, checkpoint.RespawnPosition().y, transform.position.z);
         diedParticle.transform.position = transform.position;
         dead = false;
     }
