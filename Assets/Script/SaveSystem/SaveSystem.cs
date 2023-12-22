@@ -38,7 +38,7 @@ public class SaveSystem : MonoBehaviour
             if(CameraScript.Instance != null)
             {
                 CameraScript.Instance.NewCameraBoundary(new Vector2(saveInfo.cameraPosX, saveInfo.cameraPosY));
-                CameraScript.Instance.transform.position = new Vector3(saveInfo.x, CameraScript.Instance.transform.position.y, saveInfo.z);
+                CameraScript.Instance.transform.position = new Vector3(saveInfo.x, CameraScript.Instance.transform.position.y, CameraScript.Instance.transform.position.z);
             }         
             if (GameManager.Instance != null) 
             { 

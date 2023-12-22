@@ -22,14 +22,14 @@ public class SteamMachineScript : MonoBehaviour
 
     private void Start()
     {
-        if(pauseTime == 0 &&  steamTime == 0)
+        if (pauseTime == 0 && steamTime == 0)
         {
             audioSRC.loop = true;
             audioSRC.clip = steamPushing;
             audioSRC.Play();
             diseableSound = true;
         }
-        if(buttons.Length == 0)
+        if (buttons.Length == 0)
         {
             pushCreate = true;
             Invoke("AutomaticSteam", steamTime);
@@ -38,7 +38,7 @@ public class SteamMachineScript : MonoBehaviour
 
     private void AutomaticSteam()
     {
-        if(pushCreate)
+        if (pushCreate)
         {
             pushCreate = false;
             Invoke("AutomaticSteam", pauseTime);
@@ -73,7 +73,6 @@ public class SteamMachineScript : MonoBehaviour
     {
         if (pushCreate && !particlesEnable)
         {
-
             particlesEnable = true;
             steamParticle.Play();
         }
@@ -82,7 +81,6 @@ public class SteamMachineScript : MonoBehaviour
             particlesEnable = false;
             steamParticle.Stop();
         }
-
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -101,14 +99,14 @@ public class SteamMachineScript : MonoBehaviour
                     break;
                 }
             }
-            if(IsValidInput != buttons.Length)
+            if (IsValidInput != buttons.Length)
             {
                 pushCreate = false;
             }
 
             if (IsValidInput == buttons.Length && collision.gameObject.GetComponent<BoxScript>() != null && collision.gameObject.GetComponent<Rigidbody2D>() != null)
             {
-                if(!audioSRC.enabled && !diseableSound)
+                if (!audioSRC.enabled && !diseableSound)
                 {
                     audioSRC.loop = true;
                     audioSRC.clip = steamPushing;
@@ -123,13 +121,12 @@ public class SteamMachineScript : MonoBehaviour
                 {
                     collision.gameObject.GetComponent<Rigidbody2D>().velocity = (transform.up * 10) / Vector3.Distance(transform.position, collision.transform.position);
                 }
-             }
+            }
         }
         else
         {
             if (pushCreate && collision.gameObject.GetComponent<BoxScript>() != null && collision.gameObject.GetComponent<Rigidbody2D>() != null)
             {
-
                 float distance = Vector3.Distance((transform.position + transform.up), collision.gameObject.transform.position);
                 RaycastHit2D touchPlayer = Physics2D.Raycast(transform.position + transform.up, ((transform.position + transform.up) - collision.gameObject.transform.position) * (-1), distance, obstacle);
                 Debug.DrawRay(transform.position + transform.up, (transform.position - collision.gameObject.transform.position) * (-1));
@@ -143,7 +140,7 @@ public class SteamMachineScript : MonoBehaviour
 
         if (collision.gameObject == PlayerMovement.Instance.gameObject && pushCreate)
         {
-            float distance = Vector3.Distance(transform.position + transform.up, collision.gameObject.transform.position);
+            float distance = Vector2.Distance(transform.position + transform.up, PlayerMovement.Instance.transform.position);
             RaycastHit2D touchPlayer = Physics2D.Raycast(transform.position + transform.up, ((transform.position + transform.up) - collision.gameObject.transform.position) * (-1), distance, obstacle);
             Debug.DrawRay(transform.position + transform.up, ((transform.position + transform.up) - collision.gameObject.transform.position) * (-1));
             if (touchPlayer.collider == null)

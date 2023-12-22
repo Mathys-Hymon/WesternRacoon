@@ -25,7 +25,7 @@ public class CannonScript : MonoBehaviour
         }
         else
         {
-            Invoke("BulletAnticipation", 8f / shootFrequency);
+            Invoke("BulletAnticipation", 3f / shootFrequency);
         }
         
     }
