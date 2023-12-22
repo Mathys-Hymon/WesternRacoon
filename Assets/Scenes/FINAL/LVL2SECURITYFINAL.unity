@@ -792,7 +792,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e46153e50218b464aa2338571bbda0b7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2f389e8c33fe8d4d8ea5a7aa68f3596, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -800,7 +800,7 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &27692187
@@ -3187,8 +3187,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.20935, y: -11.3231, z: 0}
-    m_Extent: {x: 1.26025, y: 0.7013998, z: 0}
+    m_Center: {x: -1.2033, y: -11.3155, z: 0}
+    m_Extent: {x: 1.2683, y: 0.69519997, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4147,7 +4147,6 @@ MonoBehaviour:
   waitTime: 5
   isHorizontal: 1
   targetPosition: 166
-  audioSRC: {fileID: 0}
 --- !u!212 &195882833
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4712,7 +4711,6 @@ MonoBehaviour:
   waitTime: 2
   isHorizontal: 0
   targetPosition: 4
-  audioSRC: {fileID: 0}
 --- !u!212 &212521312
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6958,7 +6956,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &306976776
@@ -7383,7 +7381,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &327606405
@@ -7484,7 +7482,6 @@ MonoBehaviour:
   waitTime: 0.1
   isHorizontal: 0
   targetPosition: 5
-  audioSRC: {fileID: 0}
 --- !u!212 &327645787
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7886,7 +7883,6 @@ MonoBehaviour:
   waitTime: 4
   isHorizontal: 0
   targetPosition: 8.5
-  audioSRC: {fileID: 0}
 --- !u!212 &339892175
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9398,7 +9394,7 @@ SpriteRenderer:
   m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &425674248
@@ -10520,23 +10516,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 179125070558691068, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000009634181
+      value: -0.000000005911402
       objectReference: {fileID: 0}
     - target: {fileID: 1610345243841293660, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99897856
+      value: 0.99854344
       objectReference: {fileID: 0}
     - target: {fileID: 1610345243841293660, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.045187548
+      value: -0.0539546
       objectReference: {fileID: 0}
     - target: {fileID: 2495024997009111169, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99897856
+      value: 0.99854344
       objectReference: {fileID: 0}
     - target: {fileID: 2495024997009111169, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.04518756
+      value: 0.05395461
       objectReference: {fileID: 0}
     - target: {fileID: 2580761254646739385, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10681,7 +10677,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7632546336692437559, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
-    - {fileID: 2969593374185225179, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
@@ -17525,8 +17520,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.58775, y: -11.67665, z: 0}
-    m_Extent: {x: 1.30955, y: 1.3229504, z: 0}
+    m_Center: {x: -1.586, y: -11.6739, z: 0}
+    m_Extent: {x: 1.3074, y: 1.3378, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -17607,8 +17602,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.24505, y: -11.38445, z: 0}
-    m_Extent: {x: 1.4992499, y: 0.6826496, z: 0}
+    m_Center: {x: -1.24375, y: -11.3798, z: 0}
+    m_Extent: {x: 1.4977499, y: 0.6875, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -18639,7 +18634,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ed76d03f9ccdfee44b06534122236c30, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 006c2f257f126dd45a5b21aebec6c71c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -20153,7 +20148,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.55
+  m_Intensity: 0.2
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000cf7adf07bb08b2e45b7d0b18b147127e65c2edf97764822a
@@ -20336,8 +20331,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.2072, y: -11.324301, z: 0}
-    m_Extent: {x: 1.9721, y: 1.2326999, z: 0}
+    m_Center: {x: -1.2075499, y: -11.32305, z: 0}
+    m_Extent: {x: 1.97095, y: 1.2258496, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -20435,7 +20430,6 @@ MonoBehaviour:
   waitTime: 2
   isHorizontal: 0
   targetPosition: 11
-  audioSRC: {fileID: 0}
 --- !u!212 &947643632
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -21432,8 +21426,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.2618, y: -11.6352005, z: 0}
-    m_Extent: {x: 1.5009999, y: 1.3117003, z: 0}
+    m_Center: {x: -1.2634, y: -11.6299, z: 0}
+    m_Extent: {x: 1.4908, y: 1.3056002, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -21486,7 +21480,6 @@ MonoBehaviour:
   waitTime: 0
   isHorizontal: 0
   targetPosition: 10.25
-  audioSRC: {fileID: 0}
 --- !u!212 &996270301
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22329,7 +22322,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1036007684
@@ -22754,7 +22747,6 @@ MonoBehaviour:
   waitTime: 0
   isHorizontal: 0
   targetPosition: 5
-  audioSRC: {fileID: 0}
 --- !u!212 &1047590870
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23507,8 +23499,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.2348, y: -11.420349, z: 0}
-    m_Extent: {x: 1.0054001, y: 0.83634996, z: 0}
+    m_Center: {x: -1.2412, y: -11.431749, z: 0}
+    m_Extent: {x: 1.0097001, y: 0.8390498, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -24953,7 +24945,7 @@ SpriteRenderer:
   m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1136412128
@@ -29833,7 +29825,7 @@ SpriteRenderer:
   m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1333739995
@@ -29917,7 +29909,7 @@ SpriteRenderer:
   m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1336902682
@@ -30085,8 +30077,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -3.7436497, y: -19.635399, z: 0}
-    m_Extent: {x: 4.3775496, y: 0.27040005, z: 0}
+    m_Center: {x: -3.7551, y: -19.64205, z: 0}
+    m_Extent: {x: 4.3698997, y: 0.27425003, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -31042,7 +31034,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ed76d03f9ccdfee44b06534122236c30, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 006c2f257f126dd45a5b21aebec6c71c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -31845,8 +31837,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.23585, y: -11.6288, z: 0}
-    m_Extent: {x: 1.6622499, y: 1.2844, z: 0}
+    m_Center: {x: -1.2344501, y: -11.6196995, z: 0}
+    m_Extent: {x: 1.66045, y: 1.2844996, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -32392,8 +32384,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -5.8487997, y: -19.33935, z: 0}
-    m_Extent: {x: 0.8290999, y: 0.3165493, z: 0}
+    m_Center: {x: -5.8484, y: -19.34495, z: 0}
+    m_Extent: {x: 0.8378, y: 0.32024956, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -33472,8 +33464,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -2.23595, y: -11.6744995, z: 0}
-    m_Extent: {x: 5.03225, y: 1.2771001, z: 0}
+    m_Center: {x: -2.2368999, y: -11.6719, z: 0}
+    m_Extent: {x: 5.0347, y: 1.2722001, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -34620,7 +34612,7 @@ SpriteRenderer:
   m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1539045059
@@ -35019,7 +35011,6 @@ MonoBehaviour:
   waitTime: 2
   isHorizontal: 0
   targetPosition: 10
-  audioSRC: {fileID: 0}
 --- !u!212 &1544927237
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -35190,7 +35181,7 @@ SpriteRenderer:
   m_SortingLayerID: 132086479
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 87acf6c8a89f5c048817a0677d4383b6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 320f4fe228e2f8c4fb28a33b03e0f4d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -35198,7 +35189,7 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1549355727
@@ -36742,8 +36733,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.4841, y: -11.375851, z: 0}
-    m_Extent: {x: 0.7529, y: 0.83515024, z: 0}
+    m_Center: {x: -1.4885501, y: -11.371201, z: 0}
+    m_Extent: {x: 0.75675, y: 0.83449984, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -37416,7 +37407,7 @@ SpriteRenderer:
   m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1635054995
@@ -43566,7 +43557,7 @@ SpriteRenderer:
   m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1858890605
@@ -45063,7 +45054,7 @@ SpriteRenderer:
   m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1915531934
@@ -50539,7 +50530,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &2124728404
@@ -50623,8 +50614,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.2571, y: -11.358999, z: 0}
-    m_Extent: {x: 1.0917, y: 0.81640005, z: 0}
+    m_Center: {x: -1.2537, y: -11.3575, z: 0}
+    m_Extent: {x: 1.1020999, y: 0.81410027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
