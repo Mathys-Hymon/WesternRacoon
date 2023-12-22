@@ -4839,6 +4839,7 @@ GameObject:
   - component: {fileID: 1276479926574114444}
   - component: {fileID: 3068622855055680687}
   - component: {fileID: 5694548705145956837}
+  - component: {fileID: 467661424093776910}
   m_Layer: 0
   m_Name: WindArea
   m_TagString: wind
@@ -4920,4 +4921,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strength: 5
-  XDirection: 0
+  GoLeft: 0
+--- !u!210 &467661424093776910
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4735507848371137105}
+  m_Enabled: 1
+  m_SortingLayerID: -101858715
+  m_SortingLayer: 5
+  m_SortingOrder: 10
+  m_SortAtRoot: 0

@@ -359,6 +359,10 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = new Vector3(checkpoint.RespawnPosition().x, checkpoint.RespawnPosition().y, transform.position.z);
         diedParticle.transform.position = oldPosition;
+        for (int i = 0; i < freezedObject.Count; i++)
+        {
+            freezedObject[i].GetComponent<FreezeMasterScript>().ResetTimer();
+        }
         freezedObject.Clear();
         Invoke("ResetParticle",0.3f);
     }
