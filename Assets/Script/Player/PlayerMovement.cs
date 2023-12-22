@@ -381,10 +381,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isJumping", true);
         }
-        else
-        {
-            animator.SetBool("isJumping", false);
-        }
+        
         if (controlesScript.player.jump.triggered && !grounded)
         {
             animator.SetBool("isJumping", false);

@@ -14,9 +14,11 @@ public class SaveSystem : MonoBehaviour
     {
         Instance = this;
         Load();
+        
     }
     public void Load()
     {
+
         if (File.Exists(Application.persistentDataPath + "/data.save"))
         {
             string json = File.ReadAllText(Application.persistentDataPath + "/data.save");
@@ -31,13 +33,20 @@ public class SaveSystem : MonoBehaviour
                 PlayerMovement.Instance.transform.position = new Vector3(saveInfo.x, saveInfo.y, PlayerMovement.Instance.transform.position.z);
                 CameraScript.Instance.CheckRoom(0);
             }
+
+            if (CameraScript.Instance != null)
+            {
+                CameraScript.Instance.NewCameraBoundary(new Vector2(saveInfo.cameraPosX, saveInfo.cameraPosY));
+                CameraScript.Instance.transform.position = new Vector3(saveInfo.x, CameraScript.Instance.transform.position.y, saveInfo.z);
+            }
             
- 
+            if (GameManager.Instance != null) 
+            { 
+                GameManager.Instance.money = saveInfo.money;
+            }
+
             
-            GameManager.Instance.money = saveInfo.money;
-            
-            CameraScript.Instance.NewCameraBoundary(new Vector2(saveInfo.cameraPosX, saveInfo.cameraPosY));
-            CameraScript.Instance.transform.position = new Vector3(saveInfo.x, CameraScript.Instance.transform.position.y, saveInfo.z);
+
         }
     }
 
