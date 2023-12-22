@@ -13,8 +13,10 @@ public class SaveSystem : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+    private void Start()
+    {
         Load();
-        
     }
     public void Load()
     {
@@ -24,22 +26,20 @@ public class SaveSystem : MonoBehaviour
             string json = File.ReadAllText(Application.persistentDataPath + "/data.save");
             saveInfo = JsonUtility.FromJson<AllInfo>(json);
 
-            if (saveInfo.activeScene != SceneManager.GetActiveScene().buildIndex)
+            if (saveInfo.activeScene != SceneManager.GetActiveScene().buildIndex && CameraScript.Instance != null)
             {
                 CameraScript.Instance.CheckRoom(1);
             }
-            else
+            else if(PlayerMovement.Instance != null && CameraScript.Instance != null)
             {
                 PlayerMovement.Instance.transform.position = new Vector3(saveInfo.x, saveInfo.y, PlayerMovement.Instance.transform.position.z);
                 CameraScript.Instance.CheckRoom(0);
             }
-
-            if (CameraScript.Instance != null)
+            if(CameraScript.Instance != null)
             {
                 CameraScript.Instance.NewCameraBoundary(new Vector2(saveInfo.cameraPosX, saveInfo.cameraPosY));
                 CameraScript.Instance.transform.position = new Vector3(saveInfo.x, CameraScript.Instance.transform.position.y, saveInfo.z);
-            }
-            
+            }         
             if (GameManager.Instance != null) 
             { 
                 GameManager.Instance.money = saveInfo.money;
