@@ -250,7 +250,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void IsGrounded()
     {
-        print(grounded);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, floorLayer);
         
         //print(hit.collider.gameObject.name);

@@ -68,7 +68,7 @@ public class EnemyScript : FreezeMasterScript
 
             if(isInRange)
             {
-                if (floorY >= PlayerMovement.Instance.GetFloorY() - 0.2f && floorY <= PlayerMovement.Instance.GetFloorY() + 0.2 && !rushPlayer)
+                if (floorY >= PlayerMovement.Instance.GetFloorY() - 0.3f && floorY <= PlayerMovement.Instance.GetFloorY() + 0.3f && !rushPlayer)
                 {
                     for (int i = 1; i < (int)Vector2.Distance(transform.position, PlayerMovement.Instance.transform.position) + 1; i++)
                     {
@@ -102,12 +102,13 @@ public class EnemyScript : FreezeMasterScript
                     if(canReach)
                     {
                     float distance = Vector3.Distance(transform.position, PlayerMovement.Instance.transform.position);
-                        if (CheckWall(distance) == true)
+                        if (CheckWall(distance))
                         {
                             rushPlayer = canReach;
                         }
                         else
                         {
+
                             rushPlayer = false;
                         }
                     }
@@ -193,8 +194,8 @@ public class EnemyScript : FreezeMasterScript
     
     private bool CheckWall(float Distance)
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y-0.5f, transform.position.z), transform.right, Distance, obstacle);
-        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), transform.right*Distance);
+        RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y-0.2f, transform.position.z), transform.right, Distance, obstacle);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z), transform.right*Distance);
 
         if (hit.collider == null)
         {
@@ -208,14 +209,15 @@ public class EnemyScript : FreezeMasterScript
     }
     private bool IsGrounded(float offsetX)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(offsetX,0,0), Vector2.down, 1.5f, obstacle);
-        Debug.DrawRay(transform.position + new Vector3(offsetX,0,0), Vector2.down);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(offsetX,-0.5f,0), Vector2.down, 1.5f, obstacle);
+        Debug.DrawRay(transform.position + new Vector3(offsetX,-0.5f,0), Vector2.down*1.5f);
         if(offsetX == 0)
         {
             floorY = hit.collider.transform.position.y;
         }
         if(hit.collider == null )
         {
+            print("not grounded");
             return false;
         }
         else
