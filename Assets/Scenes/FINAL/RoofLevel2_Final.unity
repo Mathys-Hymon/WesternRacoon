@@ -7433,6 +7433,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1090842619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1140608665 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3739799124692873976, guid: c232d40e82d9b08488dcb11b0a7590ad, type: 3}
+  m_PrefabInstance: {fileID: 160384342}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1141242498
 GameObject:
   m_ObjectHideFlags: 0
@@ -11921,7 +11926,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12033,7 +12038,7 @@ MonoBehaviour:
   mainMusic: {fileID: 1141242499}
   sfxVolume: 0
   sfxSlider: {fileID: 1108236623}
-  sfxMusic: {fileID: 0}
+  sfxMusic: {fileID: 1140608665}
 --- !u!114 &1752608487
 MonoBehaviour:
   m_ObjectHideFlags: 0
